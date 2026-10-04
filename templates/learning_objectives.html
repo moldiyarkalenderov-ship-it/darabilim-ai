@@ -1,0 +1,496 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>DaraBilim AI — Оқу мақсаттары</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+<style>
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f8fafc;
+}
+
+</style>
+
+</head>
+
+<body class="text-slate-800">
+
+<div class="min-h-screen">
+
+    <!-- HEADER -->
+
+    <header class="h-20 bg-white
+                   border-b border-slate-200
+                   px-8 flex items-center
+                   justify-between">
+
+        <div>
+
+            <h1 class="font-extrabold text-lg">
+                🎯 Оқу мақсаттары
+            </h1>
+
+            <p class="text-xs text-slate-500">
+                4 «Д» сыныбы · КТЖ базасы
+            </p>
+
+        </div>
+
+
+        <div class="flex items-center gap-3">
+
+            <a href="{{ url_for('materials') }}"
+               class="px-4 py-2.5
+                      bg-slate-100
+                      rounded-xl
+                      text-sm font-bold">
+
+                ← Материалдар
+
+            </a>
+
+            <span class="text-sm font-bold">
+                👩‍🏫 {{ teacher_name }}
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <main class="max-w-7xl mx-auto p-8">
+
+        <!-- TITLE -->
+
+        <div class="flex items-center
+                    justify-between mb-7">
+
+            <div>
+
+                <h2 class="text-2xl font-extrabold">
+                    Оқу мақсаттарының базасы
+                </h2>
+
+                <p class="text-sm text-slate-500 mt-1">
+
+                    Кейін бұл мақсаттар
+                    Кіріс бақылау мен Ақылды сабақта
+                    автоматты қолданылады.
+
+                </p>
+
+            </div>
+
+
+            <button
+                onclick="openModal()"
+                class="bg-blue-600
+                       hover:bg-blue-700
+                       text-white
+                       px-5 py-3
+                       rounded-xl
+                       font-bold text-sm">
+
+                ＋ Оқу мақсатын қосу
+
+            </button>
+
+        </div>
+
+
+        <!-- SUBJECT -->
+
+        <div class="flex gap-3 mb-6">
+
+            <a href="{{ url_for('learning_objectives', subject='Математика') }}"
+               class="px-5 py-3 rounded-xl
+                      font-bold text-sm
+                      {% if selected_subject == 'Математика' %}
+                      bg-blue-600 text-white
+                      {% else %}
+                      bg-white border text-slate-600
+                      {% endif %}">
+
+                📘 Математика
+
+            </a>
+
+
+            <a href="{{ url_for('learning_objectives', subject='Қазақ тілі') }}"
+               class="px-5 py-3 rounded-xl
+                      font-bold text-sm
+                      {% if selected_subject == 'Қазақ тілі' %}
+                      bg-blue-600 text-white
+                      {% else %}
+                      bg-white border text-slate-600
+                      {% endif %}">
+
+                📕 Қазақ тілі
+
+            </a>
+
+        </div>
+
+
+        <!-- LIST -->
+
+        <div class="bg-white
+                    border border-slate-200
+                    rounded-2xl overflow-hidden">
+
+            <div class="px-6 py-5 border-b">
+
+                <div class="flex items-center
+                            justify-between">
+
+                    <h3 class="font-bold">
+
+                        {{ selected_subject }}
+                        — оқу мақсаттары
+
+                    </h3>
+
+                    <span class="text-sm
+                                 text-slate-500">
+
+                        {{ objectives|length }} мақсат
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            {% if objectives %}
+
+            <div class="divide-y">
+
+                {% for item in objectives %}
+
+                <div class="p-5">
+
+                    <div class="flex
+                                items-start
+                                justify-between gap-5">
+
+                        <div class="flex-1">
+
+                            <div class="flex
+                                        flex-wrap
+                                        items-center
+                                        gap-2 mb-2">
+
+                                {% if item.objective_code %}
+
+                                <span class="px-2.5 py-1
+                                             bg-blue-50
+                                             text-blue-700
+                                             rounded-lg
+                                             text-xs font-bold">
+
+                                    {{ item.objective_code }}
+
+                                </span>
+
+                                {% endif %}
+
+
+                                {% if item.section %}
+
+                                <span class="text-xs
+                                             text-slate-400">
+
+                                    {{ item.section }}
+
+                                </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            {% if item.lesson_topic %}
+
+                            <h4 class="font-bold
+                                       text-slate-900 mb-1">
+
+                                {{ item.lesson_topic }}
+
+                            </h4>
+
+                            {% endif %}
+
+
+                            <p class="text-sm
+                                      text-slate-600
+                                      leading-relaxed">
+
+                                {{ item.objective_text }}
+
+                            </p>
+
+                        </div>
+
+
+                        <form method="POST"
+                              action="{{ url_for('delete_learning_objective', objective_id=item.id) }}"
+                              onsubmit="return confirm('Оқу мақсатын өшіруге сенімдісіз бе?')">
+
+                            <button
+                                class="px-3 py-2
+                                       bg-rose-50
+                                       text-rose-600
+                                       rounded-lg
+                                       text-xs font-bold">
+
+                                Өшіру
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            {% else %}
+
+            <div class="py-16 text-center">
+
+                <div class="text-4xl mb-3">
+                    🎯
+                </div>
+
+                <h3 class="font-bold">
+                    Оқу мақсаттары әлі енгізілмеген
+                </h3>
+
+                <p class="text-sm
+                          text-slate-400 mt-1">
+
+                    КТЖ жүктелгеннен кейін
+                    оқу мақсаттары осы жерде пайда болады.
+
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div id="objectiveModal"
+     class="hidden fixed inset-0
+            bg-slate-900/45
+            z-50 items-center
+            justify-center p-4">
+
+    <div class="bg-white
+                rounded-3xl
+                shadow-2xl
+                w-full max-w-xl p-7">
+
+        <div class="flex
+                    items-start
+                    justify-between mb-6">
+
+            <div>
+
+                <h3 class="text-xl font-extrabold">
+                    🎯 Оқу мақсатын қосу
+                </h3>
+
+                <p class="text-sm
+                          text-slate-500 mt-1">
+
+                    4 «Д» сыныбы
+
+                </p>
+
+            </div>
+
+            <button onclick="closeModal()"
+                    class="text-xl">
+                ✕
+            </button>
+
+        </div>
+
+
+        <form method="POST"
+              action="{{ url_for('add_learning_objective') }}"
+              class="space-y-4">
+
+
+            <div>
+
+                <label class="block
+                              text-sm font-bold mb-2">
+                    Пән *
+                </label>
+
+                <select name="subject"
+                        required
+                        class="w-full border
+                               rounded-xl px-4 py-3">
+
+                    <option value="Математика"
+                            {% if selected_subject == 'Математика' %}
+                            selected
+                            {% endif %}>
+                        Математика
+                    </option>
+
+                    <option value="Қазақ тілі"
+                            {% if selected_subject == 'Қазақ тілі' %}
+                            selected
+                            {% endif %}>
+                        Қазақ тілі
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label class="block
+                              text-sm font-bold mb-2">
+                    Бөлім
+                </label>
+
+                <input name="section"
+                       class="w-full border
+                              rounded-xl px-4 py-3"
+                       placeholder="Мысалы: Сандар және шамалар">
+
+            </div>
+
+
+            <div>
+
+                <label class="block
+                              text-sm font-bold mb-2">
+                    Сабақ тақырыбы
+                </label>
+
+                <input name="lesson_topic"
+                       class="w-full border
+                              rounded-xl px-4 py-3"
+                       placeholder="Сабақ тақырыбы">
+
+            </div>
+
+
+            <div>
+
+                <label class="block
+                              text-sm font-bold mb-2">
+                    Оқу мақсатының коды
+                </label>
+
+                <input name="objective_code"
+                       class="w-full border
+                              rounded-xl px-4 py-3"
+                       placeholder="Мысалы: 4.1.2.3">
+
+            </div>
+
+
+            <div>
+
+                <label class="block
+                              text-sm font-bold mb-2">
+                    Оқу мақсаты *
+                </label>
+
+                <textarea
+                    name="objective_text"
+                    required
+                    rows="4"
+                    class="w-full border
+                           rounded-xl px-4 py-3"
+                    placeholder="Оқу мақсатының толық мәтіні"></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="w-full
+                       bg-blue-600
+                       hover:bg-blue-700
+                       text-white
+                       py-3.5
+                       rounded-xl
+                       font-bold">
+
+                Оқу мақсатын сақтау
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function openModal() {
+
+    const modal =
+        document.getElementById(
+            "objectiveModal"
+        );
+
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+
+}
+
+function closeModal() {
+
+    const modal =
+        document.getElementById(
+            "objectiveModal"
+        );
+
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+
+}
+
+</script>
+
+</body>
+</html>

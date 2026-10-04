@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+
+<title>DaraBilim AI — Кіріс бақылау</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+
+<body class="bg-slate-50 text-slate-900">
+
+<div class="min-h-screen
+            flex items-center
+            justify-center
+            p-5">
+
+<div class="w-full max-w-2xl">
+
+
+<div class="text-center mb-6">
+
+<div class="inline-flex
+            w-16 h-16
+            bg-blue-600
+            rounded-2xl
+            items-center
+            justify-center
+            text-white
+            text-3xl
+            shadow-lg">
+
+🧠
+
+</div>
+
+<h1 class="text-3xl font-black mt-4">
+DaraBilim AI
+</h1>
+
+<p class="text-slate-500 mt-1">
+Кіріс бақылау
+</p>
+
+</div>
+
+
+<div class="bg-white
+            border
+            rounded-3xl
+            shadow-sm
+            p-7">
+
+
+<h2 class="text-2xl font-black">
+👋 Қош келдіңіз!
+</h2>
+
+<p class="text-sm
+          text-slate-500
+          mt-2">
+
+Кіріс бақылауды бастау үшін
+мәліметтеріңізді толтырыңыз.
+
+</p>
+
+
+{% if error %}
+
+<div class="mt-5
+            bg-red-50
+            border border-red-200
+            text-red-700
+            rounded-xl
+            p-4
+            text-sm font-bold">
+
+{{ error }}
+
+</div>
+
+{% endif %}
+
+
+<form method="POST"
+      action="{{ url_for('student_portal_start', token=token) }}"
+      class="mt-7 space-y-5">
+
+
+<!-- FULL NAME -->
+
+<div>
+
+<label class="block
+              text-sm font-bold
+              mb-2">
+
+👤 Аты-жөніңіз
+
+</label>
+
+<input
+    type="text"
+    name="full_name"
+    required
+    minlength="3"
+    placeholder="Мысалы: Аймағанбет Аңсаған"
+    class="w-full
+           border
+           rounded-xl
+           px-4 py-3">
+
+</div>
+
+
+<!-- CLASS -->
+
+<div>
+
+<label class="block
+              text-sm font-bold
+              mb-2">
+
+🏫 Сыныбыңыз
+
+</label>
+
+<select
+    id="classSelect"
+    name="class_name"
+    required
+    class="w-full
+           border
+           rounded-xl
+           px-4 py-3
+           bg-white">
+
+<option value="">
+Сыныпты таңдаңыз
+</option>
+
+{% for class_name in classes %}
+
+<option value="{{ class_name }}">
+{{ class_name }}
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+
+<!-- SUBJECT -->
+
+<div>
+
+<label class="block
+              text-sm font-bold
+              mb-2">
+
+📚 Пән
+
+</label>
+
+<select
+    id="subjectSelect"
+    name="subject"
+    required
+    onchange="filterDiagnostics()"
+    class="w-full
+           border
+           rounded-xl
+           px-4 py-3
+           bg-white">
+
+<option value="">
+Пәнді таңдаңыз
+</option>
+
+{% for subject in subjects %}
+
+<option value="{{ subject }}">
+{{ subject }}
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+
+<!-- DIAGNOSTIC -->
+
+<div>
+
+<label class="block
+              text-sm font-bold
+              mb-2">
+
+📝 Кіріс бақылау
+
+</label>
+
+<select
+    id="diagnosticSelect"
+    name="diagnostic_id"
+    required
+    class="w-full
+           border
+           rounded-xl
+           px-4 py-3
+           bg-white">
+
+<option value="">
+Алдымен пәнді таңдаңыз
+</option>
+
+{% for diagnostic in diagnostics %}
+
+<option
+    value="{{ diagnostic.id }}"
+    data-subject="{{ diagnostic.subject }}"
+    data-class="{{ diagnostic.class_name }}">
+
+{{ diagnostic.title }}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+
+<button
+    type="submit"
+    class="w-full
+           bg-blue-600
+           hover:bg-blue-700
+           text-white
+           rounded-xl
+           py-4
+           font-black">
+
+▶️ Кіріс бақылауды бастау
+
+</button>
+
+</form>
+
+</div>
+
+
+<p class="text-center
+          text-xs
+          text-slate-400
+          mt-5">
+
+DaraBilim AI • Ақылды білім беру платформасы
+
+</p>
+
+</div>
+
+</div>
+
+
+<script>
+
+function filterDiagnostics() {
+
+    const subject =
+        document.getElementById(
+            "subjectSelect"
+        ).value;
+
+    const className =
+        document.getElementById(
+            "classSelect"
+        ).value;
+
+    const select =
+        document.getElementById(
+            "diagnosticSelect"
+        );
+
+    const options =
+        Array.from(
+            select.querySelectorAll(
+                "option[data-subject]"
+            )
+        );
+
+
+    select.value = "";
+
+
+    options.forEach(
+        function(option) {
+
+            const subjectMatch =
+                option.dataset.subject
+                === subject;
+
+            const classMatch =
+                !className
+                ||
+                option.dataset.class
+                === className;
+
+            option.hidden =
+                !(
+                    subjectMatch
+                    &&
+                    classMatch
+                );
+
+        }
+    );
+
+}
+
+
+document.getElementById(
+    "classSelect"
+).addEventListener(
+    "change",
+    filterDiagnostics
+);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>DaraBilim AI — Менің сабақтарым</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+<style>
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f8fafc;
+}
+
+</style>
+
+</head>
+
+<body class="text-slate-800">
+
+
+<header class="bg-white border-b">
+
+    <div class="max-w-7xl mx-auto
+                px-6 lg:px-8 py-5
+                flex items-center
+                justify-between gap-4">
+
+        <div>
+
+            <a href="{{ url_for('smart_lessons') }}"
+               class="text-sm
+                      text-blue-600
+                      font-bold">
+
+                ← Ақылды сабақ
+
+            </a>
+
+            <h1 class="text-2xl
+                       font-extrabold mt-2">
+
+                📚 Менің сабақтарым
+
+            </h1>
+
+            <p class="text-sm
+                      text-slate-500 mt-1">
+
+                Сақталған ақылды сабақ жоспарлары
+
+            </p>
+
+        </div>
+
+        <div class="text-sm font-bold">
+
+            👩‍🏫 {{ teacher_name }}
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="max-w-7xl
+             mx-auto p-6 lg:p-8">
+
+
+{% if lessons %}
+
+<div class="grid grid-cols-1
+            md:grid-cols-2
+            xl:grid-cols-3
+            gap-5">
+
+    {% for lesson in lessons %}
+
+    <article class="bg-white
+                    border rounded-2xl
+                    p-5
+                    flex flex-col">
+
+        <div class="flex flex-wrap
+                    gap-2">
+
+            <span class="px-2.5 py-1
+                         bg-blue-50
+                         text-blue-700
+                         rounded-lg
+                         text-xs font-bold">
+
+                {{ lesson.subject }}
+
+            </span>
+
+            <span class="px-2.5 py-1
+                         bg-slate-100
+                         rounded-lg
+                         text-xs font-bold">
+
+                {{ lesson.class_name }}
+
+            </span>
+
+            <span class="px-2.5 py-1
+                         bg-violet-50
+                         text-violet-700
+                         rounded-lg
+                         text-xs font-bold">
+
+                {{ lesson.duration }} мин
+
+            </span>
+
+        </div>
+
+
+        <h2 class="font-extrabold
+                   text-lg
+                   leading-snug mt-4">
+
+            {{ lesson.lesson_topic }}
+
+        </h2>
+
+
+        {% if lesson.objective_codes %}
+
+        <div class="flex flex-wrap
+                    gap-2 mt-3">
+
+            {% for code in lesson.objective_codes %}
+
+            <span class="text-xs
+                         text-blue-600
+                         font-bold">
+
+                {{ code }}
+
+            </span>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+
+        <p class="text-sm
+                  text-slate-500
+                  leading-relaxed
+                  mt-4 flex-1">
+
+            {{ lesson.lesson_goal }}
+
+        </p>
+
+
+        <div class="text-xs
+                    text-slate-400
+                    mt-5">
+
+            💾 {{ lesson.created_at }}
+
+        </div>
+
+
+        <a href="{{ url_for(
+                'saved_smart_lesson_detail',
+                lesson_id=lesson.id
+            ) }}"
+           class="w-full
+                  text-center
+                  bg-blue-600
+                  hover:bg-blue-700
+                  text-white
+                  rounded-xl
+                  px-4 py-3
+                  text-sm font-bold
+                  mt-4">
+
+            Сабақты ашу →
+
+        </a>
+
+    </article>
+
+    {% endfor %}
+
+</div>
+
+
+{% else %}
+
+<div class="bg-white
+            border rounded-2xl
+            py-24
+            text-center">
+
+    <div class="text-6xl mb-5">
+        📚
+    </div>
+
+    <h2 class="text-xl
+               font-extrabold">
+
+        Сақталған сабақ жоқ
+
+    </h2>
+
+    <p class="text-sm
+              text-slate-400 mt-2">
+
+        Ақылды сабақтан жаңа жоспар
+        құрып, оны сақтаңыз.
+
+    </p>
+
+
+    <a href="{{ url_for('smart_lessons') }}"
+       class="inline-block
+              bg-blue-600
+              text-white
+              rounded-xl
+              px-5 py-3
+              font-bold mt-5">
+
+        🧠 Сабақ құру
+
+    </a>
+
+</div>
+
+{% endif %}
+
+
+</main>
+
+</body>
+</html>

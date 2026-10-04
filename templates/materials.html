@@ -1,0 +1,682 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>DaraBilim AI — Материалдар</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .menu:hover {
+            background: #f1f5f9;
+        }
+    </style>
+</head>
+
+<body class="text-slate-800">
+
+<div class="flex h-screen overflow-hidden">
+
+    <aside class="w-60 bg-white border-r
+                  border-slate-200 flex flex-col">
+
+        <div class="p-5 border-b border-slate-100">
+
+            <div class="flex items-center gap-3">
+
+                <div class="w-10 h-10 rounded-xl
+                            bg-blue-600 text-white
+                            flex items-center justify-center">
+                    🧠
+                </div>
+
+                <div>
+                    <h1 class="font-extrabold text-lg">
+                        DaraBilim AI
+                    </h1>
+
+                    <p class="text-[10px] text-slate-400">
+                        Интеллектуалды білім беру
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <nav class="flex-1 p-3 space-y-1">
+
+            <a href="{{ url_for('dashboard') }}" class="menu">
+                🏠 <span>Басты бет</span>
+            </a>
+
+            <a href="{{ url_for('diagnostics') }}" class="menu">
+                📝 <span>Кіріс бақылау</span>
+            </a>
+
+            <a href="{{ url_for('smart_lessons') }}" class="menu">
+                🧠 <span>Ақылды сабақ</span>
+            </a>
+
+            <a href="{{ url_for('learning_paths') }}" class="menu">
+                🎯 <span>Жеке білім бағыты</span>
+            </a>
+
+            <a href="{{ url_for('learning_gaps') }}" class="menu">
+                🗺️ <span>Оқу олқылықтары</span>
+            </a>
+
+            <a href="{{ url_for('progress') }}" class="menu">
+                📈 <span>Нәтижелер және прогресс</span>
+            </a>
+
+            <a href="{{ url_for('materials') }}"
+               class="menu bg-blue-600 text-white">
+                📚 <span>Материалдар</span>
+            </a>
+
+            <a href="{{ url_for('students') }}" class="menu">
+                👥 <span>Оқушылар</span>
+            </a>
+
+        </nav>
+
+        <div class="p-3 border-t">
+
+            <a href="{{ url_for('logout') }}"
+               class="menu text-rose-600">
+                🚪 <span>Шығу</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <div class="flex-1 flex flex-col min-w-0">
+
+        <header class="h-20 bg-white border-b
+                       px-8 flex items-center justify-between">
+
+            <div>
+                <h2 class="font-bold">
+                    📚 Материалдар
+                </h2>
+
+                <p class="text-xs text-slate-500">
+                    DaraBilim AI білім базасы
+                </p>
+            </div>
+
+            <div class="text-sm font-bold">
+                👩‍🏫 {{ teacher_name }}
+            </div>
+
+        </header>
+
+
+        <main class="flex-1 overflow-y-auto p-8">
+
+            <div class="max-w-7xl mx-auto">
+
+                <div class="flex items-center
+                            justify-between mb-7">
+
+                    <div>
+
+                        <h1 class="text-2xl font-extrabold">
+                            Оқу материалдары
+                        </h1>
+
+                        <p class="text-sm text-slate-500 mt-1">
+                            Оқулықтар мен күнтізбелік-тақырыптық
+                            жоспарлар
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        onclick="openUpload()"
+                        class="bg-blue-600 hover:bg-blue-700
+                               text-white px-5 py-3
+                               rounded-xl font-bold text-sm">
+
+                        ＋ Материал жүктеу
+
+                    </button>
+
+                </div>
+
+
+                
+<!-- НЕГІЗГІ 4 МАТЕРИАЛ -->
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-7">
+
+    <!-- МАТЕМАТИКА ОҚУЛЫҒЫ -->
+    <div class="bg-white border border-slate-200
+                rounded-2xl p-5">
+
+        <div class="flex items-start justify-between">
+
+            <div class="text-3xl">📘</div>
+
+            {% if material_status.math_book %}
+
+            <span class="text-xs font-bold
+                         text-emerald-700 bg-emerald-50
+                         px-2.5 py-1 rounded-lg">
+                ✓ Жүктелген
+            </span>
+
+            {% else %}
+
+            <span class="text-xs font-bold
+                         text-amber-700 bg-amber-50
+                         px-2.5 py-1 rounded-lg">
+                Жүктелмеген
+            </span>
+
+            {% endif %}
+
+        </div>
+
+        <h3 class="font-bold mt-4">
+            Математика
+        </h3>
+
+        <p class="text-sm text-slate-500">
+            4-сынып оқулығы
+        </p>
+
+        {% if material_status.math_book %}
+
+        <p class="text-xs text-slate-400 mt-4 truncate">
+            {{ material_status.math_book.filename }}
+        </p>
+
+        {% else %}
+
+        <button
+            onclick="openUploadWith('Математика','Оқулық','4-сынып Математика оқулығы')"
+            class="mt-4 text-sm font-bold text-blue-600">
+            ＋ Жүктеу
+        </button>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- ҚАЗАҚ ТІЛІ ОҚУЛЫҒЫ -->
+    <div class="bg-white border border-slate-200
+                rounded-2xl p-5">
+
+        <div class="flex items-start justify-between">
+
+            <div class="text-3xl">📕</div>
+
+            {% if material_status.kazakh_book %}
+
+            <span class="text-xs font-bold
+                         text-emerald-700 bg-emerald-50
+                         px-2.5 py-1 rounded-lg">
+                ✓ Жүктелген
+            </span>
+
+            {% else %}
+
+            <span class="text-xs font-bold
+                         text-amber-700 bg-amber-50
+                         px-2.5 py-1 rounded-lg">
+                Жүктелмеген
+            </span>
+
+            {% endif %}
+
+        </div>
+
+        <h3 class="font-bold mt-4">
+            Қазақ тілі
+        </h3>
+
+        <p class="text-sm text-slate-500">
+            4-сынып оқулығы
+        </p>
+
+        {% if material_status.kazakh_book %}
+
+        <p class="text-xs text-slate-400 mt-4 truncate">
+            {{ material_status.kazakh_book.filename }}
+        </p>
+
+        {% else %}
+
+        <button
+            onclick="openUploadWith('Қазақ тілі','Оқулық','4-сынып Қазақ тілі оқулығы')"
+            class="mt-4 text-sm font-bold text-blue-600">
+            ＋ Жүктеу
+        </button>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- МАТЕМАТИКА КТЖ -->
+    <div class="bg-white border border-slate-200
+                rounded-2xl p-5">
+
+        <div class="flex items-start justify-between">
+
+            <div class="text-3xl">📑</div>
+
+            {% if material_status.math_ktj %}
+
+            <span class="text-xs font-bold
+                         text-emerald-700 bg-emerald-50
+                         px-2.5 py-1 rounded-lg">
+                ✓ Жүктелген
+            </span>
+
+            {% else %}
+
+            <span class="text-xs font-bold
+                         text-amber-700 bg-amber-50
+                         px-2.5 py-1 rounded-lg">
+                Жүктелмеген
+            </span>
+
+            {% endif %}
+
+        </div>
+
+        <h3 class="font-bold mt-4">
+            Математика КТЖ
+        </h3>
+
+        <p class="text-sm text-slate-500">
+            Тақырыптар және оқу мақсаттары
+        </p>
+
+        {% if material_status.math_ktj %}
+
+        <p class="text-xs text-slate-400 mt-4 truncate">
+            {{ material_status.math_ktj.filename }}
+        </p>
+
+        {% else %}
+
+        <button
+            onclick="openUploadWith('Математика','КТЖ','4-сынып Математика КТЖ')"
+            class="mt-4 text-sm font-bold text-blue-600">
+            ＋ Жүктеу
+        </button>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- ҚАЗАҚ ТІЛІ КТЖ -->
+    <div class="bg-white border border-slate-200
+                rounded-2xl p-5">
+
+        <div class="flex items-start justify-between">
+
+            <div class="text-3xl">📑</div>
+
+            {% if material_status.kazakh_ktj %}
+
+            <span class="text-xs font-bold
+                         text-emerald-700 bg-emerald-50
+                         px-2.5 py-1 rounded-lg">
+                ✓ Жүктелген
+            </span>
+
+            {% else %}
+
+            <span class="text-xs font-bold
+                         text-amber-700 bg-amber-50
+                         px-2.5 py-1 rounded-lg">
+                Жүктелмеген
+            </span>
+
+            {% endif %}
+
+        </div>
+
+        <h3 class="font-bold mt-4">
+            Қазақ тілі КТЖ
+        </h3>
+
+        <p class="text-sm text-slate-500">
+            Тақырыптар және оқу мақсаттары
+        </p>
+
+        {% if material_status.kazakh_ktj %}
+
+        <p class="text-xs text-slate-400 mt-4 truncate">
+            {{ material_status.kazakh_ktj.filename }}
+        </p>
+
+        {% else %}
+
+        <button
+            onclick="openUploadWith('Қазақ тілі','КТЖ','4-сынып Қазақ тілі КТЖ')"
+            class="mt-4 text-sm font-bold text-blue-600">
+            ＋ Жүктеу
+        </button>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<!-- ЖҮКТЕЛГЕН ФАЙЛДАР -->
+
+
+                <div class="bg-white border rounded-2xl">
+
+                    <div class="px-6 py-5 border-b">
+                        <h3 class="font-bold">
+                            Жүктелген материалдар
+                        </h3>
+                    </div>
+
+                    {% if materials %}
+
+                    <div class="divide-y">
+
+                        {% for item in materials %}
+
+                        <div class="p-5 flex
+                                    items-center justify-between">
+
+                            <div class="flex items-center gap-4">
+
+                                <div class="w-11 h-11
+                                            rounded-xl bg-blue-50
+                                            flex items-center
+                                            justify-center">
+                                    📄
+                                </div>
+
+                                <div>
+
+                                    <h4 class="font-bold">
+                                        {{ item.title }}
+                                    </h4>
+
+                                    <p class="text-xs
+                                              text-slate-500 mt-1">
+
+                                        {{ item.subject }}
+                                        ·
+                                        {{ item.material_type }}
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <span class="text-xs
+                                         text-emerald-700
+                                         bg-emerald-50
+                                         px-3 py-1.5
+                                         rounded-lg font-bold">
+
+                                Жүктелді ✓
+
+                            </span>
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    {% else %}
+
+                    <div class="py-16 text-center">
+
+                        <div class="text-4xl mb-3">
+                            📚
+                        </div>
+
+                        <h3 class="font-bold">
+                            Материалдар әлі жүктелмеген
+                        </h3>
+
+                        <p class="text-sm text-slate-400 mt-1">
+                            Алдымен оқулықтар мен КТЖ-ны жүктеңіз
+                        </p>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<!-- UPLOAD MODAL -->
+
+<div id="uploadModal"
+     class="hidden fixed inset-0
+            bg-slate-900/45 z-50
+            items-center justify-center p-4">
+
+    <div class="bg-white rounded-3xl
+                shadow-2xl w-full max-w-xl p-7">
+
+        <div class="flex justify-between
+                    items-start mb-6">
+
+            <div>
+                <h3 class="text-xl font-extrabold">
+                    📚 Материал жүктеу
+                </h3>
+
+                <p class="text-sm text-slate-500 mt-1">
+                    Оқулық немесе КТЖ
+                </p>
+            </div>
+
+            <button onclick="closeUpload()"
+                    class="text-xl">
+                ✕
+            </button>
+
+        </div>
+
+
+        <form method="POST"
+              action="{{ url_for('upload_material') }}"
+              enctype="multipart/form-data"
+              class="space-y-4">
+
+
+            <div>
+
+                <label class="block text-sm
+                              font-bold mb-2">
+                    Пән *
+                </label>
+
+                <select name="subject"
+                        id="materialSubject"
+                        required
+                        class="w-full border
+                               rounded-xl px-4 py-3">
+
+                    <option value="">
+                        Пәнді таңдаңыз
+                    </option>
+
+                    <option value="Математика">
+                        Математика
+                    </option>
+
+                    <option value="Қазақ тілі">
+                        Қазақ тілі
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label class="block text-sm
+                              font-bold mb-2">
+                    Материал түрі *
+                </label>
+
+                <select name="material_type"
+                        id="materialType"
+                        required
+                        class="w-full border
+                               rounded-xl px-4 py-3">
+
+                    <option value="">
+                        Таңдаңыз
+                    </option>
+
+                    <option value="Оқулық">
+                        Оқулық
+                    </option>
+
+                    <option value="КТЖ">
+                        КТЖ
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label class="block text-sm
+                              font-bold mb-2">
+                    Материал атауы *
+                </label>
+
+                <input name="title"
+                       id="materialTitle"
+                       required
+                       class="w-full border
+                              rounded-xl px-4 py-3"
+                       placeholder="Мысалы: 4-сынып Математика оқулығы">
+
+            </div>
+
+
+            <div>
+
+                <label class="block text-sm
+                              font-bold mb-2">
+                    Файл *
+                </label>
+
+                <input type="file"
+                       name="material_file"
+                       accept=".pdf,.docx,.xlsx"
+                       required
+                       class="w-full border-2
+                              border-dashed
+                              rounded-xl p-5
+                              bg-slate-50">
+
+                <p class="text-xs text-slate-400 mt-2">
+                    PDF, DOCX немесе XLSX
+                </p>
+
+            </div>
+
+
+            <button type="submit"
+                    class="w-full bg-blue-600
+                           hover:bg-blue-700
+                           text-white py-3.5
+                           rounded-xl font-bold">
+
+                📥 Материалды сақтау
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+function openUploadWith(subject, type, title) {
+
+    document.getElementById("materialSubject").value = subject;
+    document.getElementById("materialType").value = type;
+    document.getElementById("materialTitle").value = title;
+
+    openUpload();
+}
+
+function openUpload() {
+    const modal =
+        document.getElementById("uploadModal");
+
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+}
+
+function closeUpload() {
+    const modal =
+        document.getElementById("uploadModal");
+
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+}
+
+</script>
+
+</body>
+</html>

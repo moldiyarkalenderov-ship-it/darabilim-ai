@@ -1,0 +1,418 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>DaraBilim AI — Кіріс бақылау</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+        }
+
+        .answer-option:has(input:checked) {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+    </style>
+</head>
+
+<body class="text-slate-800">
+
+<header class="bg-white border-b sticky top-0 z-20">
+
+    <div class="max-w-5xl mx-auto px-6 py-5
+                flex items-center justify-between">
+
+        <div>
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🧠</span>
+
+                <h1 class="font-extrabold text-lg">
+                    DaraBilim AI
+                </h1>
+            </div>
+
+            <p class="text-xs text-slate-500 mt-1">
+                Кіріс бақылау
+            </p>
+        </div>
+
+        <div class="text-right">
+            <p class="font-bold">
+                👤 {{ attempt.full_name }}
+            </p>
+
+            <p class="text-xs text-slate-500">
+                {{ attempt.class_name }}
+            </p>
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="max-w-5xl mx-auto p-6 md:p-8">
+
+    <!-- INFO -->
+
+    <section class="bg-gradient-to-r
+                    from-blue-600 to-indigo-600
+                    text-white rounded-3xl p-7 mb-7">
+
+        <div class="flex flex-col md:flex-row
+                    md:items-center
+                    md:justify-between gap-5">
+
+            <div>
+                <p class="text-sm text-blue-100">
+                    {{ attempt.subject }}
+                </p>
+
+                <h2 class="text-2xl font-extrabold mt-1">
+                    {{ attempt.title }}
+                </h2>
+
+                <p class="text-sm text-blue-100 mt-2">
+                    Барлық тапсырмаға жауап беріп,
+                    соңында «Бақылауды аяқтау» батырмасын басыңыз.
+                </p>
+            </div>
+
+            <div class="bg-white/15
+                        rounded-2xl px-5 py-4
+                        text-center">
+
+                <div class="text-2xl font-extrabold">
+                    {{ questions|length }}
+                </div>
+
+                <div class="text-xs text-blue-100">
+                    тапсырма
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    {% if questions %}
+
+    <form method="POST"
+          action="{{ url_for(
+              'submit_diagnostic_attempt',
+              attempt_id=attempt.id
+          ) }}"
+          id="diagnosticForm">
+
+        <div class="space-y-5">
+
+            {% for q in questions %}
+
+            <section class="bg-white
+                            border border-slate-200
+                            rounded-2xl p-6
+                            shadow-sm">
+
+                <div class="flex items-start
+                            justify-between gap-4 mb-4">
+
+                    <div class="flex items-center gap-3">
+
+                        <div class="w-9 h-9
+                                    bg-blue-600
+                                    text-white
+                                    rounded-xl
+                                    flex items-center
+                                    justify-center
+                                    font-extrabold">
+
+                            {{ loop.index }}
+
+                        </div>
+
+                        <div>
+
+                            <span class="text-xs
+                                         font-bold
+                                         text-blue-700
+                                         bg-blue-50
+                                         px-2 py-1
+                                         rounded-md">
+
+                                {{ q.objective_code }}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    {% if q.level == 'Қолдау' %}
+
+                    <span class="text-xs font-bold
+                                 text-emerald-700
+                                 bg-emerald-50
+                                 px-2.5 py-1 rounded-lg">
+                        Қолдау
+                    </span>
+
+                    {% elif q.level == 'Бекіту' %}
+
+                    <span class="text-xs font-bold
+                                 text-blue-700
+                                 bg-blue-50
+                                 px-2.5 py-1 rounded-lg">
+                        Бекіту
+                    </span>
+
+                    {% else %}
+
+                    <span class="text-xs font-bold
+                                 text-violet-700
+                                 bg-violet-50
+                                 px-2.5 py-1 rounded-lg">
+                        Дамыту
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <h3 class="font-bold
+                           text-lg leading-relaxed mb-5">
+
+                    {{ q.question_text }}
+
+                </h3>
+
+
+                <div class="grid grid-cols-1
+                            md:grid-cols-2 gap-3">
+
+
+                    <label class="answer-option
+                                  border-2 border-slate-200
+                                  rounded-xl p-4
+                                  cursor-pointer
+                                  hover:border-blue-300
+                                  transition">
+
+                        <div class="flex items-start gap-3">
+
+                            <input type="radio"
+                                   name="question_{{ q.id }}"
+                                   value="A"
+                                   class="mt-1 accent-blue-600">
+
+                            <div>
+                                <strong>A)</strong>
+                                {{ q.option_a }}
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="answer-option
+                                  border-2 border-slate-200
+                                  rounded-xl p-4
+                                  cursor-pointer
+                                  hover:border-blue-300
+                                  transition">
+
+                        <div class="flex items-start gap-3">
+
+                            <input type="radio"
+                                   name="question_{{ q.id }}"
+                                   value="B"
+                                   class="mt-1 accent-blue-600">
+
+                            <div>
+                                <strong>B)</strong>
+                                {{ q.option_b }}
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="answer-option
+                                  border-2 border-slate-200
+                                  rounded-xl p-4
+                                  cursor-pointer
+                                  hover:border-blue-300
+                                  transition">
+
+                        <div class="flex items-start gap-3">
+
+                            <input type="radio"
+                                   name="question_{{ q.id }}"
+                                   value="C"
+                                   class="mt-1 accent-blue-600">
+
+                            <div>
+                                <strong>C)</strong>
+                                {{ q.option_c }}
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="answer-option
+                                  border-2 border-slate-200
+                                  rounded-xl p-4
+                                  cursor-pointer
+                                  hover:border-blue-300
+                                  transition">
+
+                        <div class="flex items-start gap-3">
+
+                            <input type="radio"
+                                   name="question_{{ q.id }}"
+                                   value="D"
+                                   class="mt-1 accent-blue-600">
+
+                            <div>
+                                <strong>D)</strong>
+                                {{ q.option_d }}
+                            </div>
+
+                        </div>
+
+                    </label>
+
+                </div>
+
+            </section>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- SUBMIT -->
+
+        <div class="bg-white
+                    border border-slate-200
+                    rounded-2xl p-6 mt-7
+                    flex flex-col md:flex-row
+                    md:items-center
+                    md:justify-between gap-4">
+
+            <div>
+
+                <p class="font-bold">
+                    Жауаптарды тексеріңіз
+                </p>
+
+                <p id="answerProgress"
+                   class="text-sm text-slate-500 mt-1">
+                    0 / {{ questions|length }} тапсырмаға жауап берілді
+                </p>
+
+            </div>
+
+
+            <button type="submit"
+                    class="bg-blue-600
+                           hover:bg-blue-700
+                           text-white
+                           px-7 py-3.5
+                           rounded-xl
+                           font-bold">
+
+                Бақылауды аяқтау →
+
+            </button>
+
+        </div>
+
+    </form>
+
+
+    {% else %}
+
+    <div class="bg-white border
+                rounded-2xl py-16 text-center">
+
+        <div class="text-4xl mb-3">
+            📝
+        </div>
+
+        <h3 class="font-bold">
+            Тапсырмалар дайын емес
+        </h3>
+
+    </div>
+
+    {% endif %}
+
+</main>
+
+
+<script>
+
+const radios =
+    document.querySelectorAll(
+        'input[type="radio"]'
+    );
+
+function updateProgress() {
+
+    const names = new Set();
+
+    document
+        .querySelectorAll(
+            'input[type="radio"]:checked'
+        )
+        .forEach(item => {
+            names.add(item.name);
+        });
+
+    const progress =
+        document.getElementById(
+            "answerProgress"
+        );
+
+    if (progress) {
+
+        progress.textContent =
+            names.size
+            + " / {{ questions|length }}"
+            + " тапсырмаға жауап берілді";
+
+    }
+}
+
+radios.forEach(radio => {
+
+    radio.addEventListener(
+        "change",
+        updateProgress
+    );
+
+});
+
+</script>
+
+</body>
+</html>

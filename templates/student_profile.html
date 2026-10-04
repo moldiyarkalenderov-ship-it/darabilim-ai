@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+<title>DaraBilim AI - Оқушы профилі</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-50">
+
+<header class="bg-white border-b">
+<div class="max-w-7xl mx-auto p-6">
+
+<a href="{{ url_for('students') }}"
+   class="text-blue-600 font-bold">
+← Оқушылар
+</a>
+
+<h1 class="text-3xl font-black mt-3">
+👤 {{ student.full_name }}
+</h1>
+
+<p class="text-slate-500">
+{{ student.class_name }}
+</p>
+
+</div>
+</header>
+
+<main class="max-w-7xl mx-auto p-6 space-y-6">
+
+<div class="grid md:grid-cols-4 gap-4">
+
+<div class="bg-white border rounded-2xl p-5">
+<p class="text-sm text-slate-500">Диагностика</p>
+<p class="text-3xl font-black">{{ stats.attempts }}</p>
+</div>
+
+<div class="bg-white border rounded-2xl p-5">
+<p class="text-sm text-slate-500">Оқу мақсаттары</p>
+<p class="text-3xl font-black">{{ stats.objectives }}</p>
+</div>
+
+<div class="bg-white border rounded-2xl p-5">
+<p class="text-sm text-slate-500">Жеке тапсырмалар</p>
+<p class="text-3xl font-black">{{ stats.tasks }}</p>
+</div>
+
+<div class="bg-white border rounded-2xl p-5">
+<p class="text-sm text-slate-500">Орындалған</p>
+<p class="text-3xl font-black">{{ stats.completed }}</p>
+</div>
+
+</div>
+
+
+<section class="bg-white border rounded-3xl p-6">
+
+<h2 class="text-xl font-black mb-5">
+🎯 Оқу мақсаттары
+</h2>
+
+{% if results %}
+
+<div class="space-y-3">
+
+{% for row in results %}
+
+<div class="border rounded-2xl p-4">
+
+<div class="flex justify-between gap-4">
+
+<div>
+<p class="font-black">
+{{ row.objective_code }}
+</p>
+
+<p class="text-sm text-slate-600 mt-1">
+{{ row.objective_text }}
+</p>
+</div>
+
+<div class="text-right">
+
+<p class="font-black">
+{{ row.percentage }}%
+</p>
+
+<p class="text-sm">
+{{ row.mastery_status }}
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% else %}
+
+<p class="text-slate-500">
+Әзірге диагностика нәтижесі жоқ.
+</p>
+
+{% endif %}
+
+</section>
+
+
+<section class="bg-white border rounded-3xl p-6">
+
+<h2 class="text-xl font-black mb-5">
+🧩 Жеке тапсырмалар
+</h2>
+
+{% if tasks %}
+
+<div class="space-y-3">
+
+{% for task in tasks %}
+
+<a href="{{ url_for('personal_task_detail', task_id=task.id) }}"
+   class="block border rounded-2xl p-4 hover:bg-slate-50">
+
+<div class="flex justify-between">
+
+<div>
+
+<p class="font-black">
+{{ task.title }}
+</p>
+
+<p class="text-sm text-slate-500 mt-1">
+{{ task.path_level }}
+</p>
+
+</div>
+
+<p class="font-bold">
+{{ task.status }}
+</p>
+
+</div>
+
+</a>
+
+{% endfor %}
+
+</div>
+
+{% else %}
+
+<p class="text-slate-500">
+Жеке тапсырма жоқ.
+</p>
+
+{% endif %}
+
+</section>
+
+</main>
+</body>
+</html>

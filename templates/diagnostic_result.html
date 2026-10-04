@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>DaraBilim AI — Нәтиже</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f8fafc;
+}
+</style>
+
+</head>
+
+
+<body class="text-slate-800">
+
+
+<header class="bg-white border-b">
+
+    <div class="max-w-6xl mx-auto
+                px-8 py-5
+                flex items-center
+                justify-between">
+
+        <div>
+
+            <div class="flex items-center gap-2">
+
+                <span class="text-2xl">
+                    🧠
+                </span>
+
+                <h1 class="font-extrabold text-lg">
+                    DaraBilim AI
+                </h1>
+
+            </div>
+
+            <p class="text-xs text-slate-500 mt-1">
+                Кіріс бақылау нәтижесі
+            </p>
+
+        </div>
+
+
+        <a href="{{ url_for('diagnostics') }}"
+           class="px-4 py-2.5
+                  bg-slate-100
+                  rounded-xl
+                  text-sm font-bold">
+
+            ← Кіріс бақылау
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="max-w-6xl mx-auto p-8">
+
+
+    <!-- STUDENT -->
+
+    <div class="mb-6">
+
+        <h2 class="text-2xl font-extrabold">
+            {{ attempt.full_name }}
+        </h2>
+
+        <p class="text-sm text-slate-500 mt-1">
+
+            {{ attempt.class_name }}
+            ·
+            {{ attempt.subject }}
+            ·
+            {{ attempt.title }}
+
+        </p>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    <div class="grid grid-cols-1
+                md:grid-cols-4 gap-4 mb-7">
+
+
+        <div class="bg-white border
+                    rounded-2xl p-5">
+
+            <p class="text-xs
+                      text-slate-400 font-bold">
+                НӘТИЖЕ
+            </p>
+
+            <div class="text-3xl
+                        font-extrabold
+                        text-blue-600 mt-2">
+
+                {{ attempt.percentage }}%
+
+            </div>
+
+        </div>
+
+
+        <div class="bg-white border
+                    rounded-2xl p-5">
+
+            <p class="text-xs
+                      text-slate-400 font-bold">
+                БАЛЛ
+            </p>
+
+            <div class="text-2xl
+                        font-extrabold mt-2">
+
+                {{ attempt.earned_points }}
+                /
+                {{ attempt.max_points }}
+
+            </div>
+
+        </div>
+
+
+        <div class="bg-white border
+                    rounded-2xl p-5">
+
+            <p class="text-xs
+                      text-slate-400 font-bold">
+                ЖАУАП БЕРІЛДІ
+            </p>
+
+            <div class="text-2xl
+                        font-extrabold mt-2">
+
+                {{ attempt.answered_questions }}
+                /
+                {{ attempt.total_questions }}
+
+            </div>
+
+        </div>
+
+
+        <div class="bg-white border
+                    rounded-2xl p-5">
+
+            <p class="text-xs
+                      text-slate-400 font-bold">
+                СТАТУС
+            </p>
+
+            <div class="mt-2 font-extrabold">
+
+                {% if attempt.percentage >= 80 %}
+
+                <span class="text-emerald-600">
+                    Жоғары нәтиже
+                </span>
+
+                {% elif attempt.percentage >= 50 %}
+
+                <span class="text-amber-600">
+                    Орташа нәтиже
+                </span>
+
+                {% else %}
+
+                <span class="text-rose-600">
+                    Қолдау қажет
+                </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- OBJECTIVES -->
+
+    <section class="bg-white
+                    border rounded-2xl">
+
+        <div class="px-6 py-5 border-b">
+
+            <h3 class="font-extrabold">
+                🎯 Оқу мақсаттары бойынша талдау
+            </h3>
+
+            <p class="text-sm
+                      text-slate-500 mt-1">
+
+                DaraBilim AI әр оқу мақсатын
+                жеке талдайды.
+
+            </p>
+
+        </div>
+
+
+        {% if objective_results %}
+
+        <div class="divide-y">
+
+            {% for item in objective_results %}
+
+            <div class="p-6">
+
+                <div class="flex flex-col
+                            md:flex-row
+                            md:items-start
+                            md:justify-between gap-4">
+
+                    <div class="flex-1">
+
+                        <div class="flex
+                                    items-center
+                                    gap-2 mb-2">
+
+                            <span class="px-2.5 py-1
+                                         bg-blue-50
+                                         text-blue-700
+                                         rounded-lg
+                                         text-xs font-bold">
+
+                                {{ item.objective_code }}
+
+                            </span>
+
+
+                            {% if item.mastery_status == 'Меңгерілген' %}
+
+                            <span class="px-2.5 py-1
+                                         bg-emerald-50
+                                         text-emerald-700
+                                         rounded-lg
+                                         text-xs font-bold">
+
+                                ✓ Меңгерілген
+
+                            </span>
+
+
+                            {% elif item.mastery_status == 'Бекітуді қажет етеді' %}
+
+                            <span class="px-2.5 py-1
+                                         bg-amber-50
+                                         text-amber-700
+                                         rounded-lg
+                                         text-xs font-bold">
+
+                                ◐ Бекітуді қажет етеді
+
+                            </span>
+
+
+                            {% else %}
+
+                            <span class="px-2.5 py-1
+                                         bg-rose-50
+                                         text-rose-700
+                                         rounded-lg
+                                         text-xs font-bold">
+
+                                ⚠ Олқылық бар
+
+                            </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <p class="text-sm
+                                  text-slate-600
+                                  leading-relaxed">
+
+                            {{ item.objective_text }}
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="md:text-right">
+
+                        <div class="text-2xl font-extrabold">
+
+                            {{ item.percentage }}%
+
+                        </div>
+
+                        <p class="text-xs
+                                  text-slate-400 mt-1">
+
+                            {{ item.correct_questions }}
+                            /
+                            {{ item.total_questions }}
+                            дұрыс
+
+                        </p>
+
+                        <p class="text-xs
+                                  text-slate-400">
+
+                            {{ item.earned_points }}
+                            /
+                            {{ item.max_points }}
+                            балл
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROGRESS -->
+
+                <div class="h-2
+                            bg-slate-100
+                            rounded-full
+                            overflow-hidden mt-4">
+
+                    <div
+                        class="h-full bg-blue-600 rounded-full"
+                        style="width: {{ item.percentage }}%">
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+        <div class="py-14 text-center
+                    text-slate-400">
+
+            Нәтижелер әлі есептелмеген.
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- LEGEND -->
+
+    <div class="grid grid-cols-1
+                md:grid-cols-3 gap-4 mt-6">
+
+        <div class="bg-emerald-50
+                    rounded-2xl p-4">
+
+            <strong class="text-emerald-700">
+                80–100% — Меңгерілген
+            </strong>
+
+            <p class="text-xs
+                      text-slate-600 mt-1">
+                Оқу мақсаты бойынша
+                тұрақты нәтиже көрсетілді.
+            </p>
+
+        </div>
+
+
+        <div class="bg-amber-50
+                    rounded-2xl p-4">
+
+            <strong class="text-amber-700">
+                50–79% — Бекіту қажет
+            </strong>
+
+            <p class="text-xs
+                      text-slate-600 mt-1">
+                Дағды бар, бірақ қосымша
+                жаттығу қажет.
+            </p>
+
+        </div>
+
+
+        <div class="bg-rose-50
+                    rounded-2xl p-4">
+
+            <strong class="text-rose-700">
+                0–49% — Олқылық бар
+            </strong>
+
+            <p class="text-xs
+                      text-slate-600 mt-1">
+                Бұл оқу мақсаты жеке
+                білім бағытына қосылады.
+            </p>
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>

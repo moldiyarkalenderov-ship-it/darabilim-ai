@@ -1,0 +1,2652 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>DaraBilim AI — Жеке білім бағыты</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+<style>
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f8fafc;
+}
+
+</style>
+
+
+
+<style id="DARABILIM_DESCRIPTOR_ANALYTICS_UI_STYLE">
+
+.da-section {
+    margin-top: 24px;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.da-header {
+    padding: 18px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #f8fafc;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.da-title {
+    font-size: 15px;
+    font-weight: 900;
+    color: #0f172a;
+}
+
+.da-subtitle {
+    margin-top: 3px;
+    font-size: 11px;
+    line-height: 1.45;
+    color: #64748b;
+}
+
+.da-refresh {
+    flex: 0 0 auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    background: white;
+    padding: 7px 10px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 800;
+    color: #475569;
+}
+
+.da-refresh:hover {
+    background: #f1f5f9;
+}
+
+.da-body {
+    padding: 16px;
+}
+
+.da-empty {
+    padding: 28px 14px;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.da-card {
+    padding: 13px;
+    margin-bottom: 9px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 13px;
+
+    background: #ffffff;
+}
+
+.da-card:last-child {
+    margin-bottom: 0;
+}
+
+.da-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.da-student {
+    font-size: 13px;
+    font-weight: 900;
+    color: #0f172a;
+}
+
+.da-meta {
+    margin-top: 3px;
+    font-size: 10px;
+    color: #94a3b8;
+}
+
+.da-code {
+    display: inline-block;
+    margin-top: 7px;
+    padding: 4px 7px;
+
+    border-radius: 7px;
+    background: #eff6ff;
+
+    font-size: 10px;
+    font-weight: 900;
+    color: #2563eb;
+}
+
+.da-objective {
+    margin-top: 7px;
+    font-size: 11px;
+    line-height: 1.45;
+    color: #475569;
+}
+
+.da-percent {
+    flex: 0 0 auto;
+    font-size: 18px;
+    font-weight: 900;
+    color: #2563eb;
+}
+
+.da-progress {
+    width: 100%;
+    height: 7px;
+
+    margin-top: 10px;
+
+    border-radius: 999px;
+    background: #e2e8f0;
+    overflow: hidden;
+}
+
+.da-progress-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: #2563eb;
+}
+
+.da-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 9px;
+}
+
+.da-chip {
+    padding: 4px 7px;
+    border-radius: 7px;
+
+    background: #f1f5f9;
+
+    font-size: 10px;
+    font-weight: 700;
+    color: #64748b;
+}
+
+.da-status {
+    margin-top: 8px;
+    display: inline-block;
+
+    padding: 5px 8px;
+    border-radius: 8px;
+
+    font-size: 10px;
+    font-weight: 900;
+}
+
+.da-status.mastered {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.da-status.practice {
+    background: #fffbeb;
+    color: #b45309;
+}
+
+.da-status.gap {
+    background: #fff1f2;
+    color: #be123c;
+}
+
+.da-status.insufficient {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.da-path-box {
+    margin-top: 9px;
+    padding: 9px;
+
+    border-radius: 9px;
+    background: #f8fafc;
+
+    font-size: 11px;
+    line-height: 1.45;
+    color: #475569;
+}
+
+</style>
+
+
+
+
+<style id="DARABILIM_BASELINE_DAILY_ANALYTICS_FINAL_V1_STYLE">
+
+.da-bdp-v1 {
+    margin: 18px 0;
+    padding: 16px;
+    border: 1px solid #dbeafe;
+    border-radius: 18px;
+    background: #ffffff;
+}
+
+.da-bdp-title-v1 {
+    margin-bottom: 12px;
+    font-size: 17px;
+    font-weight: 900;
+    color: #0f172a;
+}
+
+.da-bdp-grid-v1 {
+    display: grid;
+    gap: 12px;
+}
+
+.da-bdp-card-v1 {
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+
+.da-bdp-head-v1 {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 9px;
+}
+
+.da-bdp-name-v1 {
+    font-weight: 900;
+    color: #0f172a;
+}
+
+.da-bdp-code-v1 {
+    font-weight: 900;
+    color: #2563eb;
+}
+
+.da-bdp-values-v1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.da-bdp-value-v1 {
+    padding: 9px;
+    border-radius: 10px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.da-bdp-number-v1 {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.da-bdp-label-v1 {
+    margin-top: 3px;
+    font-size: 10px;
+    color: #64748b;
+}
+
+.da-bdp-status-v1 {
+    margin-top: 10px;
+    font-weight: 900;
+}
+
+.da-bdp-timeline-v1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.da-bdp-point-v1 {
+    padding: 5px 8px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+</style>
+
+
+
+<style id="DARABILIM_ANALYTICS_RESULTS_RESET_FINAL_V1_STYLE">
+
+.da-reset-results-v1 {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    margin:
+        10px
+        0
+        16px;
+}
+
+
+.da-reset-button-v1 {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 36px;
+
+    padding:
+        7px
+        12px;
+
+    border:
+        1px solid
+        #fecaca;
+
+    border-radius:
+        10px;
+
+    background:
+        #fff1f2;
+
+    color:
+        #be123c;
+
+    font-size:
+        11px;
+
+    font-weight:
+        900;
+
+    cursor:
+        pointer;
+}
+
+
+.da-reset-button-v1:hover {
+
+    background:
+        #ffe4e6;
+}
+
+
+.da-reset-modal-v1 {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        999999;
+
+    display:
+        none;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        20px;
+
+    background:
+        rgba(
+            15,
+            23,
+            42,
+            .58
+        );
+}
+
+
+.da-reset-modal-v1.open {
+
+    display:
+        flex;
+}
+
+
+.da-reset-dialog-v1 {
+
+    width:
+        min(
+            520px,
+            96vw
+        );
+
+    max-height:
+        90vh;
+
+    overflow:
+        auto;
+
+    padding:
+        20px;
+
+    border-radius:
+        18px;
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        0 24px 70px
+        rgba(
+            15,
+            23,
+            42,
+            .25
+        );
+}
+
+
+.da-reset-title-v1 {
+
+    margin-bottom:
+        8px;
+
+    font-size:
+        18px;
+
+    font-weight:
+        900;
+
+    color:
+        #0f172a;
+}
+
+
+.da-reset-info-v1 {
+
+    margin-bottom:
+        15px;
+
+    color:
+        #475569;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.55;
+}
+
+
+.da-reset-option-v1 {
+
+    width:
+        100%;
+
+    margin-top:
+        9px;
+
+    padding:
+        12px;
+
+    border:
+        1px solid
+        #e2e8f0;
+
+    border-radius:
+        12px;
+
+    background:
+        #f8fafc;
+
+    text-align:
+        left;
+
+    cursor:
+        pointer;
+}
+
+
+.da-reset-option-v1:hover {
+
+    background:
+        #f1f5f9;
+}
+
+
+.da-reset-option-title-v1 {
+
+    font-size:
+        13px;
+
+    font-weight:
+        900;
+
+    color:
+        #0f172a;
+}
+
+
+.da-reset-option-text-v1 {
+
+    margin-top:
+        4px;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.45;
+
+    color:
+        #64748b;
+}
+
+
+.da-reset-danger-v1 {
+
+    border-color:
+        #fecaca;
+
+    background:
+        #fff1f2;
+}
+
+
+.da-reset-danger-v1
+.da-reset-option-title-v1 {
+
+    color:
+        #be123c;
+}
+
+
+.da-reset-close-v1 {
+
+    width:
+        100%;
+
+    margin-top:
+        14px;
+
+    padding:
+        9px;
+
+    border:
+        1px solid
+        #cbd5e1;
+
+    border-radius:
+        10px;
+
+    background:
+        #ffffff;
+
+    color:
+        #334155;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+}
+
+</style>
+
+</head>
+
+
+<body class="text-slate-800">
+
+
+<header class="bg-white border-b">
+
+    <div class="max-w-7xl mx-auto
+                px-8 py-5
+                flex items-center
+                justify-between">
+
+        <div>
+
+            <a href="{{ url_for('dashboard') }}"
+               class="text-sm
+                      font-bold
+                      text-blue-600">
+
+                ← Басты бет
+
+            </a>
+
+            <h1 class="text-2xl
+                       font-extrabold mt-2">
+
+                🎯 Жеке білім бағыты
+
+            </h1>
+
+            <p class="text-sm
+                      text-slate-500 mt-1">
+
+                Диагностика нәтижесіне сәйкес
+                жеке оқу бағыты
+
+            </p>
+
+        </div>
+
+
+        <div class="text-sm font-bold">
+
+            👩‍🏫 {{ teacher_name }}
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="max-w-7xl mx-auto p-8">
+
+
+    <!-- SUMMARY -->
+
+    <div class="grid grid-cols-1
+                md:grid-cols-4
+                gap-4 mb-7">
+
+
+        <div class="bg-white border
+                    rounded-2xl p-5">
+
+            <p class="text-xs
+                      text-slate-400 font-bold">
+
+                ОҚУШЫЛАР
+
+            </p>
+
+            <div class="text-3xl
+                        font-extrabold mt-2">
+
+                {{ students|length }}
+
+            </div>
+
+        </div>
+
+
+        <div class="bg-emerald-50
+                    border border-emerald-100
+                    rounded-2xl p-5">
+
+            <p class="text-xs
+                      text-emerald-600 font-bold">
+
+                🟢 ҚОЛДАУ
+
+            </p>
+
+            <div class="text-3xl
+                        text-emerald-700
+                        font-extrabold mt-2">
+
+                {{ support_count }}
+
+            </div>
+
+        </div>
+
+
+        <div class="bg-blue-50
+                    border border-blue-100
+                    rounded-2xl p-5">
+
+            <p class="text-xs
+                      text-blue-600 font-bold">
+
+                🔵 БЕКІТУ
+
+            </p>
+
+            <div class="text-3xl
+                        text-blue-700
+                        font-extrabold mt-2">
+
+                {{ reinforce_count }}
+
+            </div>
+
+        </div>
+
+
+        <div class="bg-violet-50
+                    border border-violet-100
+                    rounded-2xl p-5">
+
+            <p class="text-xs
+                      text-violet-600 font-bold">
+
+                🟣 ДАМЫТУ
+
+            </p>
+
+            <div class="text-3xl
+                        text-violet-700
+                        font-extrabold mt-2">
+
+                {{ develop_count }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- PERSONAL TASK GENERATOR -->
+
+    <section id="personalTaskGenerator"
+             class="bg-white border
+                    rounded-2xl
+                    overflow-hidden mb-6">
+
+        <div class="px-6 py-5 border-b">
+
+            <h2 class="font-extrabold">
+                ⚙️ Жеке тапсырмаларды құру
+            </h2>
+
+            <p class="text-xs text-slate-500 mt-1">
+                Аяқталған кіріс бақылау нәтижесінен
+                Қолдау / Бекіту / Дамыту тапсырмаларын дайындау
+            </p>
+
+        </div>
+
+
+        {% if completed_attempts %}
+
+        <div class="divide-y">
+
+            {% for attempt in completed_attempts %}
+
+            <div class="p-5
+                        flex flex-col
+                        lg:flex-row
+                        lg:items-center
+                        lg:justify-between
+                        gap-4">
+
+                <div>
+
+                    <div class="flex flex-wrap
+                                items-center
+                                gap-2">
+
+                        <span class="font-extrabold">
+                            {{ attempt.full_name }}
+                        </span>
+
+                        <span class="px-2 py-1
+                                     bg-blue-50
+                                     text-blue-700
+                                     rounded-md
+                                     text-xs font-bold">
+
+                            {{ attempt.subject }}
+
+                        </span>
+
+                        <span class="text-sm font-bold">
+                            {{ attempt.percentage }}%
+                        </span>
+
+                    </div>
+
+                    <p class="text-sm
+                              text-slate-500 mt-2">
+
+                        {{ attempt.diagnostic_title }}
+
+                    </p>
+
+                    <p class="text-xs
+                              text-slate-400 mt-1">
+
+                        {{ attempt.objective_count }}
+                        оқу мақсаты ·
+
+                        {{ attempt.personal_task_count }}
+                        жеке тапсырма
+
+                    </p>
+
+                </div>
+
+
+                {% if attempt.personal_task_count == 0 %}
+
+                <form method="POST"
+                      action="{{ url_for(
+                          'generate_personal_tasks',
+                          attempt_id=attempt.attempt_id
+                      ) }}">
+
+                    <button type="submit"
+                            class="bg-violet-600
+                                   hover:bg-violet-700
+                                   text-white
+                                   px-5 py-3
+                                   rounded-xl
+                                   text-sm font-bold">
+
+                        ⚙️ Жеке тапсырмаларды құру
+
+                    </button>
+
+                </form>
+
+                {% else %}
+
+                <div class="px-4 py-2.5
+                            bg-emerald-50
+                            text-emerald-700
+                            rounded-xl
+                            text-sm font-bold">
+
+                    ✓ Тапсырмалар құрылды
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+        <div class="p-6
+                    text-sm text-slate-500">
+
+            Әзірге аяқталған кіріс бақылау жоқ.
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- FILTER -->
+
+    <section class="bg-white
+                    border rounded-2xl
+                    p-5 mb-6">
+
+        <div class="grid grid-cols-1
+                    md:grid-cols-3 gap-4">
+
+            <div>
+
+                <label class="block
+                              text-xs font-bold
+                              text-slate-500 mb-2">
+
+                    Оқушы
+
+                </label>
+
+                <select id="studentFilter"
+                        onchange="filterPaths()"
+                        class="w-full border
+                               rounded-xl
+                               px-4 py-3">
+
+                    <option value="">
+                        Барлық оқушы
+                    </option>
+
+                    {% for student in students %}
+
+                    <option value="{{ student.id }}">
+                        {{ student.full_name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label class="block
+                              text-xs font-bold
+                              text-slate-500 mb-2">
+
+                    Пән
+
+                </label>
+
+                <select id="subjectFilter"
+                        onchange="filterPaths()"
+                        class="w-full border
+                               rounded-xl
+                               px-4 py-3">
+
+                    <option value="">
+                        Барлық пән
+                    </option>
+
+                    <option value="Математика">
+                        Математика
+                    </option>
+
+                    <option value="Қазақ тілі">
+                        Қазақ тілі
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label class="block
+                              text-xs font-bold
+                              text-slate-500 mb-2">
+
+                    Бағыт
+
+                </label>
+
+                <select id="levelFilter"
+                        onchange="filterPaths()"
+                        class="w-full border
+                               rounded-xl
+                               px-4 py-3">
+
+                    <option value="">
+                        Барлық бағыт
+                    </option>
+
+                    <option value="Қолдау">
+                        Қолдау
+                    </option>
+
+                    <option value="Бекіту">
+                        Бекіту
+                    </option>
+
+                    <option value="Дамыту">
+                        Дамыту
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PATHS -->
+
+    <section class="bg-white
+                    border rounded-2xl
+                    overflow-hidden">
+
+        <div class="px-6 py-5 border-b">
+
+            <h2 class="font-extrabold">
+
+                🧭 Оқу бағыттары
+
+            </h2>
+
+            <p class="text-xs
+                      text-slate-500 mt-1">
+
+                Әр оқу мақсаты бойынша
+                ұсынылатын келесі қадам
+
+            </p>
+
+        </div>
+
+
+        {% if paths %}
+
+        <div id="pathList"
+             class="divide-y">
+
+            {% for item in paths %}
+
+            <div class="path-item p-5"
+                 data-student="{{ item.student_id }}"
+                 data-subject="{{ item.subject }}"
+                 data-level="{{ item.path_level }}">
+
+
+                <div class="flex flex-col
+                            lg:flex-row
+                            lg:items-start
+                            lg:justify-between
+                            gap-5">
+
+
+                    <div class="flex-1">
+
+
+                        <div class="flex flex-wrap
+                                    items-center
+                                    gap-2 mb-3">
+
+                            <span class="font-extrabold">
+
+                                {{ item.full_name }}
+
+                            </span>
+
+
+                            <span class="text-xs
+                                         text-slate-400">
+
+                                {{ item.class_name }}
+
+                            </span>
+
+
+                            <span class="px-2 py-1
+                                         bg-slate-100
+                                         rounded-md
+                                         text-xs font-bold">
+
+                                {{ item.subject }}
+
+                            </span>
+
+
+                            <span class="px-2 py-1
+                                         bg-blue-50
+                                         text-blue-700
+                                         rounded-md
+                                         text-xs font-bold">
+
+                                {{ item.objective_code }}
+
+                            </span>
+
+                        </div>
+
+
+                        <p class="text-sm
+                                  text-slate-600
+                                  leading-relaxed">
+
+                            {{ item.objective_text }}
+
+                        </p>
+
+
+                        <div class="mt-4
+                                    bg-slate-50
+                                    rounded-xl p-4">
+
+                            <p class="text-xs
+                                      text-slate-400
+                                      font-bold mb-1">
+
+                                ҰСЫНЫЛАТЫН ҚАДАМ
+
+                            </p>
+
+                            <p class="text-sm
+                                      font-medium">
+
+                                {{ item.recommendation }}
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="lg:w-44
+                                lg:text-right">
+
+                        <div class="text-3xl
+                                    font-extrabold">
+
+                            {{ item.percentage }}%
+
+                        </div>
+
+
+                        {% if item.path_level == 'Қолдау' %}
+
+                        <span class="inline-block
+                                     mt-2 px-3 py-1.5
+                                     bg-emerald-50
+                                     text-emerald-700
+                                     rounded-lg
+                                     text-xs font-bold">
+
+                            🟢 Қолдау
+
+                        </span>
+
+
+                        {% elif item.path_level == 'Бекіту' %}
+
+                        <span class="inline-block
+                                     mt-2 px-3 py-1.5
+                                     bg-blue-50
+                                     text-blue-700
+                                     rounded-lg
+                                     text-xs font-bold">
+
+                            🔵 Бекіту
+
+                        </span>
+
+
+                        {% else %}
+
+                        <span class="inline-block
+                                     mt-2 px-3 py-1.5
+                                     bg-violet-50
+                                     text-violet-700
+                                     rounded-lg
+                                     text-xs font-bold">
+
+                            🟣 Дамыту
+
+                        </span>
+
+                        {% endif %}
+
+
+                        <p class="text-xs
+                                  text-slate-400 mt-3">
+
+                            {{ item.diagnostic_title }}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div id="emptyFilter"
+             class="hidden py-16 text-center">
+
+            <div class="text-4xl mb-3">
+                🔎
+            </div>
+
+            <h3 class="font-bold">
+                Сәйкес нәтиже табылмады
+            </h3>
+
+        </div>
+
+
+        {% else %}
+
+        <div class="py-16 text-center">
+
+            <div class="text-4xl mb-3">
+                🎯
+            </div>
+
+            <h3 class="font-bold">
+                Жеке білім бағыты әлі қалыптаспаған
+            </h3>
+
+            <p class="text-sm
+                      text-slate-400 mt-1">
+
+                Алдымен оқушы кіріс
+                бақылауын аяқтауы қажет.
+
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- RULE -->
+
+    <div class="grid grid-cols-1
+                md:grid-cols-3 gap-4 mt-6">
+
+        <div class="bg-emerald-50
+                    rounded-2xl p-4">
+
+            <strong class="text-emerald-700">
+                🟢 0–49% → Қолдау
+            </strong>
+
+            <p class="text-xs
+                      text-slate-600 mt-1">
+                Негізгі түсіндіру және
+                қарапайым жаттығулар.
+            </p>
+
+        </div>
+
+
+        <div class="bg-blue-50
+                    rounded-2xl p-4">
+
+            <strong class="text-blue-700">
+                🔵 50–79% → Бекіту
+            </strong>
+
+            <p class="text-xs
+                      text-slate-600 mt-1">
+                Қайталау және дағдыны
+                тұрақтандыру.
+            </p>
+
+        </div>
+
+
+        <div class="bg-violet-50
+                    rounded-2xl p-4">
+
+            <strong class="text-violet-700">
+                🟣 80–100% → Дамыту
+            </strong>
+
+            <p class="text-xs
+                      text-slate-600 mt-1">
+                Күрделі және жаңа
+                жағдайдағы тапсырмалар.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+<!-- ======================================================
+     ДАЙЫН ЖЕКЕ ТАПСЫРМАЛАР
+======================================================= -->
+
+<section id="personalTasksList"
+         class="bg-white border
+                rounded-2xl
+                overflow-hidden mt-6 mb-6">
+
+    <div class="px-6 py-5 border-b">
+
+        <div class="flex items-center
+                    justify-between gap-4">
+
+            <div>
+
+                <h2 class="font-extrabold">
+                    📚 Дайын жеке тапсырмалар
+                </h2>
+
+                <p class="text-xs
+                          text-slate-500 mt-1">
+
+                    Кіріс бақылау нәтижесіне және
+                    КТЖ оқу мақсатына сәйкес
+                    құрылған жеке тапсырмалар
+
+                </p>
+
+            </div>
+
+            <div class="px-3 py-1.5
+                        bg-violet-50
+                        text-violet-700
+                        rounded-xl
+                        text-sm font-bold">
+
+                {{ personal_tasks|length }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {% if personal_tasks %}
+
+    <div class="divide-y">
+
+        {% for task in personal_tasks %}
+
+        <div class="p-5">
+
+            <div class="flex flex-col
+                        lg:flex-row
+                        lg:items-start
+                        lg:justify-between
+                        gap-5">
+
+                <!-- LEFT -->
+
+                <div class="flex-1">
+
+                    <div class="flex flex-wrap
+                                items-center
+                                gap-2 mb-3">
+
+                        <span class="font-extrabold">
+                            👤 {{ task.full_name }}
+                        </span>
+
+                        <span class="px-2 py-1
+                                     bg-slate-100
+                                     rounded-md
+                                     text-xs font-bold">
+
+                            {{ task.subject }}
+
+                        </span>
+
+                        <span class="px-2 py-1
+                                     bg-blue-50
+                                     text-blue-700
+                                     rounded-md
+                                     text-xs font-bold">
+
+                            {{ task.objective_code }}
+
+                        </span>
+
+
+                        {% if task.path_level == 'Қолдау' %}
+
+                        <span class="px-2 py-1
+                                     bg-emerald-50
+                                     text-emerald-700
+                                     rounded-md
+                                     text-xs font-bold">
+
+                            🟢 Қолдау
+
+                        </span>
+
+                        {% elif task.path_level == 'Бекіту' %}
+
+                        <span class="px-2 py-1
+                                     bg-blue-50
+                                     text-blue-700
+                                     rounded-md
+                                     text-xs font-bold">
+
+                            🔵 Бекіту
+
+                        </span>
+
+                        {% else %}
+
+                        <span class="px-2 py-1
+                                     bg-violet-50
+                                     text-violet-700
+                                     rounded-md
+                                     text-xs font-bold">
+
+                            🟣 Дамыту
+
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    {% if task.ktj_topic %}
+
+                    <div class="mb-3">
+
+                        <p class="text-xs
+                                  text-slate-400
+                                  font-bold">
+
+                            КТЖ ТАҚЫРЫБЫ
+
+                        </p>
+
+                        <p class="text-sm
+                                  text-slate-600 mt-1">
+
+                            {{ task.ktj_topic }}
+
+                        </p>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <h3 class="font-extrabold
+                               text-lg">
+
+                        {{ task.title }}
+
+                    </h3>
+
+
+                    <p class="text-sm
+                              text-slate-600
+                              leading-relaxed mt-2">
+
+                        {{ task.task_text }}
+
+                    </p>
+
+
+                    <div class="mt-4
+                                bg-slate-50
+                                rounded-xl p-4">
+
+                        <p class="text-xs
+                                  text-slate-400
+                                  font-bold">
+
+                            🎯 ОҚУ МАҚСАТЫ
+
+                        </p>
+
+                        <p class="text-sm
+                                  text-slate-600
+                                  leading-relaxed mt-1">
+
+                            {{ task.objective_text }}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RIGHT -->
+
+                <div class="lg:w-52
+                            flex flex-col
+                            items-start
+                            lg:items-end
+                            gap-3">
+
+
+                    {% if task.status == 'completed' %}
+
+                        {% if task.is_correct %}
+
+                        <span class="px-3 py-1.5
+                                     bg-emerald-50
+                                     text-emerald-700
+                                     rounded-lg
+                                     text-xs font-bold">
+
+                            ✅ Дұрыс орындалды
+
+                        </span>
+
+                        {% else %}
+
+                        <span class="px-3 py-1.5
+                                     bg-rose-50
+                                     text-rose-700
+                                     rounded-lg
+                                     text-xs font-bold">
+
+                            ❌ Қате жауап
+
+                        </span>
+
+                        {% endif %}
+
+                    {% else %}
+
+                    <span class="px-3 py-1.5
+                                 bg-amber-50
+                                 text-amber-700
+                                 rounded-lg
+                                 text-xs font-bold">
+
+                        ⏳ Орындалмаған
+
+                    </span>
+
+                    {% endif %}
+
+
+                    <div class="text-sm
+                                text-slate-500">
+
+                        {{ task.earned_points }}
+                        /
+                        {{ task.max_points }}
+                        балл
+
+                    </div>
+
+
+                    <a href="{{ url_for(
+                            'personal_task_detail',
+                            task_id=task.id
+                        ) }}"
+                       class="w-full
+                              text-center
+                              px-4 py-3
+                              bg-blue-600
+                              hover:bg-blue-700
+                              text-white
+                              rounded-xl
+                              text-sm font-bold">
+
+                        {% if task.status == 'completed' %}
+
+                            Нәтижені көру →
+
+                        {% else %}
+
+                            Тапсырманы ашу →
+
+                        {% endif %}
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    {% else %}
+
+    <div class="py-16
+                px-6
+                text-center">
+
+        <div class="text-5xl mb-4">
+            📚
+        </div>
+
+        <h3 class="font-extrabold">
+            Жеке тапсырмалар әлі құрылмаған
+        </h3>
+
+        <p class="text-sm
+                  text-slate-400
+                  mt-2 max-w-lg mx-auto">
+
+            Оқушы кіріс бақылауын аяқтағаннан кейін
+            диагностика нәтижесіне сәйкес
+            Қолдау, Бекіту немесе Дамыту
+            тапсырмаларын құруға болады.
+
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+
+
+
+<section
+    id="descriptorPathsSection"
+    class="da-section"
+>
+
+    <div class="da-header">
+
+        <div>
+
+            <div class="da-title">
+                🎯 Дескриптор нәтижесіне негізделген жеке бағыт
+            </div>
+
+            <div class="da-subtitle">
+                Сабақтардағы бірнеше бағалау дәлелінен кейін
+                бекітуді қажет ететін оқу мақсаттары көрсетіледі.
+            </div>
+
+        </div>
+
+        <button
+            type="button"
+            class="da-refresh"
+            onclick="loadDescriptorPathsUI()"
+        >
+            ↻ Жаңарту
+        </button>
+
+    </div>
+
+
+    <div
+        id="descriptorPathsList"
+        class="da-body"
+    >
+        <div class="da-empty">
+            Жеке бағыт деректері жүктелуде...
+        </div>
+    </div>
+
+</section>
+
+
+</main>
+
+
+<script>
+
+function filterPaths() {
+
+    const student =
+        document.getElementById(
+            "studentFilter"
+        ).value;
+
+    const subject =
+        document.getElementById(
+            "subjectFilter"
+        ).value;
+
+    const level =
+        document.getElementById(
+            "levelFilter"
+        ).value;
+
+
+    const items =
+        document.querySelectorAll(
+            ".path-item"
+        );
+
+    let visible = 0;
+
+
+    items.forEach(item => {
+
+        const studentOk =
+            !student
+            || item.dataset.student === student;
+
+        const subjectOk =
+            !subject
+            || item.dataset.subject === subject;
+
+        const levelOk =
+            !level
+            || item.dataset.level === level;
+
+
+        const show =
+            studentOk
+            && subjectOk
+            && levelOk;
+
+
+        item.style.display =
+            show
+            ? ""
+            : "none";
+
+
+        if (show) {
+            visible += 1;
+        }
+
+    });
+
+
+    const empty =
+        document.getElementById(
+            "emptyFilter"
+        );
+
+    if (empty) {
+
+        if (visible === 0) {
+            empty.classList.remove(
+                "hidden"
+            );
+        } else {
+            empty.classList.add(
+                "hidden"
+            );
+        }
+
+    }
+
+}
+
+</script>
+
+
+
+<script id="DARABILIM_DESCRIPTOR_PATHS_UI_JS">
+
+function dpEscape(value) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        String(value ?? "");
+
+    return div.innerHTML;
+
+}
+
+
+async function loadDescriptorPathsUI() {
+
+    const list =
+        document.getElementById(
+            "descriptorPathsList"
+        );
+
+    if (!list) {
+        return;
+    }
+
+
+    list.innerHTML = `
+        <div class="da-empty">
+            ⏳ Деректер жүктелуде...
+        </div>
+    `;
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/descriptor-learning-gaps"
+            );
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            !data.ok
+        ) {
+
+            throw new Error(
+                data.error
+                || "Деректер жүктелмеді."
+            );
+
+        }
+
+
+        const items =
+            data.gaps
+            || [];
+
+
+        if (!items.length) {
+
+            list.innerHTML = `
+                <div class="da-empty">
+                    Әзірге дескриптор нәтижесі бойынша
+                    жеке білім бағытын өзгертуге жеткілікті
+                    дәлел жоқ.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        list.innerHTML =
+            items
+            .map(
+                item => {
+
+                    const percentage =
+                        Number(
+                            item.percentage
+                            || 0
+                        );
+
+
+                    let recommendation =
+                        "Оқу мақсатын қосымша бекіту тапсырмаларымен қайталау.";
+
+
+                    if (
+                        item.status
+                        === "Олқылық бар"
+                    ) {
+
+                        recommendation =
+                            "Қолдау деңгейінен бастап жеке тапсырма беру, "
+                            + "орындалмаған дағдыларды қайта түсіндіру.";
+
+                    }
+
+
+                    else if (
+                        item.status
+                        === "Бекіту қажет"
+                    ) {
+
+                        recommendation =
+                            "Бекіту деңгейіндегі жеке тапсырмалар арқылы "
+                            + "оқу мақсатын тұрақтандыру.";
+
+                    }
+
+
+                    return `
+                        <div class="da-card">
+
+                            <div class="da-card-top">
+
+                                <div>
+
+                                    <div class="da-student">
+                                        ${dpEscape(
+                                            item.full_name
+                                        )}
+                                    </div>
+
+                                    <div class="da-meta">
+                                        ${dpEscape(
+                                            item.class_name
+                                            || ""
+                                        )}
+                                        ·
+                                        ${dpEscape(
+                                            item.subject
+                                            || ""
+                                        )}
+                                    </div>
+
+                                    <div class="da-code">
+                                        🎯
+                                        ${dpEscape(
+                                            item.objective_code
+                                            || ""
+                                        )}
+                                    </div>
+
+                                </div>
+
+                                <div class="da-percent">
+                                    ${percentage.toFixed(0)}%
+                                </div>
+
+                            </div>
+
+
+                            <div class="da-objective">
+                                ${dpEscape(
+                                    item.objective_text
+                                    || ""
+                                )}
+                            </div>
+
+
+                            <div class="da-path-box">
+
+                                <strong>
+                                    Ұсынылатын бағыт:
+                                </strong>
+
+                                <br>
+
+                                ${dpEscape(
+                                    recommendation
+                                )}
+
+                            </div>
+
+
+                            <div class="da-stats">
+
+                                <span class="da-chip">
+                                    ${item.completed_descriptors || 0}
+                                    /
+                                    ${item.total_descriptors || 0}
+                                    дескриптор
+                                </span>
+
+                                <span class="da-chip">
+                                    ${item.evidence_count || 0}
+                                    бағалау дәлелі
+                                </span>
+
+                            </div>
+
+                        </div>
+                    `;
+
+                }
+            )
+            .join("");
+
+
+    } catch (error) {
+
+        list.innerHTML = `
+            <div class="da-empty">
+                ❌
+                ${dpEscape(
+                    error?.message
+                    || "Қате"
+                )}
+            </div>
+        `;
+
+    }
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadDescriptorPathsUI
+);
+
+</script>
+
+
+
+
+
+<div class="da-reset-results-v1">
+
+    <button
+        type="button"
+        class="da-reset-button-v1"
+        onclick="daOpenAnalyticsResetV1()"
+    >
+        🗑 Нәтижелерді тазалау
+    </button>
+
+</div>
+
+<div
+    class="da-bdp-v1"
+    id="daBaselineDailyAnalyticsV1"
+    data-mode="gaps"
+>
+    <div class="da-bdp-title-v1">
+        🎯 Жеке білім бағыты — әлсіз оқу мақсаттарының динамикасы
+    </div>
+
+    <div>
+        ⏳ Деректер жүктелуде...
+    </div>
+</div>
+
+
+<script id="DARABILIM_BASELINE_DAILY_ANALYTICS_FINAL_V1_JS">
+
+function daBdpEscapeV1(value) {
+
+    return String(
+        value ?? ""
+    )
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+
+function daBdpCardV1(item) {
+
+    const timeline = [
+        `
+        <span class="da-bdp-point-v1">
+            Кіріс:
+            ${Number(item.baseline_percentage || 0).toFixed(1)}%
+        </span>
+        `
+    ];
+
+
+    (
+        item.timeline
+        || []
+    )
+    .forEach(
+        point => {
+
+            timeline.push(`
+                <span class="da-bdp-point-v1">
+                    ${daBdpEscapeV1(point.date || "")}:
+                    ${Number(point.percentage || 0).toFixed(1)}%
+                </span>
+            `);
+        }
+    );
+
+
+    const growth =
+        Number(
+            item.growth
+            || 0
+        );
+
+
+    return `
+        <div class="da-bdp-card-v1">
+
+            <div class="da-bdp-head-v1">
+
+                <div>
+
+                    <div class="da-bdp-name-v1">
+                        ${daBdpEscapeV1(item.full_name)}
+                    </div>
+
+                    <div class="da-bdp-code-v1">
+                        ${daBdpEscapeV1(item.objective_code)}
+                    </div>
+
+                </div>
+
+                <div>
+                    ${daBdpEscapeV1(item.class_name)}
+                </div>
+
+            </div>
+
+
+            <div>
+                ${daBdpEscapeV1(item.objective_text)}
+            </div>
+
+
+            <div class="da-bdp-values-v1">
+
+                <div class="da-bdp-value-v1">
+                    <div class="da-bdp-number-v1">
+                        ${Number(item.baseline_percentage || 0).toFixed(1)}%
+                    </div>
+                    <div class="da-bdp-label-v1">
+                        Кіріс бақылау
+                    </div>
+                </div>
+
+
+                <div class="da-bdp-value-v1">
+                    <div class="da-bdp-number-v1">
+                        ${Number(item.current_percentage || 0).toFixed(1)}%
+                    </div>
+                    <div class="da-bdp-label-v1">
+                        Қазіргі нәтиже
+                    </div>
+                </div>
+
+
+                <div class="da-bdp-value-v1">
+                    <div class="da-bdp-number-v1">
+                        ${growth > 0 ? "+" : ""}${growth.toFixed(1)}
+                    </div>
+                    <div class="da-bdp-label-v1">
+                        Өсу, пайыздық тармақ
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="da-bdp-status-v1">
+                ${daBdpEscapeV1(item.status_icon)}
+                ${daBdpEscapeV1(item.status)}
+            </div>
+
+
+            <div>
+                Дескриптор:
+                <strong>
+                    ${Number(item.completed_descriptors || 0)}
+                    /
+                    ${Number(item.total_descriptors || 0)}
+                </strong>
+            </div>
+
+
+            <div class="da-bdp-timeline-v1">
+                ${timeline.join("")}
+            </div>
+
+        </div>
+    `;
+}
+
+
+async function daLoadBaselineDailyAnalyticsV1(
+    mode
+) {
+
+    const host =
+        document.getElementById(
+            "daBaselineDailyAnalyticsV1"
+        );
+
+
+    if (!host) {
+        return;
+    }
+
+
+    host.innerHTML =
+        "⏳ Кіріс бақылау мен күнделікті нәтижелер салыстырылуда...";
+
+
+    const url =
+        mode === "gaps"
+        ? "/api/baseline-daily-gaps"
+        : "/api/baseline-daily-progress";
+
+
+    try {
+
+        const response =
+            await fetch(url);
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            !data.ok
+        ) {
+
+            throw new Error(
+                data.error
+                ||
+                "Деректер жүктелмеді."
+            );
+        }
+
+
+        const items =
+            mode === "gaps"
+            ? (
+                data.gaps
+                || []
+            )
+            : (
+                data.results
+                || []
+            );
+
+
+        if (!items.length) {
+
+            host.innerHTML = `
+                <div class="da-bdp-card-v1">
+                    Салыстыруға жеткілікті дерек жоқ.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        host.innerHTML = `
+            <div class="da-bdp-grid-v1">
+                ${items.map(daBdpCardV1).join("")}
+            </div>
+        `;
+
+
+    } catch (error) {
+
+        host.innerHTML = `
+            <div class="da-bdp-card-v1">
+                ❌ ${daBdpEscapeV1(error.message)}
+            </div>
+        `;
+    }
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        const host =
+            document.getElementById(
+                "daBaselineDailyAnalyticsV1"
+            );
+
+
+        if (!host) {
+            return;
+        }
+
+
+        daLoadBaselineDailyAnalyticsV1(
+            host.dataset.mode
+            || "progress"
+        );
+    }
+);
+
+</script>
+
+
+
+<script id="DARABILIM_ANALYTICS_RESULTS_RESET_FINAL_V1_JS">
+
+// ==================================================================
+// DARABILIM ANALYTICS RESULTS RESET FINAL V1
+// ==================================================================
+
+
+function daEnsureAnalyticsResetModalV1() {
+
+    let modal =
+        document.getElementById(
+            "daAnalyticsResetModalV1"
+        );
+
+
+    if (modal) {
+
+        return modal;
+    }
+
+
+    modal =
+        document.createElement(
+            "div"
+        );
+
+
+    modal.id =
+        "daAnalyticsResetModalV1";
+
+
+    modal.className =
+        "da-reset-modal-v1";
+
+
+    modal.innerHTML = `
+
+        <div
+            class="da-reset-dialog-v1"
+        >
+
+            <div
+                class="da-reset-title-v1"
+            >
+                🗑 Нәтижелерді тазалау
+            </div>
+
+
+            <div
+                class="da-reset-info-v1"
+            >
+                Қай нәтижелерді тазалау керегін таңдаңыз.
+                Бұл әрекетті кейін қайтару мүмкін емес.
+            </div>
+
+
+            <button
+                type="button"
+                class="da-reset-option-v1"
+                onclick="
+                    daResetAnalyticsResultsV1(
+                        'daily'
+                    )
+                "
+            >
+
+                <div
+                    class="da-reset-option-title-v1"
+                >
+                    🧹 Күнделікті нәтижелерді тазалау
+                </div>
+
+                <div
+                    class="da-reset-option-text-v1"
+                >
+                    Ақылды сабақтағы бағалау,
+                    дескриптор балдары және күнделікті
+                    прогресс тазаланады.
+
+                    Кіріс бақылау нәтижесі сақталады.
+                </div>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="
+                    da-reset-option-v1
+                    da-reset-danger-v1
+                "
+                onclick="
+                    daResetAnalyticsResultsV1(
+                        'all'
+                    )
+                "
+            >
+
+                <div
+                    class="da-reset-option-title-v1"
+                >
+                    ⚠️ Барлық нәтижені тазалау
+                </div>
+
+                <div
+                    class="da-reset-option-text-v1"
+                >
+                    Күнделікті бағалау,
+                    кіріс бақылау нәтижелері,
+                    бақылау жауаптары және сол нәтижеден
+                    жасалған жеке тапсырмалар тазаланады.
+
+                    Оқушылар, оқу мақсаттары,
+                    бақылау тестінің өзі және сұрақтары
+                    сақталады.
+                </div>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="da-reset-close-v1"
+                onclick="
+                    daCloseAnalyticsResetV1()
+                "
+            >
+                Болдырмау
+            </button>
+
+        </div>
+    `;
+
+
+    modal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target
+                === modal
+            ) {
+
+                daCloseAnalyticsResetV1();
+            }
+        }
+    );
+
+
+    document.body.appendChild(
+        modal
+    );
+
+
+    return modal;
+}
+
+
+function daOpenAnalyticsResetV1() {
+
+    const modal =
+        daEnsureAnalyticsResetModalV1();
+
+
+    modal.classList.add(
+        "open"
+    );
+}
+
+
+function daCloseAnalyticsResetV1() {
+
+    const modal =
+        document.getElementById(
+            "daAnalyticsResetModalV1"
+        );
+
+
+    if (modal) {
+
+        modal.classList.remove(
+            "open"
+        );
+    }
+}
+
+
+async function daResetAnalyticsResultsV1(
+    mode
+) {
+
+    const isAll =
+        mode === "all";
+
+
+    const message =
+        isAll
+
+        ? (
+            "БАРЛЫҚ НӘТИЖЕЛЕР ӨШІРІЛЕДІ.\n\n"
+            + "• Кіріс бақылау нәтижелері\n"
+            + "• Оқушы жауаптары\n"
+            + "• Күнделікті сабақ бағалары\n"
+            + "• Дескриптор нәтижелері\n"
+            + "• Нәтижеден жасалған жеке тапсырмалар\n\n"
+            + "Оқушылар, оқу мақсаттары және "
+            + "бақылау тестінің өзі сақталады.\n\n"
+            + "Жалғастыру керек пе?"
+        )
+
+        : (
+            "КҮНДЕЛІКТІ БАҒАЛАУ НӘТИЖЕЛЕРІ "
+            + "ӨШІРІЛЕДІ.\n\n"
+            + "Кіріс бақылау нәтижесі сақталады.\n\n"
+            + "Жалғастыру керек пе?"
+        );
+
+
+    if (
+        !window.confirm(
+            message
+        )
+    ) {
+
+        return;
+    }
+
+
+    if (isAll) {
+
+        const second =
+            window.prompt(
+                "Барлық нәтижені тазалауды растау үшін "
+                + "ӨШІРУ сөзін жазыңыз:"
+            );
+
+
+        if (
+            String(
+                second
+                || ""
+            ).trim()
+            !== "ӨШІРУ"
+        ) {
+
+            window.alert(
+                "Тазалау тоқтатылды."
+            );
+
+            return;
+        }
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/analytics-results/reset",
+                {
+                    method:
+                        "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            mode:
+                                mode,
+
+                            confirmation:
+                                (
+                                    isAll
+                                    ? "ALL"
+                                    : "DAILY"
+                                )
+                        })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            !data.ok
+        ) {
+
+            throw new Error(
+                data.error
+                ||
+                "Нәтижелер тазаланбады."
+            );
+        }
+
+
+        daCloseAnalyticsResetV1();
+
+
+        window.alert(
+            "✓ "
+            + data.message
+        );
+
+
+        window.location.reload();
+
+
+    } catch (error) {
+
+        window.alert(
+            "Қате: "
+            + (
+                error?.message
+                ||
+                "Нәтижелер тазаланбады."
+            )
+        );
+    }
+}
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key
+            === "Escape"
+        ) {
+
+            daCloseAnalyticsResetV1();
+        }
+    }
+);
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        daEnsureAnalyticsResetModalV1();
+
+    }
+);
+
+</script>
+
+</body>
+</html>

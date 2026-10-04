@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+<title>DaraBilim AI - Есептер</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-50">
+
+<header class="bg-white border-b">
+<div class="max-w-6xl mx-auto p-6">
+
+<a href="{{ url_for('dashboard') }}"
+   class="text-blue-600 font-bold">
+← Басты бет
+</a>
+
+<h1 class="text-3xl font-black mt-3">
+📄 Есептер
+</h1>
+
+</div>
+</header>
+
+<main class="max-w-6xl mx-auto p-6">
+
+<div class="grid md:grid-cols-2 gap-5">
+
+<a href="{{ url_for('analytics') }}"
+   class="bg-white border rounded-3xl p-6 hover:shadow-md">
+
+<p class="text-4xl">📊</p>
+
+<h2 class="text-xl font-black mt-4">
+Сынып аналитикасы
+</h2>
+
+<p class="text-slate-500 mt-2">
+Оқу мақсаттары мен диагностика нәтижелері
+</p>
+
+</a>
+
+
+<a href="{{ url_for('progress') }}"
+   class="bg-white border rounded-3xl p-6 hover:shadow-md">
+
+<p class="text-4xl">📈</p>
+
+<h2 class="text-xl font-black mt-4">
+Оқушылар прогресі
+</h2>
+
+<p class="text-slate-500 mt-2">
+Жеке тапсырмалар мен меңгеру деңгейі
+</p>
+
+</a>
+
+</div>
+
+</main>
+</body>
+</html>

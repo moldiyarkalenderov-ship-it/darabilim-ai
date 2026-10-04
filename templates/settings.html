@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+<title>DaraBilim AI - Баптаулар</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+
+<header class="bg-white border-b">
+<div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
+
+<div>
+<a href="{{ url_for('dashboard') }}"
+   class="text-blue-600 font-semibold">
+← Басты бет
+</a>
+
+<h1 class="text-3xl font-black mt-2">
+⚙️ Баптаулар
+</h1>
+</div>
+
+<div class="font-bold">
+👩‍🏫 {{ teacher_name }}
+</div>
+
+</div>
+</header>
+
+<main class="max-w-6xl mx-auto p-6">
+
+{% if saved %}
+<div class="bg-emerald-50 border border-emerald-200
+            rounded-2xl p-4 mb-6 text-emerald-700 font-bold">
+✅ Баптаулар сақталды
+</div>
+{% endif %}
+
+<form method="POST"
+      class="bg-white border rounded-3xl p-7 shadow-sm">
+
+<div class="grid md:grid-cols-2 gap-6">
+
+{% for field, label in [
+('teacher_name','Мұғалімнің аты-жөні'),
+('school_name','Мектеп атауы'),
+('city_name','Қала / елді мекен'),
+('default_class','Әдепкі сынып')
+] %}
+
+<div>
+<label class="font-bold block mb-2">
+{{ label }}
+</label>
+
+<input
+    name="{{ field }}"
+    value="{{ settings.get(field,'') }}"
+    class="w-full border rounded-xl px-4 py-3"
+    required>
+</div>
+
+{% endfor %}
+
+<div class="md:col-span-2">
+
+<label class="font-bold block mb-2">
+Әдепкі пән
+</label>
+
+<select name="default_subject"
+        class="w-full border rounded-xl px-4 py-3">
+
+{% for subject in ['Математика','Қазақ тілі'] %}
+
+<option value="{{ subject }}"
+{% if settings.get('default_subject') == subject %}
+selected
+{% endif %}>
+{{ subject }}
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+</div>
+
+<div class="mt-8 flex justify-end">
+
+<button
+    class="bg-blue-600 text-white
+           px-7 py-3 rounded-xl font-bold">
+💾 Сақтау
+</button>
+
+</div>
+
+</form>
+
+</main>
+</body>
+</html>

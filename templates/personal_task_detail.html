@@ -1,0 +1,436 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>DaraBilim AI — Жеке тапсырма</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+<style>
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f8fafc;
+}
+
+</style>
+
+</head>
+
+
+<body class="text-slate-800">
+
+
+<header class="bg-white border-b">
+
+    <div class="max-w-4xl mx-auto
+                px-6 py-5
+                flex items-center
+                justify-between">
+
+        <div>
+
+            <div class="flex items-center gap-2">
+
+                <span class="text-2xl">
+                    🧠
+                </span>
+
+                <span class="font-extrabold">
+                    DaraBilim AI
+                </span>
+
+            </div>
+
+            <p class="text-xs text-slate-500 mt-1">
+                Жеке білім бағыты
+            </p>
+
+        </div>
+
+
+        <a href="{{ url_for('learning_paths') }}"
+           class="px-4 py-2.5
+                  bg-slate-100
+                  rounded-xl
+                  text-sm font-bold">
+
+            ← Жеке білім бағыты
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="max-w-4xl mx-auto p-6 md:p-8">
+
+
+    <!-- STUDENT -->
+
+    <section class="bg-white
+                    border rounded-2xl
+                    p-5 mb-5">
+
+        <div class="flex flex-col
+                    md:flex-row
+                    md:items-center
+                    md:justify-between
+                    gap-4">
+
+            <div>
+
+                <p class="text-xs
+                          text-slate-400
+                          font-bold">
+                    ОҚУШЫ
+                </p>
+
+                <h2 class="text-xl
+                           font-extrabold mt-1">
+
+                    {{ task.full_name }}
+
+                </h2>
+
+                <p class="text-sm
+                          text-slate-500">
+
+                    {{ task.class_name }}
+                    ·
+                    {{ task.subject }}
+
+                </p>
+
+            </div>
+
+
+            <div>
+
+                {% if task.path_level == 'Қолдау' %}
+
+                <span class="px-3 py-2
+                             bg-emerald-50
+                             text-emerald-700
+                             rounded-xl
+                             text-sm font-bold">
+
+                    🟢 Қолдау
+
+                </span>
+
+                {% elif task.path_level == 'Бекіту' %}
+
+                <span class="px-3 py-2
+                             bg-blue-50
+                             text-blue-700
+                             rounded-xl
+                             text-sm font-bold">
+
+                    🔵 Бекіту
+
+                </span>
+
+                {% else %}
+
+                <span class="px-3 py-2
+                             bg-violet-50
+                             text-violet-700
+                             rounded-xl
+                             text-sm font-bold">
+
+                    🟣 Дамыту
+
+                </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTEXT -->
+
+    <section class="bg-blue-50
+                    border border-blue-100
+                    rounded-2xl p-5 mb-5">
+
+        <div class="flex flex-wrap
+                    items-center gap-2">
+
+            <span class="px-2.5 py-1
+                         bg-white
+                         text-blue-700
+                         rounded-lg
+                         text-xs font-bold">
+
+                {{ task.objective_code }}
+
+            </span>
+
+            {% if task.ktj_topic %}
+
+            <span class="text-sm font-bold">
+                {{ task.ktj_topic }}
+            </span>
+
+            {% endif %}
+
+        </div>
+
+        <p class="text-sm
+                  text-slate-600
+                  leading-relaxed mt-3">
+
+            {{ task.objective_text }}
+
+        </p>
+
+    </section>
+
+
+    <!-- TASK -->
+
+    <section class="bg-white
+                    border rounded-3xl
+                    p-6 md:p-8">
+
+        <p class="text-xs
+                  text-slate-400
+                  font-bold">
+
+            ЖЕКЕ ТАПСЫРМА
+
+        </p>
+
+        <h1 class="text-2xl
+                   font-extrabold mt-2">
+
+            {{ task.title }}
+
+        </h1>
+
+
+        <div class="mt-6
+                    bg-slate-50
+                    rounded-2xl p-5">
+
+            <p class="text-lg
+                      font-semibold
+                      leading-relaxed">
+
+                {{ task.task_text }}
+
+            </p>
+
+        </div>
+
+
+        {% if task.status != 'completed' %}
+
+        <form method="POST"
+              action="{{ url_for(
+                  'submit_personal_task',
+                  task_id=task.id
+              ) }}"
+              class="mt-6">
+
+            <label class="block
+                          text-sm font-bold mb-2">
+
+                Жауабыңыз
+
+            </label>
+
+            <input
+                name="student_answer"
+                required
+                autocomplete="off"
+                class="w-full
+                       border-2
+                       border-slate-200
+                       focus:border-blue-500
+                       outline-none
+                       rounded-xl
+                       px-4 py-4
+                       text-lg"
+                placeholder="Жауапты енгізіңіз">
+
+
+            <button type="submit"
+                    class="w-full
+                           bg-blue-600
+                           hover:bg-blue-700
+                           text-white
+                           py-4
+                           rounded-xl
+                           font-bold mt-4">
+
+                Жауапты тексеру →
+
+            </button>
+
+        </form>
+
+
+        {% else %}
+
+        <!-- RESULT -->
+
+        <div class="mt-6">
+
+            {% if task.is_correct %}
+
+            <div class="bg-emerald-50
+                        border border-emerald-100
+                        rounded-2xl p-5">
+
+                <div class="text-xl
+                            font-extrabold
+                            text-emerald-700">
+
+                    ✅ Дұрыс!
+
+                </div>
+
+                <p class="text-sm
+                          text-slate-600 mt-2">
+
+                    Сіздің жауабыңыз:
+                    <strong>
+                        {{ task.student_answer }}
+                    </strong>
+
+                </p>
+
+                <p class="text-sm
+                          text-emerald-700
+                          font-bold mt-2">
+
+                    +{{ task.earned_points }}
+                    / {{ task.max_points }} балл
+
+                </p>
+
+            </div>
+
+            {% else %}
+
+            <div class="bg-rose-50
+                        border border-rose-100
+                        rounded-2xl p-5">
+
+                <div class="text-xl
+                            font-extrabold
+                            text-rose-700">
+
+                    ❌ Қате жауап
+
+                </div>
+
+                <p class="text-sm
+                          text-slate-600 mt-2">
+
+                    Сіздің жауабыңыз:
+                    <strong>
+                        {{ task.student_answer }}
+                    </strong>
+
+                </p>
+
+                <p class="text-sm
+                          text-slate-600 mt-2">
+
+                    Дұрыс жауап:
+                    <strong>
+                        {{ task.correct_answer }}
+                    </strong>
+
+                </p>
+
+            </div>
+
+            {% endif %}
+
+
+            <div class="bg-blue-50
+                        rounded-2xl p-5 mt-4">
+
+                <p class="text-xs
+                          text-blue-600
+                          font-bold">
+
+                    💡 ТҮСІНДІРМЕ
+
+                </p>
+
+                <p class="text-sm
+                          text-slate-700
+                          leading-relaxed mt-2">
+
+                    {{ task.explanation }}
+
+                </p>
+
+            </div>
+
+
+            <div class="grid grid-cols-2
+                        gap-3 mt-4">
+
+                <div class="bg-slate-50
+                            rounded-xl p-4">
+
+                    <p class="text-xs
+                              text-slate-400">
+                        Әрекет саны
+                    </p>
+
+                    <strong>
+                        {{ task.attempt_count }}
+                    </strong>
+
+                </div>
+
+                <div class="bg-slate-50
+                            rounded-xl p-4">
+
+                    <p class="text-xs
+                              text-slate-400">
+                        Нәтиже
+                    </p>
+
+                    <strong>
+                        {{ task.earned_points }}
+                        /
+                        {{ task.max_points }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+</body>
+</html>

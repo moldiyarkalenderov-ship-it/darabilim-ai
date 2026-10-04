@@ -1,0 +1,5407 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>DaraBilim AI — Нәтижелер және прогресс</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+<style>
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f8fafc;
+}
+
+</style>
+
+
+
+<style id="DARABILIM_DESCRIPTOR_ANALYTICS_UI_STYLE">
+
+.da-section {
+    margin-top: 24px;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.da-header {
+    padding: 18px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #f8fafc;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.da-title {
+    font-size: 15px;
+    font-weight: 900;
+    color: #0f172a;
+}
+
+.da-subtitle {
+    margin-top: 3px;
+    font-size: 11px;
+    line-height: 1.45;
+    color: #64748b;
+}
+
+.da-refresh {
+    flex: 0 0 auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    background: white;
+    padding: 7px 10px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 800;
+    color: #475569;
+}
+
+.da-refresh:hover {
+    background: #f1f5f9;
+}
+
+.da-body {
+    padding: 16px;
+}
+
+.da-empty {
+    padding: 28px 14px;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.da-card {
+    padding: 13px;
+    margin-bottom: 9px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 13px;
+
+    background: #ffffff;
+}
+
+.da-card:last-child {
+    margin-bottom: 0;
+}
+
+.da-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.da-student {
+    font-size: 13px;
+    font-weight: 900;
+    color: #0f172a;
+}
+
+.da-meta {
+    margin-top: 3px;
+    font-size: 10px;
+    color: #94a3b8;
+}
+
+.da-code {
+    display: inline-block;
+    margin-top: 7px;
+    padding: 4px 7px;
+
+    border-radius: 7px;
+    background: #eff6ff;
+
+    font-size: 10px;
+    font-weight: 900;
+    color: #2563eb;
+}
+
+.da-objective {
+    margin-top: 7px;
+    font-size: 11px;
+    line-height: 1.45;
+    color: #475569;
+}
+
+.da-percent {
+    flex: 0 0 auto;
+    font-size: 18px;
+    font-weight: 900;
+    color: #2563eb;
+}
+
+.da-progress {
+    width: 100%;
+    height: 7px;
+
+    margin-top: 10px;
+
+    border-radius: 999px;
+    background: #e2e8f0;
+    overflow: hidden;
+}
+
+.da-progress-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: #2563eb;
+}
+
+.da-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 9px;
+}
+
+.da-chip {
+    padding: 4px 7px;
+    border-radius: 7px;
+
+    background: #f1f5f9;
+
+    font-size: 10px;
+    font-weight: 700;
+    color: #64748b;
+}
+
+.da-status {
+    margin-top: 8px;
+    display: inline-block;
+
+    padding: 5px 8px;
+    border-radius: 8px;
+
+    font-size: 10px;
+    font-weight: 900;
+}
+
+.da-status.mastered {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.da-status.practice {
+    background: #fffbeb;
+    color: #b45309;
+}
+
+.da-status.gap {
+    background: #fff1f2;
+    color: #be123c;
+}
+
+.da-status.insufficient {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.da-path-box {
+    margin-top: 9px;
+    padding: 9px;
+
+    border-radius: 9px;
+    background: #f8fafc;
+
+    font-size: 11px;
+    line-height: 1.45;
+    color: #475569;
+}
+
+</style>
+
+
+
+
+<style id="DARABILIM_ANNUAL_PROGRESS_UI_FINAL_STYLE">
+
+.ap-final-section {
+    margin-top: 24px;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.ap-final-header {
+    padding: 18px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #f8fafc;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.ap-final-title {
+    font-size: 16px;
+    font-weight: 900;
+    color: #0f172a;
+}
+
+.ap-final-subtitle {
+    margin-top: 4px;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #64748b;
+}
+
+.ap-final-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.ap-final-select,
+.ap-final-button {
+    padding: 8px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    background: #ffffff;
+
+    font-size: 11px;
+    color: #475569;
+}
+
+.ap-final-select {
+    min-width: 145px;
+}
+
+.ap-final-button {
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.ap-final-button:hover {
+    background: #f1f5f9;
+}
+
+.ap-final-body {
+    padding: 16px;
+}
+
+.ap-final-empty {
+    padding: 32px 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #94a3b8;
+}
+
+
+/* SUMMARY */
+
+.ap-final-summary {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.ap-final-summary-card {
+    padding: 13px;
+    border: 1px solid #e2e8f0;
+    border-radius: 13px;
+    background: #ffffff;
+}
+
+.ap-final-summary-label {
+    font-size: 10px;
+    color: #64748b;
+}
+
+.ap-final-summary-value {
+    margin-top: 4px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #0f172a;
+}
+
+.ap-final-summary-note {
+    margin-top: 3px;
+    font-size: 9px;
+    color: #94a3b8;
+}
+
+
+/* STUDENT */
+
+.ap-final-student {
+    margin-bottom: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.ap-final-student:last-child {
+    margin-bottom: 0;
+}
+
+.ap-final-student-head {
+    width: 100%;
+    padding: 13px 15px;
+
+    border: 0;
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    text-align: left;
+    cursor: pointer;
+}
+
+.ap-final-student-head:hover {
+    background: #f8fafc;
+}
+
+.ap-final-name {
+    font-size: 13px;
+    font-weight: 900;
+    color: #0f172a;
+}
+
+.ap-final-class {
+    margin-top: 2px;
+    font-size: 10px;
+    color: #94a3b8;
+}
+
+.ap-final-count {
+    padding: 5px 8px;
+    border-radius: 8px;
+    background: #eff6ff;
+
+    font-size: 10px;
+    font-weight: 900;
+    color: #2563eb;
+}
+
+.ap-final-student-body {
+    display: none;
+    padding: 12px;
+
+    border-top: 1px solid #e2e8f0;
+    background: #f8fafc;
+}
+
+.ap-final-student.open
+.ap-final-student-body {
+    display: block;
+}
+
+
+/* OBJECTIVE */
+
+.ap-final-objective {
+    margin-bottom: 10px;
+    padding: 12px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+
+    background: #ffffff;
+}
+
+.ap-final-objective:last-child {
+    margin-bottom: 0;
+}
+
+.ap-final-objective-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.ap-final-code {
+    display: inline-block;
+    padding: 4px 7px;
+
+    border-radius: 7px;
+    background: #eff6ff;
+
+    font-size: 10px;
+    font-weight: 900;
+    color: #2563eb;
+}
+
+.ap-final-objective-text {
+    margin-top: 6px;
+    font-size: 11px;
+    line-height: 1.45;
+    color: #475569;
+}
+
+.ap-final-status {
+    flex: 0 0 auto;
+    padding: 5px 8px;
+
+    border-radius: 8px;
+
+    font-size: 9px;
+    font-weight: 900;
+
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.ap-final-status.growth {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.ap-final-status.decline {
+    background: #fff1f2;
+    color: #be123c;
+}
+
+.ap-final-status.running {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+
+/* 3 STAGES */
+
+.ap-final-stages {
+    display: grid;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 8px;
+    margin-top: 11px;
+}
+
+.ap-final-stage {
+    padding: 11px 8px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+
+    text-align: center;
+}
+
+.ap-final-stage.entry {
+    background: #fff7ed;
+}
+
+.ap-final-stage.year {
+    background: #eff6ff;
+}
+
+.ap-final-stage.exit {
+    background: #ecfdf5;
+}
+
+.ap-final-stage-label {
+    font-size: 9px;
+    font-weight: 800;
+    color: #64748b;
+}
+
+.ap-final-stage-value {
+    margin-top: 5px;
+
+    font-size: 19px;
+    font-weight: 900;
+    color: #0f172a;
+}
+
+.ap-final-stage-note {
+    margin-top: 3px;
+
+    min-height: 13px;
+
+    font-size: 9px;
+    color: #94a3b8;
+}
+
+
+/* VISUAL PROGRESS */
+
+.ap-final-flow {
+    display: grid;
+    grid-template-columns:
+        1fr auto 1fr auto 1fr;
+
+    align-items: center;
+    gap: 7px;
+
+    margin-top: 12px;
+}
+
+.ap-final-flow-value {
+    padding: 7px;
+
+    border-radius: 9px;
+    background: #f8fafc;
+
+    text-align: center;
+
+    font-size: 11px;
+    font-weight: 900;
+    color: #475569;
+}
+
+.ap-final-arrow {
+    font-size: 14px;
+    color: #94a3b8;
+}
+
+.ap-final-changes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+
+    margin-top: 10px;
+}
+
+.ap-final-chip {
+    padding: 5px 7px;
+
+    border-radius: 8px;
+    background: #f1f5f9;
+
+    font-size: 10px;
+    font-weight: 800;
+    color: #64748b;
+}
+
+.ap-final-chip.positive {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.ap-final-chip.negative {
+    background: #fff1f2;
+    color: #be123c;
+}
+
+
+@media (max-width: 900px) {
+
+    .ap-final-summary {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .ap-final-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .ap-final-stages {
+        grid-template-columns: 1fr;
+    }
+
+    .ap-final-flow {
+        grid-template-columns: 1fr;
+    }
+
+    .ap-final-arrow {
+        transform: rotate(90deg);
+        text-align: center;
+    }
+
+}
+
+</style>
+
+
+
+
+<style id="DARABILIM_BASELINE_DAILY_ANALYTICS_FINAL_V1_STYLE">
+
+.da-bdp-v1 {
+    margin: 18px 0;
+    padding: 16px;
+    border: 1px solid #dbeafe;
+    border-radius: 18px;
+    background: #ffffff;
+}
+
+.da-bdp-title-v1 {
+    margin-bottom: 12px;
+    font-size: 17px;
+    font-weight: 900;
+    color: #0f172a;
+}
+
+.da-bdp-grid-v1 {
+    display: grid;
+    gap: 12px;
+}
+
+.da-bdp-card-v1 {
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+
+.da-bdp-head-v1 {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 9px;
+}
+
+.da-bdp-name-v1 {
+    font-weight: 900;
+    color: #0f172a;
+}
+
+.da-bdp-code-v1 {
+    font-weight: 900;
+    color: #2563eb;
+}
+
+.da-bdp-values-v1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.da-bdp-value-v1 {
+    padding: 9px;
+    border-radius: 10px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.da-bdp-number-v1 {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.da-bdp-label-v1 {
+    margin-top: 3px;
+    font-size: 10px;
+    color: #64748b;
+}
+
+.da-bdp-status-v1 {
+    margin-top: 10px;
+    font-weight: 900;
+}
+
+.da-bdp-timeline-v1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.da-bdp-point-v1 {
+    padding: 5px 8px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+</style>
+
+
+
+<style id="DARABILIM_ANALYTICS_RESULTS_RESET_FINAL_V1_STYLE">
+
+.da-reset-results-v1 {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    margin:
+        10px
+        0
+        16px;
+}
+
+
+.da-reset-button-v1 {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 36px;
+
+    padding:
+        7px
+        12px;
+
+    border:
+        1px solid
+        #fecaca;
+
+    border-radius:
+        10px;
+
+    background:
+        #fff1f2;
+
+    color:
+        #be123c;
+
+    font-size:
+        11px;
+
+    font-weight:
+        900;
+
+    cursor:
+        pointer;
+}
+
+
+.da-reset-button-v1:hover {
+
+    background:
+        #ffe4e6;
+}
+
+
+.da-reset-modal-v1 {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        999999;
+
+    display:
+        none;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        20px;
+
+    background:
+        rgba(
+            15,
+            23,
+            42,
+            .58
+        );
+}
+
+
+.da-reset-modal-v1.open {
+
+    display:
+        flex;
+}
+
+
+.da-reset-dialog-v1 {
+
+    width:
+        min(
+            520px,
+            96vw
+        );
+
+    max-height:
+        90vh;
+
+    overflow:
+        auto;
+
+    padding:
+        20px;
+
+    border-radius:
+        18px;
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        0 24px 70px
+        rgba(
+            15,
+            23,
+            42,
+            .25
+        );
+}
+
+
+.da-reset-title-v1 {
+
+    margin-bottom:
+        8px;
+
+    font-size:
+        18px;
+
+    font-weight:
+        900;
+
+    color:
+        #0f172a;
+}
+
+
+.da-reset-info-v1 {
+
+    margin-bottom:
+        15px;
+
+    color:
+        #475569;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.55;
+}
+
+
+.da-reset-option-v1 {
+
+    width:
+        100%;
+
+    margin-top:
+        9px;
+
+    padding:
+        12px;
+
+    border:
+        1px solid
+        #e2e8f0;
+
+    border-radius:
+        12px;
+
+    background:
+        #f8fafc;
+
+    text-align:
+        left;
+
+    cursor:
+        pointer;
+}
+
+
+.da-reset-option-v1:hover {
+
+    background:
+        #f1f5f9;
+}
+
+
+.da-reset-option-title-v1 {
+
+    font-size:
+        13px;
+
+    font-weight:
+        900;
+
+    color:
+        #0f172a;
+}
+
+
+.da-reset-option-text-v1 {
+
+    margin-top:
+        4px;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.45;
+
+    color:
+        #64748b;
+}
+
+
+.da-reset-danger-v1 {
+
+    border-color:
+        #fecaca;
+
+    background:
+        #fff1f2;
+}
+
+
+.da-reset-danger-v1
+.da-reset-option-title-v1 {
+
+    color:
+        #be123c;
+}
+
+
+.da-reset-close-v1 {
+
+    width:
+        100%;
+
+    margin-top:
+        14px;
+
+    padding:
+        9px;
+
+    border:
+        1px solid
+        #cbd5e1;
+
+    border-radius:
+        10px;
+
+    background:
+        #ffffff;
+
+    color:
+        #334155;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+}
+
+</style>
+
+
+
+<style id="DARABILIM_PARENT_MESSENGER_FINAL_V2_STYLE">
+
+.da-parent-v2 {
+    margin: 16px 0;
+    padding: 16px;
+    border: 1px solid #bfdbfe;
+    border-radius: 18px;
+    background: #fff;
+}
+
+.da-parent-title-v2 {
+    font-size: 17px;
+    font-weight: 900;
+    margin-bottom: 12px;
+}
+
+.da-parent-select-row-v2 {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.da-parent-select-v2 {
+    flex: 1;
+    min-width: 280px;
+    height: 42px;
+    padding: 0 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+}
+
+.da-parent-button-v2 {
+    min-height: 42px;
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 10px;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.da-parent-modal-v2 {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(15,23,42,.6);
+}
+
+.da-parent-modal-v2.open {
+    display: flex;
+}
+
+.da-parent-dialog-v2 {
+    width: min(700px, 97vw);
+    max-height: 94vh;
+    overflow: auto;
+    padding: 20px;
+    border-radius: 18px;
+    background: #fff;
+}
+
+.da-parent-modal-head-v2 {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+}
+
+.da-parent-student-v2 {
+    font-size: 19px;
+    font-weight: 900;
+}
+
+.da-parent-close-v2 {
+    padding: 7px 10px;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.da-parent-contact-v2 {
+    margin: 12px 0;
+    padding: 12px;
+    border-radius: 12px;
+    background: #f8fafc;
+    line-height: 1.65;
+}
+
+.da-parent-message-v2 {
+    width: 100%;
+    min-height: 300px;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font: inherit;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.da-parent-actions-v2 {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.da-parent-wa-v2,
+.da-parent-tg-v2,
+.da-parent-copy-v2 {
+    min-height: 42px;
+    padding: 8px 15px;
+    border: 0;
+    border-radius: 10px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.da-parent-wa-v2 {
+    background: #16a34a;
+    color: #fff;
+}
+
+.da-parent-tg-v2 {
+    background: #0284c7;
+    color: #fff;
+}
+
+.da-parent-copy-v2 {
+    background: #e2e8f0;
+}
+
+</style>
+
+
+
+<style id="DARABILIM_WHATSAPP_QUEUE_NO_API_FINAL_V1_STYLE">
+
+.da-waq-v1 {
+    margin: 14px 0;
+    padding: 16px;
+    border: 1px solid #bbf7d0;
+    border-radius: 18px;
+    background: #f0fdf4;
+}
+
+.da-waq-title-v1 {
+    font-size: 17px;
+    font-weight: 900;
+    color: #14532d;
+    margin-bottom: 6px;
+}
+
+.da-waq-note-v1 {
+    color: #475569;
+    font-size: 11px;
+    line-height: 1.5;
+    margin-bottom: 13px;
+}
+
+.da-waq-actions-v1 {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.da-waq-start-v1,
+.da-waq-next-v1,
+.da-waq-skip-v1,
+.da-waq-stop-v1 {
+    min-height: 40px;
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 10px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.da-waq-start-v1 {
+    background: #16a34a;
+    color: #fff;
+}
+
+.da-waq-next-v1 {
+    background: #2563eb;
+    color: #fff;
+}
+
+.da-waq-skip-v1 {
+    background: #f59e0b;
+    color: #fff;
+}
+
+.da-waq-stop-v1 {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.da-waq-panel-v1 {
+    display: none;
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 14px;
+    background: #fff;
+    border: 1px solid #dcfce7;
+}
+
+.da-waq-panel-v1.open {
+    display: block;
+}
+
+.da-waq-progress-v1 {
+    font-size: 14px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.da-waq-current-v1 {
+    padding: 12px;
+    border-radius: 12px;
+    background: #f8fafc;
+    line-height: 1.6;
+}
+
+.da-waq-list-v1 {
+    max-height: 260px;
+    overflow: auto;
+    margin-top: 12px;
+}
+
+.da-waq-item-v1 {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 7px 4px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 11px;
+}
+
+.da-waq-done-v1 {
+    color: #15803d;
+    font-weight: 800;
+}
+
+.da-waq-skip-text-v1 {
+    color: #b45309;
+    font-weight: 800;
+}
+
+.da-waq-wait-v1 {
+    color: #64748b;
+}
+
+</style>
+
+</head>
+
+<body class="text-slate-800">
+
+
+<header class="bg-white border-b">
+
+    <div class="max-w-7xl mx-auto
+                px-6 lg:px-8 py-5
+                flex items-center
+                justify-between">
+
+        <div>
+
+            <a href="{{ url_for('dashboard') }}"
+               class="text-sm
+                      text-blue-600
+                      font-bold">
+
+                ← Басты бет
+
+            </a>
+
+            <h1 class="text-2xl
+                       font-extrabold mt-2">
+
+                📈 Нәтижелер және прогресс
+
+            </h1>
+
+            <p class="text-sm
+                      text-slate-500 mt-1">
+
+                4 «Д» сыныбының оқу динамикасы
+
+            </p>
+
+        </div>
+
+        <div class="text-sm font-bold">
+            👩‍🏫 {{ teacher_name }}
+        </div>
+
+    </div>
+
+</header>
+
+<!-- ===================================================== -->
+<!-- PROGRESS PAGE ACTIONS -->
+<!-- ===================================================== -->
+
+<div class="max-w-7xl mx-auto px-6 pt-5">
+
+    <div class="flex flex-col
+                sm:flex-row
+                sm:items-center
+                sm:justify-end
+                gap-3">
+
+
+        <form
+            method="POST"
+            action="{{ url_for('clear_progress_results') }}"
+            onsubmit="return confirm('Барлық диагностика нәтижелерін, жауаптарды және жеке тапсырмаларды тазалайсыз ба? Бұл әрекетті кері қайтару мүмкін емес.')">
+
+            <button
+                type="submit"
+                class="inline-flex
+                       items-center
+                       justify-center
+                       gap-2
+                       px-5 py-3
+                       bg-red-50
+                       hover:bg-red-100
+                       border border-red-200
+                       text-red-600
+                       rounded-xl
+                       text-sm
+                       font-extrabold
+                       transition">
+
+                <span>🧹</span>
+
+                <span>
+                    Нәтижелерді тазалау
+                </span>
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    {% if request.args.get('cleared') == '1' %}
+
+    <div class="mt-4
+                p-4
+                bg-emerald-50
+                border border-emerald-200
+                rounded-xl
+                text-emerald-700
+                text-sm
+                font-bold">
+
+        ✅ Нәтижелер мен жеке тапсырмалар тазаланды.
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+
+
+
+<main class="max-w-7xl
+             mx-auto p-6 lg:p-8">
+
+
+
+
+
+
+
+<!-- GENERAL STATS -->
+
+<div class="grid grid-cols-1
+            md:grid-cols-2
+            xl:grid-cols-4
+            gap-4">
+
+    <div class="bg-white
+                border rounded-2xl p-5">
+
+        <p class="text-xs
+                  text-slate-400
+                  font-bold">
+            ОҚУШЫЛАР
+        </p>
+
+        <div class="text-3xl
+                    font-extrabold mt-2">
+            {{ total_students }}
+        </div>
+
+    </div>
+
+
+    <div class="bg-white
+                border rounded-2xl p-5">
+
+        <p class="text-xs
+                  text-slate-400
+                  font-bold">
+            АЯҚТАЛҒАН БАҚЫЛАУ
+        </p>
+
+        <div class="text-3xl
+                    font-extrabold mt-2">
+            {{ completed_attempts }}
+        </div>
+
+    </div>
+
+
+    <div class="bg-blue-50
+                border border-blue-100
+                rounded-2xl p-5">
+
+        <p class="text-xs
+                  text-blue-600
+                  font-bold">
+            ОРТАША НӘТИЖЕ
+        </p>
+
+        <div class="text-3xl
+                    text-blue-700
+                    font-extrabold mt-2">
+
+            {{ average_diagnostic }}%
+
+        </div>
+
+    </div>
+
+
+    <div class="bg-violet-50
+                border border-violet-100
+                rounded-2xl p-5">
+
+        <p class="text-xs
+                  text-violet-600
+                  font-bold">
+            ЖЕКЕ ТАПСЫРМА ОРЫНДАЛУЫ
+        </p>
+
+        <div class="text-3xl
+                    text-violet-700
+                    font-extrabold mt-2">
+
+            {{ task_completion }}%
+
+        </div>
+
+        <p class="text-xs
+                  text-slate-500 mt-1">
+
+            {{ completed_tasks }}
+            / {{ total_tasks }}
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- OBJECTIVES -->
+
+<section class="mt-6
+                bg-white border
+                rounded-2xl p-6">
+
+    <h2 class="font-extrabold">
+        🎯 Оқу мақсаттарының жағдайы
+    </h2>
+
+    <div class="grid grid-cols-1
+                md:grid-cols-3
+                gap-4 mt-5">
+
+        <div class="bg-emerald-50
+                    rounded-2xl p-5">
+
+            <p class="text-sm
+                      text-emerald-700
+                      font-bold">
+                ✅ Меңгерілген
+            </p>
+
+            <div class="text-3xl
+                        text-emerald-700
+                        font-extrabold mt-2">
+                {{ mastered_count }}
+            </div>
+
+        </div>
+
+
+        <div class="bg-amber-50
+                    rounded-2xl p-5">
+
+            <p class="text-sm
+                      text-amber-700
+                      font-bold">
+                ◐ Бекітуді қажет етеді
+            </p>
+
+            <div class="text-3xl
+                        text-amber-700
+                        font-extrabold mt-2">
+                {{ reinforcement_count }}
+            </div>
+
+        </div>
+
+
+        <div class="bg-rose-50
+                    rounded-2xl p-5">
+
+            <p class="text-sm
+                      text-rose-700
+                      font-bold">
+                ⚠️ Олқылық бар
+            </p>
+
+            <div class="text-3xl
+                        text-rose-700
+                        font-extrabold mt-2">
+                {{ gap_count }}
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STUDENTS -->
+
+<section class="mt-6
+                bg-white border
+                rounded-2xl
+                overflow-hidden">
+
+    <div class="px-6 py-5 border-b">
+
+        <h2 class="font-extrabold">
+            👥 Оқушылар прогресі
+        </h2>
+
+        <p class="text-xs
+                  text-slate-500 mt-1">
+            Диагностика және жеке тапсырмалар
+        </p>
+
+    </div>
+
+
+    {% if students %}
+
+    <div class="overflow-x-auto">
+
+        <table class="w-full">
+
+            <thead class="bg-slate-50
+                          text-xs
+                          text-slate-500">
+
+                <tr>
+
+                    <th class="text-left
+                               px-6 py-4">
+                        Оқушы
+                    </th>
+
+                    <th class="text-center
+                               px-4 py-4">
+                        Бақылау
+                    </th>
+
+                    <th class="text-center
+                               px-4 py-4">
+                        Орташа
+                    </th>
+
+                    <th class="text-center
+                               px-4 py-4">
+                        Жеке тапсырма
+                    </th>
+
+                    <th class="text-center
+                               px-4 py-4">
+                        Орындалды
+                    </th>
+
+                    <th class="text-center
+                               px-4 py-4">
+                        Прогресс
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody class="divide-y">
+
+                {% for student in students %}
+
+                <tr>
+
+                    <td class="px-6 py-4">
+
+                        <div class="font-bold">
+                            {{ student.full_name }}
+                        </div>
+
+                        <div class="text-xs
+                                    text-slate-400">
+                            {{ student.class_name }}
+                        </div>
+
+                    </td>
+
+
+                    <td class="text-center
+                               px-4 py-4
+                               font-bold">
+
+                        {{ student.diagnostic_count }}
+
+                    </td>
+
+
+                    <td class="text-center
+                               px-4 py-4">
+
+                        <span class="font-extrabold">
+                            {{ student.average_percentage }}%
+                        </span>
+
+                    </td>
+
+
+                    <td class="text-center
+                               px-4 py-4">
+
+                        {{ student.personal_task_count }}
+
+                    </td>
+
+
+                    <td class="text-center
+                               px-4 py-4">
+
+                        {{ student.completed_task_count }}
+
+                    </td>
+
+
+                    <td class="px-4 py-4
+                               min-w-[190px]">
+
+                        <div class="flex
+                                    items-center
+                                    gap-3">
+
+                            <div class="flex-1
+                                        h-2.5
+                                        bg-slate-100
+                                        rounded-full
+                                        overflow-hidden">
+
+                                <div class="h-full
+                                            bg-blue-600
+                                            rounded-full"
+                                     style="width:
+                                     {{ student.completion_percentage }}%">
+                                </div>
+
+                            </div>
+
+                            <strong class="text-sm">
+                                {{ student.completion_percentage }}%
+                            </strong>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    {% else %}
+
+    <div class="py-16 text-center">
+
+        <div class="text-4xl mb-3">
+            👥
+        </div>
+
+        <h3 class="font-bold">
+            Оқушылар әлі енгізілмеген
+        </h3>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+
+<!-- PERSONAL TASK SUMMARY + RECENT -->
+
+<div class="grid grid-cols-1
+            lg:grid-cols-3
+            gap-6 mt-6">
+
+
+    <section class="bg-white
+                    border rounded-2xl
+                    p-6">
+
+        <h2 class="font-extrabold">
+            🧠 Жеке тапсырмалар
+        </h2>
+
+        <div class="space-y-4 mt-5">
+
+            <div class="flex
+                        justify-between">
+
+                <span class="text-sm
+                             text-slate-500">
+                    Барлығы
+                </span>
+
+                <strong>
+                    {{ total_tasks }}
+                </strong>
+
+            </div>
+
+            <div class="flex
+                        justify-between">
+
+                <span class="text-sm
+                             text-slate-500">
+                    Орындалған
+                </span>
+
+                <strong>
+                    {{ completed_tasks }}
+                </strong>
+
+            </div>
+
+            <div class="flex
+                        justify-between">
+
+                <span class="text-sm
+                             text-slate-500">
+                    Дұрыс орындалған
+                </span>
+
+                <strong class="text-emerald-600">
+                    {{ correct_tasks }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="lg:col-span-2
+                    bg-white border
+                    rounded-2xl
+                    overflow-hidden">
+
+        <div class="px-6 py-5 border-b">
+
+            <h2 class="font-extrabold">
+                🕘 Соңғы бақылау нәтижелері
+            </h2>
+
+        </div>
+
+
+        {% if recent_results %}
+
+        <div class="divide-y">
+
+            {% for result in recent_results %}
+
+            <div class="p-5
+                        flex items-center
+                        justify-between
+                        gap-4">
+
+                <div>
+
+                    <div class="font-bold">
+                        {{ result.full_name }}
+                    </div>
+
+                    <div class="text-sm
+                                text-slate-500 mt-1">
+
+                        {{ result.title }}
+                        ·
+                        {{ result.subject }}
+
+                    </div>
+
+                </div>
+
+
+                <div class="text-right">
+
+                    <div class="text-xl
+                                font-extrabold">
+
+                        {{ result.percentage }}%
+
+                    </div>
+
+                    <div class="text-xs
+                                text-slate-400">
+
+                        {{ result.earned_points }}
+                        /
+                        {{ result.max_points }}
+                        балл
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+        <div class="p-8
+                    text-center
+                    text-sm
+                    text-slate-400">
+
+            Әзірге аяқталған бақылау жоқ.
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+</div>
+
+
+
+<section
+    id="descriptorProgressSection"
+    class="da-section"
+>
+
+    <div class="da-header">
+
+        <div>
+
+            <div class="da-title">
+                📈 Сабақтағы оқу мақсаты прогресі
+            </div>
+
+            <div class="da-subtitle">
+                Ақылды сабақтағы тапсырма дескрипторлары
+                бойынша жиналған нақты оқу дәлелдері.
+            </div>
+
+        </div>
+
+        <button
+            type="button"
+            class="da-refresh"
+            onclick="loadDescriptorProgressUI()"
+        >
+            ↻ Жаңарту
+        </button>
+
+    </div>
+
+
+    <div
+        id="descriptorProgressList"
+        class="da-body"
+    >
+        <div class="da-empty">
+            Прогресс деректері жүктелуде...
+        </div>
+    </div>
+
+</section>
+
+
+
+
+<!-- ===================================================== -->
+<!-- DARABILIM ANNUAL PROGRESS FINAL -->
+<!-- ===================================================== -->
+
+<section
+    id="annualProgressFinalSection"
+    class="ap-final-section"
+>
+
+    <div class="ap-final-header">
+
+        <div>
+
+            <div class="ap-final-title">
+                📊 Жылдық оқу прогресі
+            </div>
+
+            <div class="ap-final-subtitle">
+                Кіріс бақылау → жыл бойғы сабақ нәтижелері
+                → шығыс бақылау
+            </div>
+
+        </div>
+
+
+        <div class="ap-final-toolbar">
+
+            <select
+                id="annualProgressFinalYear"
+                class="ap-final-select"
+                onchange="
+                    loadAnnualProgressFinal()
+                "
+            >
+            </select>
+
+
+            <select
+                id="annualProgressFinalSubject"
+                class="ap-final-select"
+                onchange="
+                    renderAnnualProgressFinal()
+                "
+            >
+                <option value="">
+                    Барлық пән
+                </option>
+            </select>
+
+
+            <button
+                type="button"
+                class="ap-final-button"
+                onclick="
+                    loadAnnualProgressFinal()
+                "
+            >
+                ↻ Жаңарту
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="annualProgressFinalBody"
+        class="ap-final-body"
+    >
+
+        <div class="ap-final-empty">
+            Жылдық прогресс жүктелуде...
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<script id="DARABILIM_DESCRIPTOR_PROGRESS_UI_JS">
+
+function dprEscape(value) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        String(value ?? "");
+
+    return div.innerHTML;
+
+}
+
+
+function dprStatusClass(status) {
+
+    if (status === "Меңгерді") {
+        return "mastered";
+    }
+
+    if (status === "Бекіту қажет") {
+        return "practice";
+    }
+
+    if (status === "Олқылық бар") {
+        return "gap";
+    }
+
+    return "insufficient";
+
+}
+
+
+async function loadDescriptorProgressUI() {
+
+    const list =
+        document.getElementById(
+            "descriptorProgressList"
+        );
+
+    if (!list) {
+        return;
+    }
+
+
+    list.innerHTML = `
+        <div class="da-empty">
+            ⏳ Прогресс жүктелуде...
+        </div>
+    `;
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/descriptor-progress"
+            );
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            !data.ok
+        ) {
+
+            throw new Error(
+                data.error
+                || "Прогресс жүктелмеді."
+            );
+
+        }
+
+
+        const items =
+            data.results
+            || [];
+
+
+        if (!items.length) {
+
+            list.innerHTML = `
+                <div class="da-empty">
+                    Әзірге Ақылды сабақтан
+                    дескрипторлық бағалау нәтижесі жоқ.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        list.innerHTML =
+            items
+            .map(
+                item => {
+
+                    const percentage =
+                        Number(
+                            item.percentage
+                            || 0
+                        );
+
+
+                    return `
+                        <div class="da-card">
+
+                            <div class="da-card-top">
+
+                                <div>
+
+                                    <div class="da-student">
+                                        ${dprEscape(
+                                            item.full_name
+                                        )}
+                                    </div>
+
+                                    <div class="da-meta">
+                                        ${dprEscape(
+                                            item.class_name
+                                            || ""
+                                        )}
+                                        ·
+                                        ${dprEscape(
+                                            item.subject
+                                            || ""
+                                        )}
+                                    </div>
+
+                                    <div class="da-code">
+                                        🎯
+                                        ${dprEscape(
+                                            item.objective_code
+                                            || ""
+                                        )}
+                                    </div>
+
+                                </div>
+
+
+                                <div class="da-percent">
+                                    ${percentage.toFixed(0)}%
+                                </div>
+
+                            </div>
+
+
+                            <div class="da-objective">
+                                ${dprEscape(
+                                    item.objective_text
+                                    || ""
+                                )}
+                            </div>
+
+
+                            <div class="da-progress">
+
+                                <div
+                                    class="da-progress-fill"
+                                    style="
+                                        width:
+                                        ${Math.max(
+                                            0,
+                                            Math.min(
+                                                100,
+                                                percentage
+                                            )
+                                        )}%
+                                    "
+                                ></div>
+
+                            </div>
+
+
+                            <div class="da-stats">
+
+                                <span class="da-chip">
+                                    ✓
+                                    ${item.completed_descriptors || 0}
+                                    /
+                                    ${item.total_descriptors || 0}
+                                </span>
+
+                                <span class="da-chip">
+                                    📚
+                                    ${item.evidence_count || 0}
+                                    сабақ дәлелі
+                                </span>
+
+                            </div>
+
+
+                            <span
+                                class="
+                                    da-status
+                                    ${dprStatusClass(
+                                        item.status
+                                    )}
+                                "
+                            >
+                                ${dprEscape(
+                                    item.status
+                                    || ""
+                                )}
+                            </span>
+
+                        </div>
+                    `;
+
+                }
+            )
+            .join("");
+
+
+    } catch (error) {
+
+        list.innerHTML = `
+            <div class="da-empty">
+                ❌
+                ${dprEscape(
+                    error?.message
+                    || "Қате"
+                )}
+            </div>
+        `;
+
+    }
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadDescriptorProgressUI
+);
+
+</script>
+
+
+
+
+<script id="DARABILIM_ANNUAL_PROGRESS_FINAL_JS">
+
+let annualProgressFinalData = [];
+
+
+/* ==========================================================
+   SAFE ESCAPE
+   ========================================================== */
+
+function apfEscape(value) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        String(
+            value ?? ""
+        );
+
+    return div.innerHTML;
+
+}
+
+
+/* ==========================================================
+   ACADEMIC YEAR
+   ========================================================== */
+
+function apfCurrentYear() {
+
+    const now =
+        new Date();
+
+    const year =
+        now.getFullYear();
+
+    const month =
+        now.getMonth() + 1;
+
+
+    if (month >= 8) {
+
+        return (
+            year
+            + "-"
+            + (year + 1)
+        );
+
+    }
+
+
+    return (
+        (year - 1)
+        + "-"
+        + year
+    );
+
+}
+
+
+function initAnnualProgressFinalYears() {
+
+    const select =
+        document.getElementById(
+            "annualProgressFinalYear"
+        );
+
+
+    if (!select) {
+        return;
+    }
+
+
+    const current =
+        apfCurrentYear();
+
+
+    const start =
+        Number(
+            current.split("-")[0]
+        );
+
+
+    const years = [];
+
+
+    for (
+        let offset = -2;
+        offset <= 1;
+        offset++
+    ) {
+
+        const value =
+            start + offset;
+
+
+        years.push(
+            value
+            + "-"
+            + (value + 1)
+        );
+
+    }
+
+
+    select.innerHTML =
+        years
+        .map(
+            year => `
+                <option
+                    value="${year}"
+                    ${
+                        year === current
+                        ? "selected"
+                        : ""
+                    }
+                >
+                    ${year}
+                </option>
+            `
+        )
+        .join("");
+
+}
+
+
+/* ==========================================================
+   VALUES
+   ========================================================== */
+
+function apfHas(value) {
+
+    return (
+        value !== null
+        &&
+        value !== undefined
+        &&
+        value !== ""
+        &&
+        Number.isFinite(
+            Number(value)
+        )
+    );
+
+}
+
+
+function apfPercent(value) {
+
+    if (!apfHas(value)) {
+
+        return "—";
+
+    }
+
+
+    return (
+        Number(value)
+        .toFixed(0)
+        + "%"
+    );
+
+}
+
+
+function apfChange(value) {
+
+    if (!apfHas(value)) {
+
+        return "—";
+
+    }
+
+
+    const number =
+        Number(value);
+
+
+    if (number > 0) {
+
+        return (
+            "+"
+            + number.toFixed(0)
+            + "%"
+        );
+
+    }
+
+
+    return (
+        number.toFixed(0)
+        + "%"
+    );
+
+}
+
+
+function apfChangeClass(value) {
+
+    if (!apfHas(value)) {
+
+        return "";
+
+    }
+
+
+    const number =
+        Number(value);
+
+
+    if (number > 0) {
+
+        return "positive";
+
+    }
+
+
+    if (number < 0) {
+
+        return "negative";
+
+    }
+
+
+    return "";
+
+}
+
+
+/* ==========================================================
+   STATUS
+   ========================================================== */
+
+function apfStatusClass(status) {
+
+    if (status === "Өсу бар") {
+
+        return "growth";
+
+    }
+
+
+    if (status === "Төмендеу") {
+
+        return "decline";
+
+    }
+
+
+    if (
+        status
+        === "Жылдық прогресс жүріп жатыр"
+        ||
+        status
+        === "Сабақ нәтижелері бар"
+    ) {
+
+        return "running";
+
+    }
+
+
+    return "";
+
+}
+
+
+/* ==========================================================
+   SUBJECT FILTER
+   ========================================================== */
+
+function rebuildAnnualProgressFinalSubjects() {
+
+    const select =
+        document.getElementById(
+            "annualProgressFinalSubject"
+        );
+
+
+    if (!select) {
+        return;
+    }
+
+
+    const oldValue =
+        select.value;
+
+
+    const subjects =
+        [
+            ...new Set(
+                annualProgressFinalData
+                .map(
+                    item =>
+                        item.subject
+                )
+                .filter(Boolean)
+            )
+        ]
+        .sort();
+
+
+    select.innerHTML = `
+        <option value="">
+            Барлық пән
+        </option>
+
+        ${subjects
+            .map(
+                subject => `
+                    <option
+                        value="${apfEscape(
+                            subject
+                        )}"
+                    >
+                        ${apfEscape(
+                            subject
+                        )}
+                    </option>
+                `
+            )
+            .join("")
+        }
+    `;
+
+
+    if (
+        subjects.includes(
+            oldValue
+        )
+    ) {
+
+        select.value =
+            oldValue;
+
+    }
+
+}
+
+
+/* ==========================================================
+   AVERAGE
+   ========================================================== */
+
+function apfAverage(
+    items,
+    key
+) {
+
+    const valid =
+        items.filter(
+            item =>
+                apfHas(
+                    item[key]
+                )
+        );
+
+
+    if (!valid.length) {
+
+        return null;
+
+    }
+
+
+    return (
+        valid.reduce(
+            (sum, item) =>
+                sum
+                + Number(
+                    item[key]
+                ),
+            0
+        )
+        / valid.length
+    );
+
+}
+
+
+/* ==========================================================
+   SUMMARY
+   ========================================================== */
+
+function apfSummary(items) {
+
+    const entry =
+        apfAverage(
+            items,
+            "entry_percentage"
+        );
+
+
+    const year =
+        apfAverage(
+            items,
+            "year_percentage"
+        );
+
+
+    const exitValue =
+        apfAverage(
+            items,
+            "exit_percentage"
+        );
+
+
+    const finalChanges =
+        items.filter(
+            item =>
+                apfHas(
+                    item.entry_to_exit_change
+                )
+        );
+
+
+    const finalChange =
+        finalChanges.length
+        ? (
+            finalChanges.reduce(
+                (sum, item) =>
+                    sum
+                    + Number(
+                        item.entry_to_exit_change
+                    ),
+                0
+            )
+            / finalChanges.length
+        )
+        : null;
+
+
+    return `
+        <div class="ap-final-summary">
+
+            <div class="ap-final-summary-card">
+
+                <div class="ap-final-summary-label">
+                    🟠 Кіріс бақылау
+                </div>
+
+                <div class="ap-final-summary-value">
+                    ${apfPercent(entry)}
+                </div>
+
+                <div class="ap-final-summary-note">
+                    Бастапқы білім
+                </div>
+
+            </div>
+
+
+            <div class="ap-final-summary-card">
+
+                <div class="ap-final-summary-label">
+                    🔵 Жыл бойғы нәтиже
+                </div>
+
+                <div class="ap-final-summary-value">
+                    ${apfPercent(year)}
+                </div>
+
+                <div class="ap-final-summary-note">
+                    Сабақтағы дескрипторлар
+                </div>
+
+            </div>
+
+
+            <div class="ap-final-summary-card">
+
+                <div class="ap-final-summary-label">
+                    🟢 Шығыс бақылау
+                </div>
+
+                <div class="ap-final-summary-value">
+                    ${apfPercent(exitValue)}
+                </div>
+
+                <div class="ap-final-summary-note">
+                    Қорытынды білім
+                </div>
+
+            </div>
+
+
+            <div class="ap-final-summary-card">
+
+                <div class="ap-final-summary-label">
+                    📈 Жылдық өзгеріс
+                </div>
+
+                <div class="ap-final-summary-value">
+                    ${apfChange(
+                        finalChange
+                    )}
+                </div>
+
+                <div class="ap-final-summary-note">
+                    Кіріс → шығыс
+                </div>
+
+            </div>
+
+        </div>
+    `;
+
+}
+
+
+/* ==========================================================
+   OBJECTIVE
+   ========================================================== */
+
+function apfObjective(item) {
+
+    return `
+        <div class="ap-final-objective">
+
+            <div class="ap-final-objective-top">
+
+                <div>
+
+                    <span class="ap-final-code">
+                        🎯
+                        ${apfEscape(
+                            item.objective_code
+                            || ""
+                        )}
+                    </span>
+
+
+                    <div class="ap-final-objective-text">
+                        ${apfEscape(
+                            item.objective_text
+                            || ""
+                        )}
+                    </div>
+
+                </div>
+
+
+                <span
+                    class="
+                        ap-final-status
+                        ${apfStatusClass(
+                            item.progress_status
+                        )}
+                    "
+                >
+                    ${apfEscape(
+                        item.progress_status
+                        || "Дерек жеткіліксіз"
+                    )}
+                </span>
+
+            </div>
+
+
+            <div class="ap-final-stages">
+
+                <div class="ap-final-stage entry">
+
+                    <div class="ap-final-stage-label">
+                        🟠 Кіріс бақылау
+                    </div>
+
+                    <div class="ap-final-stage-value">
+                        ${apfPercent(
+                            item.entry_percentage
+                        )}
+                    </div>
+
+                    <div class="ap-final-stage-note">
+                        ${
+                            apfHas(
+                                item.entry_percentage
+                            )
+                            ? "Бастапқы нәтиже"
+                            : "Нәтиже жоқ"
+                        }
+                    </div>
+
+                </div>
+
+
+                <div class="ap-final-stage year">
+
+                    <div class="ap-final-stage-label">
+                        🔵 Жыл бойғы нәтиже
+                    </div>
+
+                    <div class="ap-final-stage-value">
+                        ${apfPercent(
+                            item.year_percentage
+                        )}
+                    </div>
+
+                    <div class="ap-final-stage-note">
+                        ${
+                            item.year_evidence_count
+                            || 0
+                        }
+                        сабақ дәлелі
+                    </div>
+
+                </div>
+
+
+                <div class="ap-final-stage exit">
+
+                    <div class="ap-final-stage-label">
+                        🟢 Шығыс бақылау
+                    </div>
+
+                    <div class="ap-final-stage-value">
+                        ${apfPercent(
+                            item.exit_percentage
+                        )}
+                    </div>
+
+                    <div class="ap-final-stage-note">
+                        ${
+                            apfHas(
+                                item.exit_percentage
+                            )
+                            ? "Қорытынды нәтиже"
+                            : "Нәтиже жоқ"
+                        }
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="ap-final-flow">
+
+                <div class="ap-final-flow-value">
+                    ${apfPercent(
+                        item.entry_percentage
+                    )}
+                </div>
+
+                <div class="ap-final-arrow">
+                    →
+                </div>
+
+                <div class="ap-final-flow-value">
+                    ${apfPercent(
+                        item.year_percentage
+                    )}
+                </div>
+
+                <div class="ap-final-arrow">
+                    →
+                </div>
+
+                <div class="ap-final-flow-value">
+                    ${apfPercent(
+                        item.exit_percentage
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="ap-final-changes">
+
+                <span
+                    class="
+                        ap-final-chip
+                        ${apfChangeClass(
+                            item.entry_to_current_change
+                        )}
+                    "
+                >
+                    Кіріс → ағымдағы:
+                    ${apfChange(
+                        item.entry_to_current_change
+                    )}
+                </span>
+
+
+                <span
+                    class="
+                        ap-final-chip
+                        ${apfChangeClass(
+                            item.entry_to_exit_change
+                        )}
+                    "
+                >
+                    Кіріс → шығыс:
+                    ${apfChange(
+                        item.entry_to_exit_change
+                    )}
+                </span>
+
+
+                <span class="ap-final-chip">
+                    ✓
+                    ${
+                        item.year_completed_descriptors
+                        || 0
+                    }
+                    /
+                    ${
+                        item.year_total_descriptors
+                        || 0
+                    }
+                    дескриптор
+                </span>
+
+
+                <span class="ap-final-chip">
+                    📚
+                    ${
+                        item.year_evidence_count
+                        || 0
+                    }
+                    сабақ дәлелі
+                </span>
+
+            </div>
+
+        </div>
+    `;
+
+}
+
+
+/* ==========================================================
+   STUDENT
+   ========================================================== */
+
+function apfStudent(
+    studentId,
+    items
+) {
+
+    const first =
+        items[0]
+        || {};
+
+
+    return `
+        <div
+            class="ap-final-student"
+            id="apFinalStudent-${studentId}"
+        >
+
+            <button
+                type="button"
+                class="ap-final-student-head"
+                onclick="
+                    toggleAnnualProgressFinalStudent(
+                        '${studentId}'
+                    )
+                "
+            >
+
+                <div>
+
+                    <div class="ap-final-name">
+                        ${apfEscape(
+                            first.full_name
+                            || ""
+                        )}
+                    </div>
+
+                    <div class="ap-final-class">
+                        ${apfEscape(
+                            first.class_name
+                            || ""
+                        )}
+                        ${
+                            first.subject
+                            ? " · "
+                            + apfEscape(
+                                first.subject
+                            )
+                            : ""
+                        }
+                    </div>
+
+                </div>
+
+
+                <span class="ap-final-count">
+                    ${items.length}
+                    оқу мақсаты
+                </span>
+
+            </button>
+
+
+            <div class="ap-final-student-body">
+
+                ${items
+                    .map(
+                        apfObjective
+                    )
+                    .join("")
+                }
+
+            </div>
+
+        </div>
+    `;
+
+}
+
+
+/* ==========================================================
+   TOGGLE STUDENT
+   ========================================================== */
+
+function toggleAnnualProgressFinalStudent(
+    studentId
+) {
+
+    const card =
+        document.getElementById(
+            "apFinalStudent-"
+            + studentId
+        );
+
+
+    if (!card) {
+        return;
+    }
+
+
+    card.classList.toggle(
+        "open"
+    );
+
+}
+
+
+/* ==========================================================
+   RENDER
+   ========================================================== */
+
+function renderAnnualProgressFinal() {
+
+    const body =
+        document.getElementById(
+            "annualProgressFinalBody"
+        );
+
+
+    if (!body) {
+        return;
+    }
+
+
+    const subject =
+        document.getElementById(
+            "annualProgressFinalSubject"
+        )?.value || "";
+
+
+    const filtered =
+        annualProgressFinalData
+        .filter(
+            item =>
+                !subject
+                ||
+                item.subject
+                === subject
+        );
+
+
+    if (!filtered.length) {
+
+        body.innerHTML = `
+            <div class="ap-final-empty">
+
+                Әзірге осы оқу жылына
+                салыстыруға болатын нақты нәтиже жоқ.
+
+                <br><br>
+
+                Кіріс бақылау, Ақылды сабақтағы
+                дескрипторлық бағалау немесе
+                шығыс бақылау нәтижесі пайда болғанда
+                бұл бөлім автоматты толады.
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    const groups = {};
+
+
+    filtered.forEach(
+        item => {
+
+            const key =
+                String(
+                    item.student_id
+                );
+
+
+            if (!groups[key]) {
+
+                groups[key] = [];
+
+            }
+
+
+            groups[key].push(
+                item
+            );
+
+        }
+    );
+
+
+    body.innerHTML =
+        apfSummary(
+            filtered
+        )
+        +
+        Object.entries(
+            groups
+        )
+        .map(
+            ([studentId, items]) =>
+                apfStudent(
+                    studentId,
+                    items
+                )
+        )
+        .join("");
+
+}
+
+
+/* ==========================================================
+   LOAD
+   ========================================================== */
+
+async function loadAnnualProgressFinal() {
+
+    const body =
+        document.getElementById(
+            "annualProgressFinalBody"
+        );
+
+
+    if (!body) {
+        return;
+    }
+
+
+    body.innerHTML = `
+        <div class="ap-final-empty">
+            ⏳ Жылдық прогресс жүктелуде...
+        </div>
+    `;
+
+
+    const year =
+        document.getElementById(
+            "annualProgressFinalYear"
+        )?.value
+        ||
+        apfCurrentYear();
+
+
+    try {
+
+        const params =
+            new URLSearchParams({
+                academic_year:
+                    year
+            });
+
+
+        const response =
+            await fetch(
+                "/api/annual-progress?"
+                + params.toString()
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            !data.ok
+        ) {
+
+            throw new Error(
+                data.error
+                || "Жылдық прогресс жүктелмеді."
+            );
+
+        }
+
+
+        annualProgressFinalData =
+            data.results
+            || [];
+
+
+        rebuildAnnualProgressFinalSubjects();
+
+        renderAnnualProgressFinal();
+
+
+    } catch (error) {
+
+        body.innerHTML = `
+            <div class="ap-final-empty">
+                ❌
+                ${apfEscape(
+                    error?.message
+                    || "Қате"
+                )}
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* ==========================================================
+   INIT
+   ========================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        initAnnualProgressFinalYears();
+
+        loadAnnualProgressFinal();
+
+    }
+);
+
+</script>
+
+
+
+
+
+<div class="da-reset-results-v1">
+
+    <button
+        type="button"
+        class="da-reset-button-v1"
+        onclick="daOpenAnalyticsResetV1()"
+    >
+        🗑 Нәтижелерді тазалау
+    </button>
+
+</div>
+
+
+
+<div class="da-parent-v2">
+
+    <div class="da-parent-title-v2">
+        👨‍👩‍👧 Ата-анаға оқу нәтижесін жіберу
+    </div>
+
+
+    <div class="da-parent-select-row-v2">
+
+        <select
+            id="daParentStudentV2"
+            class="da-parent-select-v2"
+        >
+            <option value="">
+                Оқушылар жүктелуде...
+            </option>
+        </select>
+
+
+        <button
+            type="button"
+            class="da-parent-button-v2"
+            onclick="daOpenParentV2()"
+        >
+            📨 Хабарлама дайындау
+        </button>
+
+    </div>
+
+</div>
+
+
+<div
+    id="daParentModalV2"
+    class="da-parent-modal-v2"
+>
+
+    <div class="da-parent-dialog-v2">
+
+        <div class="da-parent-modal-head-v2">
+
+            <div
+                id="daParentStudentNameV2"
+                class="da-parent-student-v2"
+            >
+                Оқушы
+            </div>
+
+
+            <button
+                type="button"
+                class="da-parent-close-v2"
+                onclick="daCloseParentV2()"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <div
+            id="daParentContactV2"
+            class="da-parent-contact-v2"
+        ></div>
+
+
+        <textarea
+            id="daParentMessageV2"
+            class="da-parent-message-v2"
+        ></textarea>
+
+
+        <div class="da-parent-actions-v2">
+
+            <button
+                type="button"
+                class="da-parent-wa-v2"
+                onclick="daSendWhatsAppV2()"
+            >
+                🟢 WhatsApp
+            </button>
+
+
+            <button
+                type="button"
+                class="da-parent-tg-v2"
+                onclick="daSendTelegramV2()"
+            >
+                🔵 Telegram
+            </button>
+
+
+            <button
+                type="button"
+                class="da-parent-copy-v2"
+                onclick="daCopyParentV2()"
+            >
+                📋 Көшіру
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="da-waq-v1">
+
+    <div class="da-waq-title-v1">
+        👨‍👩‍👧‍👦 Барлық ата-анаға кезекпен жіберу
+    </div>
+
+    <div class="da-waq-note-v1">
+        DaraBilim әр ата-анаға өз баласының жеке нәтижесін
+        дайындайды. WhatsApp чаты дайын мәтінмен ашылады.
+        Мұғалім хабарламаны жіберіп, «✓ Жіберілді — келесі»
+        батырмасын басады.
+    </div>
+
+
+    <div class="da-waq-actions-v1">
+
+        <button
+            type="button"
+            class="da-waq-start-v1"
+            onclick="daStartWhatsAppQueueV1()"
+        >
+            🚀 Барлығына жіберуді бастау
+        </button>
+
+    </div>
+
+
+    <div
+        id="daWhatsAppQueuePanelV1"
+        class="da-waq-panel-v1"
+    >
+
+        <div
+            id="daWhatsAppQueueProgressV1"
+            class="da-waq-progress-v1"
+        >
+            0/0
+        </div>
+
+
+        <div
+            id="daWhatsAppQueueCurrentV1"
+            class="da-waq-current-v1"
+        ></div>
+
+
+        <div
+            class="da-waq-actions-v1"
+            style="margin-top:12px"
+        >
+
+            <button
+                type="button"
+                class="da-waq-next-v1"
+                onclick="daWhatsAppQueueSentNextV1()"
+            >
+                ✓ Жіберілді — келесі
+            </button>
+
+
+            <button
+                type="button"
+                class="da-waq-skip-v1"
+                onclick="daWhatsAppQueueSkipV1()"
+            >
+                ⏭ Өткізу
+            </button>
+
+
+            <button
+                type="button"
+                class="da-waq-stop-v1"
+                onclick="daStopWhatsAppQueueV1()"
+            >
+                ✕ Тоқтату
+            </button>
+
+        </div>
+
+
+        <div
+            id="daWhatsAppQueueListV1"
+            class="da-waq-list-v1"
+        ></div>
+
+    </div>
+
+</div>
+
+<div
+    class="da-bdp-v1"
+    id="daBaselineDailyAnalyticsV1"
+    data-mode="progress"
+>
+    <div class="da-bdp-title-v1">
+        📈 Кіріс бақылау → күнделікті сабақ прогресі
+    </div>
+
+    <div>
+        ⏳ Деректер жүктелуде...
+    </div>
+</div>
+
+
+<script id="DARABILIM_BASELINE_DAILY_ANALYTICS_FINAL_V1_JS">
+
+function daBdpEscapeV1(value) {
+
+    return String(
+        value ?? ""
+    )
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+
+function daBdpCardV1(item) {
+
+    const timeline = [
+        `
+        <span class="da-bdp-point-v1">
+            Кіріс:
+            ${Number(item.baseline_percentage || 0).toFixed(1)}%
+        </span>
+        `
+    ];
+
+
+    (
+        item.timeline
+        || []
+    )
+    .forEach(
+        point => {
+
+            timeline.push(`
+                <span class="da-bdp-point-v1">
+                    ${daBdpEscapeV1(point.date || "")}:
+                    ${Number(point.percentage || 0).toFixed(1)}%
+                </span>
+            `);
+        }
+    );
+
+
+    const growth =
+        Number(
+            item.growth
+            || 0
+        );
+
+
+    return `
+        <div class="da-bdp-card-v1">
+
+            <div class="da-bdp-head-v1">
+
+                <div>
+
+                    <div class="da-bdp-name-v1">
+                        ${daBdpEscapeV1(item.full_name)}
+                    </div>
+
+                    <div class="da-bdp-code-v1">
+                        ${daBdpEscapeV1(item.objective_code)}
+                    </div>
+
+                </div>
+
+                <div>
+                    ${daBdpEscapeV1(item.class_name)}
+                </div>
+
+            </div>
+
+
+            <div>
+                ${daBdpEscapeV1(item.objective_text)}
+            </div>
+
+
+            <div class="da-bdp-values-v1">
+
+                <div class="da-bdp-value-v1">
+                    <div class="da-bdp-number-v1">
+                        ${Number(item.baseline_percentage || 0).toFixed(1)}%
+                    </div>
+                    <div class="da-bdp-label-v1">
+                        Кіріс бақылау
+                    </div>
+                </div>
+
+
+                <div class="da-bdp-value-v1">
+                    <div class="da-bdp-number-v1">
+                        ${Number(item.current_percentage || 0).toFixed(1)}%
+                    </div>
+                    <div class="da-bdp-label-v1">
+                        Қазіргі нәтиже
+                    </div>
+                </div>
+
+
+                <div class="da-bdp-value-v1">
+                    <div class="da-bdp-number-v1">
+                        ${growth > 0 ? "+" : ""}${growth.toFixed(1)}
+                    </div>
+                    <div class="da-bdp-label-v1">
+                        Өсу, пайыздық тармақ
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="da-bdp-status-v1">
+                ${daBdpEscapeV1(item.status_icon)}
+                ${daBdpEscapeV1(item.status)}
+            </div>
+
+
+            <div>
+                Дескриптор:
+                <strong>
+                    ${Number(item.completed_descriptors || 0)}
+                    /
+                    ${Number(item.total_descriptors || 0)}
+                </strong>
+            </div>
+
+
+            <div class="da-bdp-timeline-v1">
+                ${timeline.join("")}
+            </div>
+
+        </div>
+    `;
+}
+
+
+async function daLoadBaselineDailyAnalyticsV1(
+    mode
+) {
+
+    const host =
+        document.getElementById(
+            "daBaselineDailyAnalyticsV1"
+        );
+
+
+    if (!host) {
+        return;
+    }
+
+
+    host.innerHTML =
+        "⏳ Кіріс бақылау мен күнделікті нәтижелер салыстырылуда...";
+
+
+    const url =
+        mode === "gaps"
+        ? "/api/baseline-daily-gaps"
+        : "/api/baseline-daily-progress";
+
+
+    try {
+
+        const response =
+            await fetch(url);
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            !data.ok
+        ) {
+
+            throw new Error(
+                data.error
+                ||
+                "Деректер жүктелмеді."
+            );
+        }
+
+
+        const items =
+            mode === "gaps"
+            ? (
+                data.gaps
+                || []
+            )
+            : (
+                data.results
+                || []
+            );
+
+
+        if (!items.length) {
+
+            host.innerHTML = `
+                <div class="da-bdp-card-v1">
+                    Салыстыруға жеткілікті дерек жоқ.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        host.innerHTML = `
+            <div class="da-bdp-grid-v1">
+                ${items.map(daBdpCardV1).join("")}
+            </div>
+        `;
+
+
+    } catch (error) {
+
+        host.innerHTML = `
+            <div class="da-bdp-card-v1">
+                ❌ ${daBdpEscapeV1(error.message)}
+            </div>
+        `;
+    }
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        const host =
+            document.getElementById(
+                "daBaselineDailyAnalyticsV1"
+            );
+
+
+        if (!host) {
+            return;
+        }
+
+
+        daLoadBaselineDailyAnalyticsV1(
+            host.dataset.mode
+            || "progress"
+        );
+    }
+);
+
+</script>
+
+
+
+<script id="DARABILIM_ANALYTICS_RESULTS_RESET_FINAL_V1_JS">
+
+// ==================================================================
+// DARABILIM ANALYTICS RESULTS RESET FINAL V1
+// ==================================================================
+
+
+function daEnsureAnalyticsResetModalV1() {
+
+    let modal =
+        document.getElementById(
+            "daAnalyticsResetModalV1"
+        );
+
+
+    if (modal) {
+
+        return modal;
+    }
+
+
+    modal =
+        document.createElement(
+            "div"
+        );
+
+
+    modal.id =
+        "daAnalyticsResetModalV1";
+
+
+    modal.className =
+        "da-reset-modal-v1";
+
+
+    modal.innerHTML = `
+
+        <div
+            class="da-reset-dialog-v1"
+        >
+
+            <div
+                class="da-reset-title-v1"
+            >
+                🗑 Нәтижелерді тазалау
+            </div>
+
+
+            <div
+                class="da-reset-info-v1"
+            >
+                Қай нәтижелерді тазалау керегін таңдаңыз.
+                Бұл әрекетті кейін қайтару мүмкін емес.
+            </div>
+
+
+            <button
+                type="button"
+                class="da-reset-option-v1"
+                onclick="
+                    daResetAnalyticsResultsV1(
+                        'daily'
+                    )
+                "
+            >
+
+                <div
+                    class="da-reset-option-title-v1"
+                >
+                    🧹 Күнделікті нәтижелерді тазалау
+                </div>
+
+                <div
+                    class="da-reset-option-text-v1"
+                >
+                    Ақылды сабақтағы бағалау,
+                    дескриптор балдары және күнделікті
+                    прогресс тазаланады.
+
+                    Кіріс бақылау нәтижесі сақталады.
+                </div>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="
+                    da-reset-option-v1
+                    da-reset-danger-v1
+                "
+                onclick="
+                    daResetAnalyticsResultsV1(
+                        'all'
+                    )
+                "
+            >
+
+                <div
+                    class="da-reset-option-title-v1"
+                >
+                    ⚠️ Барлық нәтижені тазалау
+                </div>
+
+                <div
+                    class="da-reset-option-text-v1"
+                >
+                    Күнделікті бағалау,
+                    кіріс бақылау нәтижелері,
+                    бақылау жауаптары және сол нәтижеден
+                    жасалған жеке тапсырмалар тазаланады.
+
+                    Оқушылар, оқу мақсаттары,
+                    бақылау тестінің өзі және сұрақтары
+                    сақталады.
+                </div>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="da-reset-close-v1"
+                onclick="
+                    daCloseAnalyticsResetV1()
+                "
+            >
+                Болдырмау
+            </button>
+
+        </div>
+    `;
+
+
+    modal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target
+                === modal
+            ) {
+
+                daCloseAnalyticsResetV1();
+            }
+        }
+    );
+
+
+    document.body.appendChild(
+        modal
+    );
+
+
+    return modal;
+}
+
+
+function daOpenAnalyticsResetV1() {
+
+    const modal =
+        daEnsureAnalyticsResetModalV1();
+
+
+    modal.classList.add(
+        "open"
+    );
+}
+
+
+function daCloseAnalyticsResetV1() {
+
+    const modal =
+        document.getElementById(
+            "daAnalyticsResetModalV1"
+        );
+
+
+    if (modal) {
+
+        modal.classList.remove(
+            "open"
+        );
+    }
+}
+
+
+async function daResetAnalyticsResultsV1(
+    mode
+) {
+
+    const isAll =
+        mode === "all";
+
+
+    const message =
+        isAll
+
+        ? (
+            "БАРЛЫҚ НӘТИЖЕЛЕР ӨШІРІЛЕДІ.\n\n"
+            + "• Кіріс бақылау нәтижелері\n"
+            + "• Оқушы жауаптары\n"
+            + "• Күнделікті сабақ бағалары\n"
+            + "• Дескриптор нәтижелері\n"
+            + "• Нәтижеден жасалған жеке тапсырмалар\n\n"
+            + "Оқушылар, оқу мақсаттары және "
+            + "бақылау тестінің өзі сақталады.\n\n"
+            + "Жалғастыру керек пе?"
+        )
+
+        : (
+            "КҮНДЕЛІКТІ БАҒАЛАУ НӘТИЖЕЛЕРІ "
+            + "ӨШІРІЛЕДІ.\n\n"
+            + "Кіріс бақылау нәтижесі сақталады.\n\n"
+            + "Жалғастыру керек пе?"
+        );
+
+
+    if (
+        !window.confirm(
+            message
+        )
+    ) {
+
+        return;
+    }
+
+
+    if (isAll) {
+
+        const second =
+            window.prompt(
+                "Барлық нәтижені тазалауды растау үшін "
+                + "ӨШІРУ сөзін жазыңыз:"
+            );
+
+
+        if (
+            String(
+                second
+                || ""
+            ).trim()
+            !== "ӨШІРУ"
+        ) {
+
+            window.alert(
+                "Тазалау тоқтатылды."
+            );
+
+            return;
+        }
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/analytics-results/reset",
+                {
+                    method:
+                        "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            mode:
+                                mode,
+
+                            confirmation:
+                                (
+                                    isAll
+                                    ? "ALL"
+                                    : "DAILY"
+                                )
+                        })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            !data.ok
+        ) {
+
+            throw new Error(
+                data.error
+                ||
+                "Нәтижелер тазаланбады."
+            );
+        }
+
+
+        daCloseAnalyticsResetV1();
+
+
+        window.alert(
+            "✓ "
+            + data.message
+        );
+
+
+        window.location.reload();
+
+
+    } catch (error) {
+
+        window.alert(
+            "Қате: "
+            + (
+                error?.message
+                ||
+                "Нәтижелер тазаланбады."
+            )
+        );
+    }
+}
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key
+            === "Escape"
+        ) {
+
+            daCloseAnalyticsResetV1();
+        }
+    }
+);
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        daEnsureAnalyticsResetModalV1();
+
+    }
+);
+
+</script>
+
+
+
+<script id="DARABILIM_PARENT_MESSENGER_FINAL_V2_JS">
+
+window.daParentReportV2 = null;
+
+
+function daParentEscapeV2(value) {
+
+    return String(
+        value ?? ""
+    )
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+
+function daNormalizeKazakhstanPhoneV2(value) {
+
+    let phone =
+        String(
+            value ?? ""
+        )
+        .replace(
+            /\D/g,
+            ""
+        );
+
+
+    if (
+        phone.length === 11
+        &&
+        phone.startsWith("8")
+    ) {
+
+        phone =
+            "7"
+            + phone.slice(1);
+    }
+
+
+    return phone;
+}
+
+
+async function daLoadParentStudentsV2() {
+
+    const select =
+        document.getElementById(
+            "daParentStudentV2"
+        );
+
+
+    if (!select) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/parent-report/students-v2"
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            !data.ok
+        ) {
+
+            throw new Error(
+                data.error
+                ||
+                "Оқушылар жүктелмеді."
+            );
+        }
+
+
+        select.innerHTML = `
+            <option value="">
+                Оқушыны және ата-ананы таңдаңыз
+            </option>
+        `;
+
+
+        (
+            data.students
+            || []
+        )
+        .forEach(
+            student => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    student.id;
+
+
+                option.textContent =
+                    student.full_name
+                    + " | "
+                    + student.class_name
+                    + " | "
+                    + (
+                        student.parent_name
+                        || "Ата-ана көрсетілмеген"
+                    );
+
+
+                select.appendChild(
+                    option
+                );
+            }
+        );
+
+
+    } catch (error) {
+
+        select.innerHTML = `
+            <option value="">
+                ${daParentEscapeV2(error.message)}
+            </option>
+        `;
+    }
+}
+
+
+function daBuildParentMessageV2(report) {
+
+    const s =
+        report.student
+        || {};
+
+
+    const lines = [];
+
+
+    lines.push(
+        "Құрметті "
+        + (
+            s.parent_name
+            || "ата-ана"
+        )
+        + "!"
+    );
+
+
+    lines.push("");
+
+
+    lines.push(
+        "Балаңыз "
+        + s.full_name
+        + "ның оқу нәтижесі туралы ақпарат:"
+    );
+
+
+    lines.push("");
+
+
+    lines.push(
+        "Сыныбы: "
+        + (
+            s.class_name
+            || "—"
+        )
+    );
+
+
+    if (
+        report.baseline_average
+        !== null
+    ) {
+
+        lines.push(
+            "Кіріс бақылау: "
+            + report.baseline_average
+            + "%"
+        );
+    }
+
+
+    if (
+        report.current_average
+        !== null
+    ) {
+
+        lines.push(
+            "Қазіргі нәтиже: "
+            + report.current_average
+            + "%"
+        );
+    }
+
+
+    if (
+        report.growth
+        !== null
+    ) {
+
+        lines.push(
+            "Ілгерілеу: "
+            + (
+                Number(
+                    report.growth
+                ) > 0
+                ? "+"
+                : ""
+            )
+            + report.growth
+            + " пайыздық тармақ"
+        );
+    }
+
+
+    if (
+        report.latest_assessment
+    ) {
+
+        const a =
+            report.latest_assessment;
+
+
+        lines.push(
+            "Соңғы сабақтағы нәтиже: "
+            + a.score
+            + "/"
+            + a.max_score
+            + " балл"
+        );
+    }
+
+
+    const weak =
+        report.weak_skills
+        || [];
+
+
+    if (weak.length) {
+
+        lines.push("");
+
+        lines.push(
+            "Қосымша назар аударуды қажет ететін дағдылар:"
+        );
+
+
+        weak.forEach(
+            skill => {
+
+                lines.push(
+                    "• "
+                    + skill
+                );
+            }
+        );
+    }
+
+
+    const strong =
+        report.strong_skills
+        || [];
+
+
+    if (strong.length) {
+
+        lines.push("");
+
+        lines.push(
+            "Жақсы меңгерген дағдылары:"
+        );
+
+
+        strong.forEach(
+            skill => {
+
+                lines.push(
+                    "• "
+                    + skill
+                );
+            }
+        );
+    }
+
+
+    lines.push("");
+
+    lines.push(
+        "Жалпы жағдай: "
+        + report.overall_status
+    );
+
+
+    lines.push("");
+
+    lines.push(
+        "DaraBilim AI"
+    );
+
+
+    return lines.join(
+        "\n"
+    );
+}
+
+
+async function daOpenParentV2() {
+
+    const select =
+        document.getElementById(
+            "daParentStudentV2"
+        );
+
+
+    const studentId =
+        Number(
+            select?.value
+            || 0
+        );
+
+
+    if (!studentId) {
+
+        alert(
+            "Оқушыны таңдаңыз."
+        );
+
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/parent-report-v2/"
+                + studentId
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok
+            ||
+            !data.ok
+        ) {
+
+            throw new Error(
+                data.error
+                ||
+                "Хабарлама дайындалмады."
+            );
+        }
+
+
+        const report =
+            data.report;
+
+
+        window.daParentReportV2 =
+            report;
+
+
+        document.getElementById(
+            "daParentStudentNameV2"
+        ).textContent =
+            report.student.full_name;
+
+
+        document.getElementById(
+            "daParentContactV2"
+        ).innerHTML = `
+
+            <strong>Сыныбы:</strong>
+            ${daParentEscapeV2(report.student.class_name)}
+            <br>
+
+            <strong>Ата-ана:</strong>
+            ${daParentEscapeV2(report.student.parent_name || "—")}
+            <br>
+
+            <strong>WhatsApp:</strong>
+            ${daParentEscapeV2(report.student.whatsapp || "—")}
+            <br>
+
+            <strong>Telegram:</strong>
+            ${daParentEscapeV2(report.student.telegram || "—")}
+        `;
+
+
+        document.getElementById(
+            "daParentMessageV2"
+        ).value =
+            daBuildParentMessageV2(
+                report
+            );
+
+
+        document.getElementById(
+            "daParentModalV2"
+        ).classList.add(
+            "open"
+        );
+
+
+    } catch (error) {
+
+        alert(
+            error.message
+        );
+    }
+}
+
+
+function daCloseParentV2() {
+
+    document.getElementById(
+        "daParentModalV2"
+    )
+    ?.classList.remove(
+        "open"
+    );
+}
+
+
+function daSendWhatsAppV2() {
+
+    const report =
+        window.daParentReportV2;
+
+
+    if (!report) {
+        return;
+    }
+
+
+    const phone =
+        daNormalizeKazakhstanPhoneV2(
+            report.student.whatsapp
+        );
+
+
+    if (!phone) {
+
+        alert(
+            "Ата-ананың WhatsApp нөмірі енгізілмеген."
+        );
+
+        return;
+    }
+
+
+    const message =
+        document.getElementById(
+            "daParentMessageV2"
+        ).value;
+
+
+    window.open(
+        "https://wa.me/"
+        + phone
+        + "?text="
+        + encodeURIComponent(
+            message
+        ),
+        "_blank",
+        "noopener"
+    );
+}
+
+
+async function daSendTelegramV2() {
+
+    const report =
+        window.daParentReportV2;
+
+
+    if (!report) {
+        return;
+    }
+
+
+    let telegram =
+        String(
+            report.student.telegram
+            || ""
+        ).trim();
+
+
+    const message =
+        document.getElementById(
+            "daParentMessageV2"
+        ).value;
+
+
+    if (!telegram) {
+
+        alert(
+            "Ата-ананың Telegram мәліметі енгізілмеген."
+        );
+
+        return;
+    }
+
+
+    try {
+
+        await navigator.clipboard.writeText(
+            message
+        );
+
+    } catch (_) {}
+
+
+    // Telegram username
+    if (
+        telegram.startsWith("@")
+    ) {
+
+        telegram =
+            telegram.slice(1);
+
+
+        window.open(
+            "https://t.me/"
+            + encodeURIComponent(
+                telegram
+            ),
+            "_blank",
+            "noopener"
+        );
+
+
+        return;
+    }
+
+
+    // Plain username
+    if (
+        /^[A-Za-z][A-Za-z0-9_]{4,}$/.test(
+            telegram
+        )
+    ) {
+
+        window.open(
+            "https://t.me/"
+            + encodeURIComponent(
+                telegram
+            ),
+            "_blank",
+            "noopener"
+        );
+
+
+        return;
+    }
+
+
+    // Current database contains phone numbers.
+    alert(
+        "Telegram бағанында телефон нөмірі сақталған.\n\n"
+        + "Хабарлама көшірілді. "
+        + "Telegram ашылады — ата-ананың чатын таңдап, "
+        + "хабарламаны жіберіңіз."
+    );
+
+
+    window.open(
+        "https://web.telegram.org/",
+        "_blank",
+        "noopener"
+    );
+}
+
+
+async function daCopyParentV2() {
+
+    const message =
+        document.getElementById(
+            "daParentMessageV2"
+        ).value;
+
+
+    try {
+
+        await navigator.clipboard.writeText(
+            message
+        );
+
+
+        alert(
+            "Хабарлама көшірілді."
+        );
+
+
+    } catch (_) {
+
+        alert(
+            "Хабарламаны қолмен көшіріңіз."
+        );
+    }
+}
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key
+            === "Escape"
+        ) {
+
+            daCloseParentV2();
+        }
+    }
+);
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        daLoadParentStudentsV2();
+
+    }
+);
+
+</script>
+
+
+
+<script id="DARABILIM_WHATSAPP_QUEUE_NO_API_FINAL_V1_JS">
+
+// ==================================================================
+// DARABILIM WHATSAPP QUEUE - NO API FINAL V1
+//
+// Does NOT automatically press WhatsApp Send.
+// Each parent receives only their own child's report.
+// ==================================================================
+
+
+window.daWhatsAppQueueV1 = {
+
+    students:
+        [],
+
+    index:
+        0,
+
+    sent:
+        new Set(),
+
+    skipped:
+        new Set(),
+
+    currentReport:
+        null,
+
+    active:
+        false
+};
+
+
+// ----------------------------------------------------------
+// Get students with WhatsApp contact
+// ----------------------------------------------------------
+
+async function daLoadWhatsAppQueueStudentsV1() {
+
+    const response =
+        await fetch(
+            "/api/parent-report/students-v2"
+        );
+
+
+    const data =
+        await response.json();
+
+
+    if (
+        !response.ok
+        ||
+        !data.ok
+    ) {
+
+        throw new Error(
+            data.error
+            ||
+            "Ата-аналар тізімі жүктелмеді."
+        );
+    }
+
+
+    return (
+        data.students
+        || []
+    )
+    .filter(
+        student =>
+            String(
+                student.whatsapp
+                || ""
+            ).trim()
+    );
+}
+
+
+// ----------------------------------------------------------
+// Start queue
+// ----------------------------------------------------------
+
+async function daStartWhatsAppQueueV1() {
+
+    try {
+
+        const students =
+            await daLoadWhatsAppQueueStudentsV1();
+
+
+        if (!students.length) {
+
+            alert(
+                "WhatsApp нөмірі бар ата-ана табылмады."
+            );
+
+            return;
+        }
+
+
+        const ok =
+            confirm(
+                students.length
+                + " ата-анаға жеке-жеке хабарлама "
+                + "жіберу кезегін бастаймыз ба?\n\n"
+                + "Әр ата-ананың WhatsApp чаты "
+                + "жеке ашылады."
+            );
+
+
+        if (!ok) {
+            return;
+        }
+
+
+        window.daWhatsAppQueueV1 = {
+
+            students:
+                students,
+
+            index:
+                0,
+
+            sent:
+                new Set(),
+
+            skipped:
+                new Set(),
+
+            currentReport:
+                null,
+
+            active:
+                true
+        };
+
+
+        document.getElementById(
+            "daWhatsAppQueuePanelV1"
+        )
+        .classList.add(
+            "open"
+        );
+
+
+        await daOpenCurrentWhatsAppQueueV1();
+
+
+    } catch (error) {
+
+        alert(
+            error.message
+        );
+    }
+}
+
+
+// ----------------------------------------------------------
+// Current student report
+// ----------------------------------------------------------
+
+async function daOpenCurrentWhatsAppQueueV1() {
+
+    const q =
+        window.daWhatsAppQueueV1;
+
+
+    if (
+        !q.active
+        ||
+        q.index >= q.students.length
+    ) {
+
+        daFinishWhatsAppQueueV1();
+
+        return;
+    }
+
+
+    const student =
+        q.students[
+            q.index
+        ];
+
+
+    const response =
+        await fetch(
+            "/api/parent-report-v2/"
+            + student.id
+        );
+
+
+    const data =
+        await response.json();
+
+
+    if (
+        !response.ok
+        ||
+        !data.ok
+    ) {
+
+        q.skipped.add(
+            student.id
+        );
+
+
+        q.index += 1;
+
+
+        daRenderWhatsAppQueueV1();
+
+
+        await daOpenCurrentWhatsAppQueueV1();
+
+        return;
+    }
+
+
+    const report =
+        data.report;
+
+
+    q.currentReport =
+        report;
+
+
+    const message =
+        daBuildParentMessageV2(
+            report
+        );
+
+
+    const phone =
+        daNormalizeKazakhstanPhoneV2(
+            report.student.whatsapp
+        );
+
+
+    daRenderWhatsAppQueueV1();
+
+
+    if (!phone) {
+
+        q.skipped.add(
+            student.id
+        );
+
+        q.index += 1;
+
+        await daOpenCurrentWhatsAppQueueV1();
+
+        return;
+    }
+
+
+    const url =
+        "https://wa.me/"
+        + phone
+        + "?text="
+        + encodeURIComponent(
+            message
+        );
+
+
+    // User initiated queue start,
+    // but browsers may still block repeated popups.
+    window.open(
+        url,
+        "_blank",
+        "noopener"
+    );
+}
+
+
+// ----------------------------------------------------------
+// Teacher confirms message was sent
+// ----------------------------------------------------------
+
+async function daWhatsAppQueueSentNextV1() {
+
+    const q =
+        window.daWhatsAppQueueV1;
+
+
+    if (
+        !q.active
+        ||
+        q.index >= q.students.length
+    ) {
+        return;
+    }
+
+
+    const student =
+        q.students[
+            q.index
+        ];
+
+
+    q.sent.add(
+        student.id
+    );
+
+
+    q.index += 1;
+
+
+    daRenderWhatsAppQueueV1();
+
+
+    await daOpenCurrentWhatsAppQueueV1();
+}
+
+
+// ----------------------------------------------------------
+// Skip
+// ----------------------------------------------------------
+
+async function daWhatsAppQueueSkipV1() {
+
+    const q =
+        window.daWhatsAppQueueV1;
+
+
+    if (
+        !q.active
+        ||
+        q.index >= q.students.length
+    ) {
+        return;
+    }
+
+
+    const student =
+        q.students[
+            q.index
+        ];
+
+
+    q.skipped.add(
+        student.id
+    );
+
+
+    q.index += 1;
+
+
+    daRenderWhatsAppQueueV1();
+
+
+    await daOpenCurrentWhatsAppQueueV1();
+}
+
+
+// ----------------------------------------------------------
+// Stop
+// ----------------------------------------------------------
+
+function daStopWhatsAppQueueV1() {
+
+    window.daWhatsAppQueueV1.active =
+        false;
+
+
+    daRenderWhatsAppQueueV1();
+
+
+    alert(
+        "Жіберу кезегі тоқтатылды."
+    );
+}
+
+
+// ----------------------------------------------------------
+// Finish
+// ----------------------------------------------------------
+
+function daFinishWhatsAppQueueV1() {
+
+    const q =
+        window.daWhatsAppQueueV1;
+
+
+    q.active =
+        false;
+
+
+    daRenderWhatsAppQueueV1();
+
+
+    alert(
+        "Ата-аналарға жіберу кезегі аяқталды.\n\n"
+        + "Жіберілді: "
+        + q.sent.size
+        + "\n"
+        + "Өткізілді: "
+        + q.skipped.size
+    );
+}
+
+
+// ----------------------------------------------------------
+// Render queue
+// ----------------------------------------------------------
+
+function daRenderWhatsAppQueueV1() {
+
+    const q =
+        window.daWhatsAppQueueV1;
+
+
+    const total =
+        q.students.length;
+
+
+    const currentNumber =
+        Math.min(
+            q.index + 1,
+            total
+        );
+
+
+    const progress =
+        document.getElementById(
+            "daWhatsAppQueueProgressV1"
+        );
+
+
+    const current =
+        document.getElementById(
+            "daWhatsAppQueueCurrentV1"
+        );
+
+
+    const list =
+        document.getElementById(
+            "daWhatsAppQueueListV1"
+        );
+
+
+    if (progress) {
+
+        progress.textContent =
+            (
+                total
+                ? currentNumber
+                : 0
+            )
+            + "/"
+            + total
+            + " · Жіберілді: "
+            + q.sent.size
+            + " · Өткізілді: "
+            + q.skipped.size;
+    }
+
+
+    if (current) {
+
+        const student =
+            q.students[
+                q.index
+            ];
+
+
+        if (
+            q.active
+            &&
+            student
+        ) {
+
+            current.innerHTML = `
+                <strong>Қазіргі оқушы:</strong>
+                ${daParentEscapeV2(student.full_name)}
+                <br>
+
+                <strong>Сыныбы:</strong>
+                ${daParentEscapeV2(student.class_name)}
+                <br>
+
+                <strong>Ата-ана:</strong>
+                ${daParentEscapeV2(student.parent_name || "—")}
+                <br>
+
+                <strong>WhatsApp:</strong>
+                ${daParentEscapeV2(student.whatsapp || "—")}
+            `;
+
+        } else {
+
+            current.innerHTML = `
+                <strong>Кезек аяқталды немесе тоқтатылды.</strong>
+            `;
+        }
+    }
+
+
+    if (list) {
+
+        list.innerHTML =
+            q.students
+            .map(
+                (
+                    student,
+                    index
+                ) => {
+
+                    let status =
+                        "Күтуде";
+
+
+                    let css =
+                        "da-waq-wait-v1";
+
+
+                    if (
+                        q.sent.has(
+                            student.id
+                        )
+                    ) {
+
+                        status =
+                            "✓ Жіберілді";
+
+                        css =
+                            "da-waq-done-v1";
+                    }
+
+
+                    else if (
+                        q.skipped.has(
+                            student.id
+                        )
+                    ) {
+
+                        status =
+                            "Өткізілді";
+
+                        css =
+                            "da-waq-skip-text-v1";
+                    }
+
+
+                    else if (
+                        q.active
+                        &&
+                        index === q.index
+                    ) {
+
+                        status =
+                            "⏳ Қазір";
+
+                        css =
+                            "da-waq-wait-v1";
+                    }
+
+
+                    return `
+                        <div class="da-waq-item-v1">
+
+                            <span>
+                                ${index + 1}.
+                                ${daParentEscapeV2(student.full_name)}
+                                —
+                                ${daParentEscapeV2(student.parent_name || "—")}
+                            </span>
+
+                            <span class="${css}">
+                                ${status}
+                            </span>
+
+                        </div>
+                    `;
+                }
+            )
+            .join("");
+    }
+}
+
+</script>
+
+</body>
+</html>

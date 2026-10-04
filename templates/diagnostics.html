@@ -1,0 +1,2289 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>DaraBilim AI — Кіріс бақылау</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .menu:hover {
+            background: #f1f5f9;
+        }
+    </style>
+
+
+<style>
+
+/* =========================================================
+   DARABILIM AI - CREATE DIAGNOSTIC MODAL
+   ========================================================= */
+
+#createModal {
+    overflow-y: auto;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+#createModal > div {
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+
+/* Форманың өзін scroll аймағына айналдырамыз */
+
+#createModal form {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+
+
+/* form ішіндегі негізгі контент */
+
+#createModal .diagnostic-form-scroll {
+    overflow-y: auto;
+    min-height: 0;
+    flex: 1;
+    padding-right: 4px;
+}
+
+
+/* Төменгі батырмалар үнемі көрінеді */
+
+#createModal .diagnostic-form-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 20;
+
+    background: white;
+
+    padding-top: 16px;
+    padding-bottom: 4px;
+
+    margin-top: 16px;
+
+    border-top: 1px solid #e2e8f0;
+}
+
+
+/* Оқу мақсаттары тым ұзын болып кетпесін */
+
+#createModal .objective-scroll-area {
+    max-height: 260px !important;
+    overflow-y: auto !important;
+}
+
+
+/* Кіші экран */
+
+@media (max-height: 800px) {
+
+    #createModal > div {
+        max-height: 96vh;
+    }
+
+    #createModal .objective-scroll-area {
+        max-height: 190px !important;
+    }
+
+}
+
+</style>
+
+
+
+
+<style id="diagnosticModalDefinitiveFix">
+
+/* Modal itself */
+#createModal {
+    overflow: hidden !important;
+    padding: 12px !important;
+}
+
+
+/* White modal card */
+#createModal > div {
+    width: 100%;
+    max-width: 36rem;
+
+    height: min(94vh, 900px);
+    max-height: 94vh;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    overflow: hidden !important;
+}
+
+
+/* Form fills available modal height */
+#createModal form {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    overflow: hidden !important;
+}
+
+
+/* Only middle content scrolls */
+#createModal .diagnostic-form-scroll {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    padding-right: 6px;
+    padding-bottom: 16px;
+}
+
+
+/* Objective list has its own compact scroll */
+#createModal .objective-scroll-area {
+    max-height: 210px !important;
+    overflow-y: auto !important;
+}
+
+
+/* Footer never scrolls away */
+#createModal .diagnostic-form-footer {
+    flex: 0 0 auto !important;
+
+    position: relative !important;
+
+    bottom: auto !important;
+
+    z-index: 30;
+
+    background: #ffffff;
+
+    border-top: 1px solid #e2e8f0;
+
+    margin: 0 -4px -4px -4px !important;
+
+    padding: 14px 4px 4px 4px !important;
+
+    box-shadow:
+        0 -8px 20px
+        rgba(15, 23, 42, 0.06);
+}
+
+
+/* Submit button always visible */
+#createModal .diagnostic-form-footer
+button[type="submit"] {
+
+    display: block !important;
+
+    width: 100% !important;
+
+    min-height: 48px;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+
+/* Laptop / short screen */
+@media (max-height: 800px) {
+
+    #createModal {
+        padding: 8px !important;
+    }
+
+    #createModal > div {
+        height: 96vh;
+        max-height: 96vh;
+    }
+
+    #createModal .objective-scroll-area {
+        max-height: 150px !important;
+    }
+
+    #createModal .diagnostic-form-footer {
+        padding-top: 10px !important;
+    }
+
+}
+
+
+/* Very short screen */
+@media (max-height: 650px) {
+
+    #createModal .objective-scroll-area {
+        max-height: 110px !important;
+    }
+
+}
+
+</style>
+
+
+
+
+<style id="DARABILIM_DIAGNOSTIC_TYPES_STYLE">
+
+.diagnostic-type-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 8px;
+}
+
+
+.diagnostic-type-option {
+    position: relative;
+}
+
+
+.diagnostic-type-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+.diagnostic-type-card {
+    padding: 11px 8px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 11px;
+
+    background: #ffffff;
+
+    text-align: center;
+    cursor: pointer;
+
+    transition:
+        border-color .15s ease,
+        background .15s ease,
+        box-shadow .15s ease;
+}
+
+
+.diagnostic-type-card:hover {
+    border-color: #93c5fd;
+    background: #f8fafc;
+}
+
+
+.diagnostic-type-option
+input:checked
++
+.diagnostic-type-card {
+    border-color: #2563eb;
+    background: #eff6ff;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(37, 99, 235, .08);
+}
+
+
+.diagnostic-type-icon {
+    font-size: 20px;
+}
+
+
+.diagnostic-type-title {
+    margin-top: 4px;
+
+    font-size: 11px;
+    font-weight: 900;
+    color: #334155;
+}
+
+
+.diagnostic-type-help {
+    margin-top: 3px;
+
+    font-size: 9px;
+    line-height: 1.3;
+    color: #94a3b8;
+}
+
+
+.diagnostic-year-select {
+    width: 100%;
+
+    padding: 9px 10px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+
+    background: white;
+
+    font-size: 12px;
+    color: #475569;
+}
+
+
+.diagnostic-type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    padding: 4px 7px;
+
+    border-radius: 7px;
+
+    font-size: 9px;
+    font-weight: 900;
+}
+
+
+.diagnostic-type-badge.entry {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+
+.diagnostic-type-badge.intermediate {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+
+.diagnostic-type-badge.exit {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+
+@media (max-width: 650px) {
+
+    .diagnostic-type-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+
+</head>
+
+<body class="text-slate-800">
+
+<div class="flex h-screen overflow-hidden">
+
+    <!-- SIDEBAR -->
+
+    <aside class="w-60 bg-white border-r
+                  border-slate-200 flex flex-col">
+
+        <div class="p-5 border-b border-slate-100">
+
+            <div class="flex items-center gap-3">
+
+                <div class="w-10 h-10 rounded-xl
+                            bg-blue-600 text-white
+                            flex items-center justify-center">
+                    🧠
+                </div>
+
+                <div>
+                    <h1 class="font-extrabold text-lg">
+                        DaraBilim AI
+                    </h1>
+
+                    <p class="text-[10px] text-slate-400">
+                        Интеллектуалды білім беру
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <nav class="flex-1 p-3 space-y-1">
+
+            <a href="{{ url_for('dashboard') }}"
+               class="menu">
+                🏠
+                <span>Басты бет</span>
+            </a>
+
+            <a href="{{ url_for('diagnostics') }}"
+               class="menu bg-blue-600 text-white">
+                📝
+                <span>Кіріс бақылау</span>
+            </a>
+
+            <a href="{{ url_for('smart_lessons') }}" class="menu">
+                🧠
+                <span>Ақылды сабақ</span>
+            </a>
+
+            <a href="{{ url_for('learning_paths') }}" class="menu">
+                🎯
+                <span>Жеке білім бағыты</span>
+            </a>
+
+            <a href="{{ url_for('learning_gaps') }}" class="menu">
+                🗺️
+                <span>Оқу олқылықтары</span>
+            </a>
+
+            <a href="{{ url_for('progress') }}" class="menu">
+                📈
+                <span>Нәтижелер және прогресс</span>
+            </a>
+
+            <a href="{{ url_for('materials') }}" class="menu">
+                📚
+                <span>Материалдар</span>
+            </a>
+
+            <a href="{{ url_for('students') }}"
+               class="menu">
+                👥
+                <span>Оқушылар</span>
+            </a>
+
+        </nav>
+
+
+        <div class="p-3 border-t">
+
+            <a href="{{ url_for('logout') }}"
+               class="menu text-rose-600">
+                🚪
+                <span>Шығу</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <div class="flex-1 flex flex-col min-w-0">
+
+        <header class="h-20 bg-white border-b
+                       px-8 flex items-center justify-between">
+
+            <div>
+                <h2 class="font-bold">
+                    📝 Кіріс бақылау
+                </h2>
+
+                <p class="text-xs text-slate-500">
+                    4 «Д» сыныбы
+                </p>
+            </div>
+
+            <div class="text-sm font-bold">
+                👩‍🏫 {{ teacher_name }}
+            </div>
+
+        </header>
+
+
+        <main class="flex-1 overflow-y-auto p-8">
+
+
+<!-- ===================================================== -->
+<!-- STUDENT PORTAL SHARE LINK -->
+<!-- ===================================================== -->
+
+<section
+    id="studentPortalShareBox"
+    class="bg-white
+           border border-slate-200
+           rounded-2xl
+           p-5
+           mb-6">
+
+    <div class="flex
+                flex-col
+                xl:flex-row
+                xl:items-center
+                xl:justify-between
+                gap-4">
+
+        <div>
+
+            <div class="flex
+                        items-center
+                        gap-2">
+
+                <span class="text-2xl">
+                    🔗
+                </span>
+
+                <h2 class="font-extrabold
+                           text-slate-900">
+
+                    Оқушыға кіріс бақылау сілтемесі
+
+                </h2>
+
+            </div>
+
+            <p class="text-sm
+                      text-slate-500
+                      mt-1">
+
+                Осы сілтемені оқушыларға жіберіңіз.
+                Оқушы аты-жөнін енгізіп, сынып пен пәнді таңдайды.
+
+            </p>
+
+        </div>
+
+
+        {% if student_portal_token %}
+
+        <div class="flex
+                    flex-col
+                    sm:flex-row
+                    gap-2
+                    xl:min-w-[520px]">
+
+            <input
+                id="studentPortalUrl"
+                type="text"
+                readonly
+                value="{{ request.host_url.rstrip('/') }}{{ url_for('student_diagnostic_portal', token=student_portal_token) }}"
+                class="flex-1
+                       min-w-0
+                       border border-slate-200
+                       bg-slate-50
+                       rounded-xl
+                       px-4 py-3
+                       text-sm
+                       text-slate-600">
+
+
+            <button
+                type="button"
+                id="copyStudentPortalButton"
+                onclick="copyStudentPortalLink()"
+                class="inline-flex
+                       items-center
+                       justify-center
+                       gap-2
+                       px-5 py-3
+                       bg-blue-600
+                       hover:bg-blue-700
+                       text-white
+                       rounded-xl
+                       text-sm
+                       font-extrabold
+                       whitespace-nowrap">
+
+                📋 Сілтемені көшіру
+
+            </button>
+
+        </div>
+
+        {% else %}
+
+        <div class="px-4 py-3
+                    bg-amber-50
+                    border border-amber-200
+                    text-amber-700
+                    rounded-xl
+                    text-sm font-bold">
+
+            Сілтеме әзірге қолжетімсіз
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <div
+        id="studentPortalCopyStatus"
+        class="hidden
+               mt-3
+               text-sm
+               font-bold
+               text-emerald-600">
+
+        ✅ Сілтеме көшірілді
+
+    </div>
+
+</section>
+
+
+<script>
+
+async function copyStudentPortalLink() {
+
+    const input =
+        document.getElementById(
+            "studentPortalUrl"
+        );
+
+    const status =
+        document.getElementById(
+            "studentPortalCopyStatus"
+        );
+
+    const button =
+        document.getElementById(
+            "copyStudentPortalButton"
+        );
+
+
+    if (!input) {
+        return;
+    }
+
+
+    const link =
+        input.value;
+
+
+    let copied = false;
+
+
+    // -------------------------------------------------------
+    // Modern clipboard
+    // -------------------------------------------------------
+
+    try {
+
+        if (
+            navigator.clipboard
+            &&
+            window.isSecureContext
+        ) {
+
+            await navigator.clipboard.writeText(
+                link
+            );
+
+            copied = true;
+
+        }
+
+    } catch (error) {
+
+        copied = false;
+
+    }
+
+
+    // -------------------------------------------------------
+    // Fallback
+    // -------------------------------------------------------
+
+    if (!copied) {
+
+        try {
+
+            input.removeAttribute(
+                "readonly"
+            );
+
+            input.select();
+
+            input.setSelectionRange(
+                0,
+                99999
+            );
+
+            copied =
+                document.execCommand(
+                    "copy"
+                );
+
+            input.setAttribute(
+                "readonly",
+                "readonly"
+            );
+
+        } catch (error) {
+
+            copied = false;
+
+        }
+
+    }
+
+
+    // -------------------------------------------------------
+    // UI status
+    // -------------------------------------------------------
+
+    if (copied) {
+
+        if (status) {
+
+            status.classList.remove(
+                "hidden"
+            );
+
+        }
+
+
+        if (button) {
+
+            const oldText =
+                button.innerHTML;
+
+            button.innerHTML =
+                "✅ Көшірілді";
+
+            setTimeout(
+                function() {
+
+                    button.innerHTML =
+                        oldText;
+
+                },
+                1800
+            );
+
+        }
+
+
+        setTimeout(
+            function() {
+
+                if (status) {
+
+                    status.classList.add(
+                        "hidden"
+                    );
+
+                }
+
+            },
+            2500
+        );
+
+    } else {
+
+        // Copy blocked болса,
+        // URL-ді белгілеп береміз.
+
+        input.focus();
+        input.select();
+
+        alert(
+            "Сілтемені автоматты көшіру мүмкін болмады. "
+            + "Белгіленген сілтемені Ctrl+C арқылы көшіріңіз."
+        );
+
+    }
+
+}
+
+</script>
+
+
+
+
+            <div class="max-w-7xl mx-auto">
+
+                <!-- TITLE -->
+
+                <div class="flex items-center
+                            justify-between mb-7">
+
+                    <div>
+
+                        <h1 class="text-2xl font-extrabold">
+                            Бастапқы диагностика
+                        </h1>
+
+                        <p class="text-sm text-slate-500 mt-1">
+
+                            Оқушылардың бастапқы білім деңгейін
+                            анықтау
+
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        onclick="openModal()"
+                        class="bg-blue-600 hover:bg-blue-700
+                               text-white px-5 py-3
+                               rounded-xl font-bold text-sm">
+
+                        ＋ Кіріс бақылау құру
+
+                    </button>
+
+                </div>
+
+
+                <!-- INFO CARDS -->
+
+                <div class="grid grid-cols-3 gap-4 mb-7">
+
+                    <div class="bg-white border
+                                rounded-2xl p-5">
+
+                        <p class="text-xs font-bold
+                                  text-slate-400 uppercase">
+                            Сынып
+                        </p>
+
+                        <h3 class="text-xl font-extrabold mt-2">
+                            4 «Д»
+                        </h3>
+
+                    </div>
+
+
+                    <div class="bg-white border
+                                rounded-2xl p-5">
+
+                        <p class="text-xs font-bold
+                                  text-slate-400 uppercase">
+                            Оқушылар
+                        </p>
+
+                        <h3 class="text-xl font-extrabold mt-2">
+                            {{ student_count }} оқушы
+                        </h3>
+
+                    </div>
+
+
+                    <div class="bg-white border
+                                rounded-2xl p-5">
+
+                        <p class="text-xs font-bold
+                                  text-slate-400 uppercase">
+                            Бақылаулар
+                        </p>
+
+                        <h3 class="text-xl font-extrabold mt-2">
+                            {{ diagnostics|length }}
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LIST -->
+
+                <div class="bg-white border
+                            rounded-2xl overflow-hidden">
+
+                    <div class="px-6 py-5 border-b">
+
+                        <h3 class="font-bold">
+                            Кіріс бақылаулар
+                        </h3>
+
+                    </div>
+
+
+                    {% if diagnostics %}
+
+                    <div class="divide-y">
+
+                        {% for item in diagnostics %}
+
+                        <div class="p-6 flex
+                                    items-center justify-between">
+
+                            <div>
+
+                                <div class="flex items-center
+                                            gap-2 mb-2">
+
+                                    <span class="px-2.5 py-1
+                                                 bg-blue-50
+                                                 text-blue-700
+                                                 rounded-lg
+                                                 text-xs font-bold">
+
+                                        {{ item.subject }}
+
+                                    </span>
+
+                                    <span class="text-xs
+                                                 text-slate-400">
+
+                                        {{ item.question_count }}
+                                        тапсырма
+
+                                    </span>
+
+                                </div>
+
+                                <h4 class="font-bold text-slate-900">
+                                    {{ item.title }}
+                                </h4>
+
+                                <p class="text-sm
+                                          text-slate-500 mt-1">
+
+                                    {{ item.learning_objective
+                                       or 'Оқу мақсаты енгізілмеген' }}
+
+                                </p>
+
+                            </div>
+
+
+                            <div class="flex flex-wrap items-center gap-2">
+
+                                <div class="flex flex-wrap items-center gap-2">
+
+                                <a href="{{ url_for('diagnostic_detail', diagnostic_id=item.id) }}"
+                                   class="px-4 py-2.5
+                                          bg-slate-100
+                                          hover:bg-blue-50
+                                          hover:text-blue-700
+                                          rounded-xl
+                                          text-sm font-bold">
+
+                                    Ашу →
+
+                                </a>
+
+
+                                <button
+                                    type="button"
+                                    onclick='openEditDiagnostic(
+                                        {{ item.id }},
+                                        {{ item.title|tojson }},
+                                        {{ item.subject|tojson }},
+                                        {{ item.question_count }}
+                                    )'
+                                    class="px-4 py-2.5
+                                           bg-blue-50
+                                           text-blue-700
+                                           hover:bg-blue-100
+                                           rounded-xl
+                                           text-sm font-bold">
+
+                                    ✏️ Өңдеу
+
+                                </button>
+
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for('delete_diagnostic', diagnostic_id=item.id) }}"
+                                    onsubmit="return confirm('Бұл кіріс бақылауды өшіргіңіз келе ме? Осы бақылауға қатысты нәтижелер де өшіріледі.')">
+
+                                    <button
+                                        type="submit"
+                                        class="px-4 py-2.5
+                                               bg-red-50
+                                               text-red-600
+                                               hover:bg-red-100
+                                               rounded-xl
+                                               text-sm font-bold">
+
+                                        🗑️ Өшіру
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+
+                                <button
+                                    type="button"
+                                    onclick='openEditDiagnostic(
+                                        {{ item.id }},
+                                        {{ item.title|tojson }},
+                                        {{ item.subject|tojson }},
+                                        {{ item.question_count }}
+                                    )'
+                                    class="px-4 py-2.5
+                                           bg-blue-50
+                                           text-blue-700
+                                           hover:bg-blue-100
+                                           rounded-xl
+                                           text-sm font-bold">
+
+                                    ✏️ Өңдеу
+
+                                </button>
+
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for('delete_diagnostic', diagnostic_id=item.id) }}"
+                                    onsubmit="return confirm('Бұл кіріс бақылауды өшіргіңіз келе ме? Осы бақылауға қатысты нәтижелер де өшіріледі.')">
+
+                                    <button
+                                        type="submit"
+                                        class="px-4 py-2.5
+                                               bg-red-50
+                                               text-red-600
+                                               hover:bg-red-100
+                                               rounded-xl
+                                               text-sm font-bold">
+
+                                        🗑️ Өшіру
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    {% else %}
+
+                    <div class="py-16 text-center">
+
+                        <div class="text-4xl mb-3">
+                            📝
+                        </div>
+
+                        <h3 class="font-bold">
+                            Кіріс бақылау әлі құрылмаған
+                        </h3>
+
+                        <p class="text-sm
+                                  text-slate-400 mt-1">
+
+                            Алғашқы диагностикалық бақылауды
+                            құрыңыз
+
+                        </p>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<!-- CREATE MODAL -->
+
+<div id="createModal"
+     class="hidden fixed inset-0
+            bg-slate-900/45 z-50
+            items-center justify-center p-4">
+
+    <div class="bg-white rounded-3xl
+                shadow-2xl w-full
+                max-w-xl p-7 max-h-[92vh] flex flex-col">
+
+        <div class="flex items-start
+                    justify-between mb-6">
+
+            <div>
+
+                <h3 class="text-xl font-extrabold">
+                    📝 Жаңа кіріс бақылау
+                </h3>
+
+                <p class="text-sm text-slate-500 mt-1">
+                    4 «Д» сыныбы
+                </p>
+
+            </div>
+
+            <button onclick="closeModal()"
+                    class="text-xl">
+                ✕
+            </button>
+
+        </div>
+
+
+        <form method="POST"
+              action="{{ url_for('create_diagnostic') }}"
+              class="space-y-4">
+
+<!-- ===================================================== -->
+<!-- CONTROL TYPE + ACADEMIC YEAR -->
+<!-- ===================================================== -->
+
+<div
+    id="diagnosticTypeSelector"
+    class="
+        mb-4
+        p-4
+        rounded-xl
+        border border-slate-200
+        bg-slate-50
+    "
+>
+
+    <label class="
+        block
+        text-xs
+        font-extrabold
+        text-slate-700
+        mb-2
+    ">
+        Бақылау түрі
+    </label>
+
+
+    <div class="diagnostic-type-grid">
+
+        <label class="diagnostic-type-option">
+
+            <input
+                type="radio"
+                name="diagnostic_type"
+                value="entry"
+                checked
+            >
+
+            <div class="diagnostic-type-card">
+
+                <div class="diagnostic-type-icon">
+                    🟠
+                </div>
+
+                <div class="diagnostic-type-title">
+                    Кіріс бақылау
+                </div>
+
+                <div class="diagnostic-type-help">
+                    Бастапқы білім деңгейі
+                </div>
+
+            </div>
+
+        </label>
+
+
+        <label class="diagnostic-type-option">
+
+            <input
+                type="radio"
+                name="diagnostic_type"
+                value="intermediate"
+            >
+
+            <div class="diagnostic-type-card">
+
+                <div class="diagnostic-type-icon">
+                    🔵
+                </div>
+
+                <div class="diagnostic-type-title">
+                    Аралық бақылау
+                </div>
+
+                <div class="diagnostic-type-help">
+                    Жыл ішіндегі аралық нәтиже
+                </div>
+
+            </div>
+
+        </label>
+
+
+        <label class="diagnostic-type-option">
+
+            <input
+                type="radio"
+                name="diagnostic_type"
+                value="exit"
+            >
+
+            <div class="diagnostic-type-card">
+
+                <div class="diagnostic-type-icon">
+                    🟢
+                </div>
+
+                <div class="diagnostic-type-title">
+                    Шығыс бақылау
+                </div>
+
+                <div class="diagnostic-type-help">
+                    Жыл соңындағы қорытынды
+                </div>
+
+            </div>
+
+        </label>
+
+    </div>
+
+
+    <div class="mt-4">
+
+        <label
+            for="diagnosticAcademicYear"
+            class="
+                block
+                text-xs
+                font-extrabold
+                text-slate-700
+                mb-2
+            "
+        >
+            Оқу жылы
+        </label>
+
+
+        <select
+            id="diagnosticAcademicYear"
+            name="academic_year"
+            class="diagnostic-year-select"
+            required
+        >
+        </select>
+
+    </div>
+
+</div>
+
+
+<div class="diagnostic-form-scroll">
+
+
+
+            <div>
+
+                <label class="block
+                              text-sm font-bold mb-2">
+                    Пән *
+                </label>
+
+                <select name="subject"
+                        id="diagnosticSubject"
+                        onchange="loadObjectives()"
+                        required
+                        class="w-full border
+                               rounded-xl px-4 py-3">
+
+                    <option value="">
+                        Пәнді таңдаңыз
+                    </option>
+
+                    <option value="Математика">
+                        Математика
+                    </option>
+
+                    <option value="Қазақ тілі">
+                        Қазақ тілі
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label class="block
+                              text-sm font-bold mb-2">
+                    Бақылау атауы *
+                </label>
+
+                <input name="title"
+                       required
+                       class="w-full border
+                              rounded-xl px-4 py-3"
+                       placeholder="Мысалы: Математика бойынша бастапқы диагностика">
+
+            </div>
+
+
+            
+<div id="learningObjectivePicker">
+
+    <div class="flex items-center justify-between mb-2">
+
+        <label class="block text-sm font-bold">
+            Оқу мақсаттары *
+        </label>
+
+        <span id="selectedObjectiveCount"
+              class="text-xs font-bold text-blue-600">
+            0 таңдалды
+        </span>
+
+    </div>
+
+    <div id="objectiveHint"
+         class="bg-slate-50 border border-slate-200
+                rounded-xl p-4 text-sm text-slate-500">
+
+        Алдымен пәнді таңдаңыз.
+
+    </div>
+
+    <div id="objectivePanel"
+         class="hidden border border-slate-200
+                rounded-xl overflow-hidden">
+
+        <div class="p-3 border-b bg-slate-50">
+
+            <input type="text"
+                   id="objectiveSearch"
+                   oninput="filterObjectives()"
+                   placeholder="🔎 Код немесе оқу мақсатын іздеу..."
+                   class="w-full border border-slate-200
+                          rounded-lg px-3 py-2.5 text-sm">
+
+        </div>
+
+        <div class="px-3 py-2 border-b
+                    flex items-center justify-between">
+
+            <span id="objectiveTotal"
+                  class="text-xs text-slate-500">
+                0 мақсат
+            </span>
+
+            <button type="button"
+                    onclick="clearObjectives()"
+                    class="text-xs font-bold text-rose-600">
+                Таңдауды тазалау
+            </button>
+
+        </div>
+
+        <div id="objectiveList"
+             class="max-h-72 overflow-y-auto
+                    divide-y divide-slate-100 objective-scroll-area">
+        </div>
+
+    </div>
+
+    <p class="text-xs text-slate-400 mt-2">
+        Бір немесе бірнеше оқу мақсатын таңдауға болады.
+    </p>
+
+</div>
+
+
+<div>
+
+                <label class="block
+                              text-sm font-bold mb-2">
+                    Тапсырма саны
+                </label>
+
+                <select name="question_count"
+                        class="w-full border
+                               rounded-xl px-4 py-3">
+
+                    <option value="5">5 тапсырма</option>
+                    <option value="10" selected>10 тапсырма</option>
+                    <option value="15">15 тапсырма</option>
+                    <option value="20">20 тапсырма</option>
+
+                </select>
+
+            </div>
+
+
+            
+</div>
+
+<div class="bg-blue-50
+                        border border-blue-100
+                        rounded-xl p-4">
+
+                <p class="text-sm text-slate-600">
+
+                    🤖 Келесі кезеңде DaraBilim AI
+                    КТЖ мен оқулық негізінде осы бақылауға
+                    тапсырмаларды автоматты дайындайды.
+
+                </p>
+
+            </div>
+
+</div>
+
+<div class="diagnostic-form-footer">
+<button type="submit"
+                    class="w-full bg-blue-600
+                           hover:bg-blue-700
+                           text-white py-3.5
+                           rounded-xl font-bold">
+
+                Кіріс бақылауды сақтау
+
+            </button>
+</div>
+</form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function openModal() {
+    const modal =
+        document.getElementById("createModal");
+
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+}
+
+function closeModal() {
+    const modal =
+        document.getElementById("createModal");
+
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+}
+
+
+
+// ==========================================================
+// DARABILIM AI — DIAGNOSTIC OBJECTIVE PICKER
+// ==========================================================
+
+let objectiveData = [];
+let selectedObjectiveIds = new Set();
+
+
+async function loadObjectives() {
+
+    const subject =
+        document.getElementById(
+            "diagnosticSubject"
+        ).value;
+
+    const hint =
+        document.getElementById(
+            "objectiveHint"
+        );
+
+    const panel =
+        document.getElementById(
+            "objectivePanel"
+        );
+
+    const list =
+        document.getElementById(
+            "objectiveList"
+        );
+
+    const search =
+        document.getElementById(
+            "objectiveSearch"
+        );
+
+    objectiveData = [];
+    selectedObjectiveIds.clear();
+
+    list.innerHTML = "";
+    search.value = "";
+
+    updateSelectedCount();
+
+
+    if (!subject) {
+
+        hint.textContent =
+            "Алдымен пәнді таңдаңыз.";
+
+        hint.classList.remove("hidden");
+        panel.classList.add("hidden");
+
+        return;
+    }
+
+
+    hint.textContent =
+        "Оқу мақсаттары жүктелуде...";
+
+    hint.classList.remove("hidden");
+    panel.classList.add("hidden");
+
+
+    try {
+
+        const response = await fetch(
+            "/api/learning-objectives?subject="
+            + encodeURIComponent(subject)
+        );
+
+        if (!response.ok) {
+            throw new Error(
+                "HTTP " + response.status
+            );
+        }
+
+        const data =
+            await response.json();
+
+        if (!data.ok) {
+            throw new Error(
+                data.error || "API қатесі"
+            );
+        }
+
+        objectiveData =
+            data.items || [];
+
+        document.getElementById(
+            "objectiveTotal"
+        ).textContent =
+            objectiveData.length
+            + " бірегей оқу мақсаты";
+
+        renderObjectives(
+            objectiveData
+        );
+
+        hint.classList.add("hidden");
+        panel.classList.remove("hidden");
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        hint.textContent =
+            "Оқу мақсаттарын жүктеу мүмкін болмады.";
+
+        hint.classList.remove("hidden");
+        panel.classList.add("hidden");
+
+    }
+}
+
+
+function renderObjectives(items) {
+
+    const list =
+        document.getElementById(
+            "objectiveList"
+        );
+
+    list.innerHTML = "";
+
+
+    if (!items.length) {
+
+        list.innerHTML = `
+            <div class="p-6 text-center
+                        text-sm text-slate-400">
+                Оқу мақсаты табылмады
+            </div>
+        `;
+
+        return;
+    }
+
+
+    items.forEach(item => {
+
+        const label =
+            document.createElement(
+                "label"
+            );
+
+        label.className =
+            "flex items-start gap-3 "
+            + "p-4 cursor-pointer "
+            + "hover:bg-blue-50/60";
+
+
+        // CHECKBOX
+
+        const checkbox =
+            document.createElement(
+                "input"
+            );
+
+        checkbox.type =
+            "checkbox";
+
+        checkbox.name =
+            "objective_ids";
+
+        checkbox.value =
+            item.id;
+
+        checkbox.className =
+            "mt-1 w-4 h-4 "
+            + "accent-blue-600";
+
+        checkbox.checked =
+            selectedObjectiveIds.has(
+                String(item.id)
+            );
+
+
+        checkbox.addEventListener(
+            "change",
+            function () {
+
+                const id =
+                    String(item.id);
+
+                if (this.checked) {
+
+                    selectedObjectiveIds.add(
+                        id
+                    );
+
+                } else {
+
+                    selectedObjectiveIds.delete(
+                        id
+                    );
+
+                }
+
+                updateSelectedCount();
+            }
+        );
+
+
+        // CONTENT
+
+        const content =
+            document.createElement(
+                "div"
+            );
+
+        content.className =
+            "flex-1 min-w-0";
+
+
+        const top =
+            document.createElement(
+                "div"
+            );
+
+        top.className =
+            "flex flex-wrap "
+            + "items-center gap-2 mb-1";
+
+
+        // CODE
+
+        const code =
+            document.createElement(
+                "span"
+            );
+
+        code.className =
+            "px-2 py-1 "
+            + "rounded-md "
+            + "bg-blue-50 "
+            + "text-blue-700 "
+            + "text-xs font-bold";
+
+        code.textContent =
+            item.code || "Код жоқ";
+
+
+        // LESSON COUNT
+
+        const lessons =
+            document.createElement(
+                "span"
+            );
+
+        lessons.className =
+            "text-[11px] "
+            + "text-slate-400";
+
+        lessons.textContent =
+            item.lesson_count
+            + " сабақта";
+
+
+        // TEXT
+
+        const description =
+            document.createElement(
+                "p"
+            );
+
+        description.className =
+            "text-sm "
+            + "text-slate-600 "
+            + "leading-relaxed";
+
+        description.textContent =
+            item.text;
+
+
+        top.appendChild(code);
+        top.appendChild(lessons);
+
+        content.appendChild(top);
+        content.appendChild(
+            description
+        );
+
+        label.appendChild(
+            checkbox
+        );
+
+        label.appendChild(
+            content
+        );
+
+        list.appendChild(
+            label
+        );
+
+    });
+}
+
+
+function filterObjectives() {
+
+    const query =
+        document.getElementById(
+            "objectiveSearch"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    if (!query) {
+
+        renderObjectives(
+            objectiveData
+        );
+
+        return;
+    }
+
+
+    const filtered =
+        objectiveData.filter(
+            item => {
+
+                const searchable =
+                    (
+                        (item.code || "")
+                        + " "
+                        + (item.text || "")
+                    )
+                    .toLowerCase();
+
+                return searchable.includes(
+                    query
+                );
+            }
+        );
+
+
+    renderObjectives(
+        filtered
+    );
+}
+
+
+function updateSelectedCount() {
+
+    document.getElementById(
+        "selectedObjectiveCount"
+    ).textContent =
+        selectedObjectiveIds.size
+        + " таңдалды";
+}
+
+
+function clearObjectives() {
+
+    selectedObjectiveIds.clear();
+
+    renderObjectives(
+        getFilteredObjectives()
+    );
+
+    updateSelectedCount();
+}
+
+
+function getFilteredObjectives() {
+
+    const query =
+        document.getElementById(
+            "objectiveSearch"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    if (!query) {
+        return objectiveData;
+    }
+
+
+    return objectiveData.filter(
+        item => {
+
+            const searchable =
+                (
+                    (item.code || "")
+                    + " "
+                    + (item.text || "")
+                )
+                .toLowerCase();
+
+            return searchable.includes(
+                query
+            );
+        }
+    );
+}
+
+
+</script>
+
+
+
+<!-- ===================================================== -->
+<!-- EDIT DIAGNOSTIC MODAL -->
+<!-- ===================================================== -->
+
+<div id="editDiagnosticModal"
+     class="hidden fixed inset-0
+            bg-slate-900/45 z-50
+            items-center justify-center p-4">
+
+    <div class="bg-white
+                rounded-3xl
+                shadow-2xl
+                w-full
+                max-w-xl
+                p-7">
+
+        <div class="flex
+                    items-start
+                    justify-between
+                    gap-4">
+
+            <div>
+
+                <p class="text-xs
+                          font-black
+                          text-blue-600">
+
+                    КІРІС БАҚЫЛАУ
+
+                </p>
+
+                <h2 class="text-2xl
+                           font-black
+                           mt-1">
+
+                    ✏️ Кіріс бақылауды өңдеу
+
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="closeEditDiagnostic()"
+                class="w-10 h-10
+                       bg-slate-100
+                       rounded-xl
+                       font-black">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <form id="editDiagnosticForm"
+              method="POST"
+              class="mt-6 space-y-5">
+
+
+            <div>
+
+                <label class="block
+                              text-sm
+                              font-bold
+                              mb-2">
+
+                    Бақылау атауы
+
+                </label>
+
+                <input
+                    id="editDiagnosticTitle"
+                    name="title"
+                    type="text"
+                    required
+                    class="w-full
+                           border
+                           rounded-xl
+                           px-4 py-3">
+
+            </div>
+
+
+            <div>
+
+                <label class="block
+                              text-sm
+                              font-bold
+                              mb-2">
+
+                    Пән
+
+                </label>
+
+                <select
+                    id="editDiagnosticSubject"
+                    name="subject"
+                    class="w-full
+                           border
+                           rounded-xl
+                           px-4 py-3">
+
+                    <option value="Математика">
+                        Математика
+                    </option>
+
+                    <option value="Қазақ тілі">
+                        Қазақ тілі
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label class="block
+                              text-sm
+                              font-bold
+                              mb-2">
+
+                    Тапсырма саны
+
+                </label>
+
+                <input
+                    id="editDiagnosticQuestionCount"
+                    name="question_count"
+                    type="number"
+                    min="1"
+                    max="100"
+                    required
+                    class="w-full
+                           border
+                           rounded-xl
+                           px-4 py-3">
+
+            </div>
+
+
+            <div class="flex
+                        justify-end
+                        gap-3
+                        pt-3">
+
+                <button
+                    type="button"
+                    onclick="closeEditDiagnostic()"
+                    class="px-5 py-3
+                           bg-slate-100
+                           rounded-xl
+                           font-bold">
+
+                    Болдырмау
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="px-6 py-3
+                           bg-blue-600
+                           text-white
+                           rounded-xl
+                           font-bold">
+
+                    💾 Сақтау
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function openEditDiagnostic(
+    id,
+    title,
+    subject,
+    questionCount
+) {
+
+    const modal =
+        document.getElementById(
+            "editDiagnosticModal"
+        );
+
+    const form =
+        document.getElementById(
+            "editDiagnosticForm"
+        );
+
+    document.getElementById(
+        "editDiagnosticTitle"
+    ).value =
+        title || "";
+
+    document.getElementById(
+        "editDiagnosticSubject"
+    ).value =
+        subject || "Математика";
+
+    document.getElementById(
+        "editDiagnosticQuestionCount"
+    ).value =
+        questionCount || 1;
+
+
+    form.action =
+        "/diagnostics/"
+        + id
+        + "/edit";
+
+
+    modal.classList.remove(
+        "hidden"
+    );
+
+    modal.classList.add(
+        "flex"
+    );
+
+}
+
+
+function closeEditDiagnostic() {
+
+    const modal =
+        document.getElementById(
+            "editDiagnosticModal"
+        );
+
+    modal.classList.add(
+        "hidden"
+    );
+
+    modal.classList.remove(
+        "flex"
+    );
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+
+            closeEditDiagnostic();
+
+        }
+
+    }
+);
+
+</script>
+
+
+
+
+<script id="DARABILIM_DIAGNOSTIC_TYPES_JS">
+
+function diagnosticCurrentAcademicYear() {
+
+    const now =
+        new Date();
+
+
+    const year =
+        now.getFullYear();
+
+
+    const month =
+        now.getMonth() + 1;
+
+
+    if (month >= 8) {
+
+        return (
+            year
+            + "-"
+            + (year + 1)
+        );
+
+    }
+
+
+    return (
+        (year - 1)
+        + "-"
+        + year
+    );
+
+}
+
+
+function initDiagnosticAcademicYears() {
+
+    const select =
+        document.getElementById(
+            "diagnosticAcademicYear"
+        );
+
+
+    if (!select) {
+
+        return;
+
+    }
+
+
+    const current =
+        diagnosticCurrentAcademicYear();
+
+
+    const start =
+        Number(
+            current.split("-")[0]
+        );
+
+
+    const years = [];
+
+
+    for (
+        let offset = -2;
+        offset <= 1;
+        offset++
+    ) {
+
+        const value =
+            start + offset;
+
+
+        years.push(
+            value
+            + "-"
+            + (value + 1)
+        );
+
+    }
+
+
+    select.innerHTML =
+        years
+        .map(
+            year => `
+                <option
+                    value="${year}"
+                    ${
+                        year === current
+                        ? "selected"
+                        : ""
+                    }
+                >
+                    ${year}
+                </option>
+            `
+        )
+        .join("");
+
+}
+
+
+/*
+ * Create form POST кезінде type/year
+ * FormData-ға автоматты кіреді,
+ * өйткені input/select name атрибуттары бар.
+ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    initDiagnosticAcademicYears
+);
+
+</script>
+
+
+</body>
+</html>

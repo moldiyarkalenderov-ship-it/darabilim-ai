@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>DaraBilim AI — Сақталған сабақ</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+<style>
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f8fafc;
+}
+
+</style>
+
+</head>
+
+
+<body class="text-slate-800">
+
+
+<header class="bg-white border-b">
+
+<div class="max-w-5xl mx-auto
+            px-6 py-5">
+
+    <div class="flex flex-wrap
+                items-center
+                justify-between
+                gap-3">
+
+        <a href="{{ url_for(
+                'saved_smart_lessons'
+            ) }}"
+           class="text-sm
+                  text-blue-600
+                  font-bold">
+
+            ← Менің сабақтарым
+
+        </a>
+
+
+        <a href="{{ url_for(
+                'export_saved_smart_lesson_word',
+                lesson_id=lesson.id
+            ) }}"
+           class="px-4 py-2.5
+                  bg-emerald-600
+                  hover:bg-emerald-700
+                  text-white
+                  rounded-xl
+                  text-sm font-bold">
+
+            📄 Word жүктеу
+
+        </a>
+
+    </div>
+
+</div>
+
+</header>
+
+
+<main class="max-w-5xl
+             mx-auto p-6 lg:p-8">
+
+
+<!-- HEADER -->
+
+<section class="bg-white
+                border rounded-2xl
+                p-6">
+
+    <div class="flex flex-wrap gap-2">
+
+        <span class="px-3 py-1
+                     bg-blue-50
+                     text-blue-700
+                     rounded-lg
+                     text-xs font-bold">
+
+            {{ plan.subject }}
+
+        </span>
+
+        <span class="px-3 py-1
+                     bg-slate-100
+                     rounded-lg
+                     text-xs font-bold">
+
+            {{ plan.class_name }}
+
+        </span>
+
+        <span class="px-3 py-1
+                     bg-violet-50
+                     text-violet-700
+                     rounded-lg
+                     text-xs font-bold">
+
+            {{ plan.duration }} минут
+
+        </span>
+
+    </div>
+
+
+    <h1 class="text-2xl
+               font-extrabold mt-4">
+
+        {{ plan.lesson_topic }}
+
+    </h1>
+
+
+    <div class="bg-slate-50
+                rounded-xl p-4 mt-5">
+
+        <p class="text-xs
+                  text-slate-400
+                  font-bold">
+
+            🎯 ОҚУ МАҚСАТТАРЫ
+
+        </p>
+
+        {% for code in plan.objective_codes %}
+
+        <div class="text-sm mt-2">
+
+            <strong>
+                {{ code }}
+            </strong>
+
+            {% if plan.objective_texts[
+                    loop.index0
+                ] is defined %}
+
+                —
+                {{ plan.objective_texts[
+                    loop.index0
+                ] }}
+
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- GOAL -->
+
+<section class="bg-blue-50
+                border border-blue-100
+                rounded-2xl p-6 mt-5">
+
+    <p class="text-xs
+              text-blue-600
+              font-bold">
+
+        🎯 САБАҚ МАҚСАТЫ
+
+    </p>
+
+    <p class="font-semibold
+              leading-relaxed mt-2">
+
+        {{ plan.lesson_goal }}
+
+    </p>
+
+</section>
+
+
+<!-- STAGES -->
+
+<section class="bg-white
+                border rounded-2xl
+                overflow-hidden mt-5">
+
+    <div class="px-6 py-5 border-b">
+
+        <h2 class="font-extrabold">
+            📋 Сабақ кезеңдері
+        </h2>
+
+    </div>
+
+
+    {% for key in [
+        'start',
+        'new_knowledge',
+        'practice',
+        'reflection'
+    ] %}
+
+        {% set stage = plan.stages[key] %}
+
+        <div class="p-6 border-b last:border-b-0">
+
+            <div class="flex
+                        items-center
+                        justify-between
+                        gap-4">
+
+                <h3 class="font-extrabold">
+
+                    {{ stage.title }}
+
+                </h3>
+
+                <span class="px-2.5 py-1
+                             bg-blue-50
+                             text-blue-700
+                             rounded-lg
+                             text-xs font-bold">
+
+                    {{ stage.minutes }} минут
+
+                </span>
+
+            </div>
+
+
+            {% if stage.teacher_action %}
+
+            <div class="mt-4">
+
+                <p class="text-xs
+                          text-slate-400
+                          font-bold">
+
+                    МҰҒАЛІМ ӘРЕКЕТІ
+
+                </p>
+
+                <p class="text-sm
+                          text-slate-600
+                          leading-relaxed mt-1">
+
+                    {{ stage.teacher_action }}
+
+                </p>
+
+            </div>
+
+            {% endif %}
+
+
+            {% if stage.student_action %}
+
+            <div class="mt-4">
+
+                <p class="text-xs
+                          text-slate-400
+                          font-bold">
+
+                    ОҚУШЫ ӘРЕКЕТІ
+
+                </p>
+
+                <p class="text-sm
+                          text-slate-600
+                          leading-relaxed mt-1">
+
+                    {{ stage.student_action }}
+
+                </p>
+
+            </div>
+
+            {% endif %}
+
+
+            {% if stage.assessment %}
+
+            <div class="bg-slate-50
+                        rounded-xl p-3 mt-4">
+
+                <p class="text-xs
+                          text-slate-400
+                          font-bold">
+
+                    БАҒАЛАУ
+
+                </p>
+
+                <p class="text-sm
+                          text-slate-600 mt-1">
+
+                    {{ stage.assessment }}
+
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    {% endfor %}
+
+</section>
+
+
+<!-- TASKS -->
+
+<section class="bg-white
+                border rounded-2xl
+                p-6 mt-5">
+
+    <h2 class="font-extrabold">
+        🧩 Деңгейлік тапсырмалар
+    </h2>
+
+
+    {% for objective in plan.level_tasks %}
+
+    <div class="mt-5">
+
+        <div class="font-bold">
+
+            {{ objective.objective_code }}
+
+        </div>
+
+
+        <div class="grid grid-cols-1
+                    lg:grid-cols-3
+                    gap-3 mt-3">
+
+            {% for task in objective.tasks %}
+
+            <div class="border
+                        rounded-xl p-4">
+
+                <div class="font-extrabold">
+
+                    {% if task.level == 'Қолдау' %}
+                        🟢
+                    {% elif task.level == 'Бекіту' %}
+                        🔵
+                    {% else %}
+                        🟣
+                    {% endif %}
+
+                    {{ task.level }}
+
+                </div>
+
+
+                <p class="text-sm
+                          font-semibold mt-3">
+
+                    {{ task.task_text }}
+
+                </p>
+
+
+                <div class="bg-slate-50
+                            rounded-lg p-3 mt-4">
+
+                    <p class="text-xs
+                              text-slate-400
+                              font-bold">
+
+                        ДҰРЫС ЖАУАП
+
+                    </p>
+
+                    <p class="text-sm
+                              font-bold mt-1">
+
+                        {{ task.correct_answer }}
+
+                    </p>
+
+                </div>
+
+
+                <p class="text-xs
+                          text-slate-500
+                          leading-relaxed mt-3">
+
+                    💡 {{ task.explanation }}
+
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</section>
+
+
+<!-- CRITERIA -->
+
+<div class="grid grid-cols-1
+            lg:grid-cols-2
+            gap-5 mt-5">
+
+<section class="bg-white
+                border rounded-2xl p-6">
+
+    <h2 class="font-extrabold">
+        ✅ Бағалау критерийлері
+    </h2>
+
+    {% for item in plan.criteria %}
+
+    <div class="bg-emerald-50
+                rounded-xl p-4 mt-3">
+
+        <strong class="text-sm
+                       text-emerald-700">
+
+            {{ item.objective_code }}
+
+        </strong>
+
+        <p class="text-sm
+                  text-slate-700 mt-2">
+
+            {{ item.text }}
+
+        </p>
+
+    </div>
+
+    {% endfor %}
+
+</section>
+
+
+<section class="bg-white
+                border rounded-2xl p-6">
+
+    <h2 class="font-extrabold">
+        📌 Дескрипторлар
+    </h2>
+
+    {% for descriptor in plan.descriptors %}
+
+    <div class="mt-4">
+
+        <strong class="text-sm
+                       text-blue-600">
+
+            {{ descriptor.objective_code }}
+
+        </strong>
+
+        <ul class="list-disc
+                   pl-5
+                   text-sm
+                   text-slate-600
+                   space-y-1 mt-2">
+
+            {% for item in descriptor['items'] %}
+
+            <li>
+                {{ item }}
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    {% endfor %}
+
+</section>
+
+</div>
+
+
+<!-- HOMEWORK -->
+
+<section class="bg-violet-50
+                border border-violet-100
+                rounded-2xl p-6 mt-5">
+
+    <h2 class="font-extrabold
+               text-violet-800">
+
+        🏠 Үй тапсырмасы
+
+    </h2>
+
+    <p class="text-sm
+              text-slate-700
+              leading-relaxed mt-2">
+
+        {{ plan.homework }}
+
+    </p>
+
+</section>
+
+
+</main>
+
+</body>
+</html>

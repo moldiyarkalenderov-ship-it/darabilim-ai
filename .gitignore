@@ -1,0 +1,73 @@
+# ============================================================
+# DARABILIM AI
+# ============================================================
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Environment
+.env
+.env.*
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Backups
+production_backups/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Colab
+.ipynb_checkpoints/
+
+# Large runtime uploads
+uploads/
+
+# Generated PowerPoint/PDF previews
+ppt_preview/
+powerpoint_preview/
+preview_cache/
+cache/
+
+# Office temporary files
+~$*
+*.lock
+
+# Secrets
+*.pem
+*.key
+credentials.json
+service-account*.json
+
+# SQLite runtime journals
+*.db-journal
+*.db-shm
+*.db-wal
+# ============================================================
+# DaraBilim development backups - DO NOT PUSH
+# ============================================================
+
+app_before_*.py
+app_*_before_*.py
+
+templates/*_before_*.html
+templates/*before*.html
+
+database/backups/
+
+PRODUCTION_SECRET_HINT.txt

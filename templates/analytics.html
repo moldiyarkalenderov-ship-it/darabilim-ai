@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+<title>DaraBilim AI - Аналитика</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-50">
+
+<header class="bg-white border-b">
+<div class="max-w-7xl mx-auto p-6">
+
+<a href="{{ url_for('dashboard') }}"
+   class="text-blue-600 font-bold">
+← Басты бет
+</a>
+
+<h1 class="text-3xl font-black mt-3">
+📊 Аналитика
+</h1>
+
+<p class="text-slate-500 mt-1">
+Сынып пен оқу нәтижелерінің жалпы көрінісі
+</p>
+
+</div>
+</header>
+
+<main class="max-w-7xl mx-auto p-6 space-y-6">
+
+<div class="grid md:grid-cols-4 gap-4">
+
+{% for label,value in [
+('Оқушылар',stats.students),
+('Диагностика',stats.attempts),
+('Олқылықтар',stats.gaps),
+('Жеке тапсырмалар',stats.tasks)
+] %}
+
+<div class="bg-white border rounded-2xl p-5">
+
+<p class="text-sm text-slate-500">
+{{ label }}
+</p>
+
+<p class="text-3xl font-black mt-2">
+{{ value }}
+</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+<section class="bg-white border rounded-3xl p-6">
+
+<h2 class="text-xl font-black mb-5">
+🎯 Оқу мақсаттары бойынша аналитика
+</h2>
+
+{% if objectives %}
+
+<div class="overflow-x-auto">
+
+<table class="w-full text-sm">
+
+<thead>
+<tr class="border-b text-left">
+<th class="py-3">Код</th>
+<th>Пән</th>
+<th>Оқушы саны</th>
+<th>Орташа нәтиже</th>
+<th>Олқылық</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for row in objectives %}
+
+<tr class="border-b">
+
+<td class="py-3 font-bold">
+{{ row.objective_code }}
+</td>
+
+<td>{{ row.subject }}</td>
+
+<td>{{ row.student_count }}</td>
+
+<td>{{ row.average_percentage }}%</td>
+
+<td>{{ row.gap_count }}</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+</table>
+
+</div>
+
+{% else %}
+
+<p class="text-slate-500">
+Әзірге аналитикаға жеткілікті диагностика дерегі жоқ.
+</p>
+
+{% endif %}
+
+</section>
+
+</main>
+</body>
+</html>

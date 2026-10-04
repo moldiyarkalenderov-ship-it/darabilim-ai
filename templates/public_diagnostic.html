@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+
+<title>DaraBilim AI — Кіріс бақылау</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+
+<body class="bg-slate-50 text-slate-900">
+
+<div class="min-h-screen
+            flex items-center
+            justify-center
+            p-5">
+
+<div class="w-full max-w-2xl">
+
+
+<!-- LOGO -->
+
+<div class="text-center mb-6">
+
+<div class="inline-flex
+            w-16 h-16
+            bg-blue-600
+            rounded-2xl
+            items-center
+            justify-center
+            text-white
+            text-3xl
+            shadow-lg">
+
+🧠
+
+</div>
+
+<h1 class="text-3xl
+           font-black
+           mt-4">
+
+DaraBilim AI
+
+</h1>
+
+<p class="text-slate-500 mt-1">
+
+Кіріс бақылау
+
+</p>
+
+</div>
+
+
+<!-- CARD -->
+
+<div class="bg-white
+            border
+            rounded-3xl
+            shadow-sm
+            p-7">
+
+
+<div class="flex flex-wrap gap-2 mb-5">
+
+<span class="px-3 py-1
+             bg-blue-50
+             text-blue-700
+             rounded-lg
+             text-xs font-bold">
+
+{{ diagnostic.subject }}
+
+</span>
+
+<span class="px-3 py-1
+             bg-slate-100
+             rounded-lg
+             text-xs font-bold">
+
+{{ diagnostic.class_name }}
+
+</span>
+
+<span class="px-3 py-1
+             bg-violet-50
+             text-violet-700
+             rounded-lg
+             text-xs font-bold">
+
+{{ diagnostic.question_count }} тапсырма
+
+</span>
+
+</div>
+
+
+<h2 class="text-2xl font-black">
+
+{{ diagnostic.title }}
+
+</h2>
+
+
+{% if diagnostic.learning_objective %}
+
+<p class="text-sm
+          text-slate-500
+          mt-3
+          leading-relaxed">
+
+🎯 {{ diagnostic.learning_objective }}
+
+</p>
+
+{% endif %}
+
+
+<div class="border-t mt-6 pt-6">
+
+<h3 class="font-black">
+
+👤 Өзіңізді таңдаңыз
+
+</h3>
+
+<p class="text-sm
+          text-slate-500
+          mt-1">
+
+Тестті бастау үшін тізімнен өз атыңызды таңдаңыз.
+
+</p>
+
+
+<form method="POST"
+      action="{{ url_for('public_diagnostic_start', token=token) }}"
+      class="mt-5">
+
+<select name="student_id"
+        required
+        class="w-full
+               border
+               rounded-xl
+               px-4 py-3
+               bg-white">
+
+<option value="">
+Оқушыны таңдаңыз
+</option>
+
+{% for student in students %}
+
+<option value="{{ student.id }}">
+{{ student.full_name }}
+</option>
+
+{% endfor %}
+
+</select>
+
+
+<button type="submit"
+        class="w-full
+               mt-5
+               bg-blue-600
+               hover:bg-blue-700
+               text-white
+               rounded-xl
+               py-3.5
+               font-black">
+
+▶️ Кіріс бақылауды бастау
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+
+<p class="text-center
+          text-xs
+          text-slate-400
+          mt-5">
+
+DaraBilim AI • Ақылды білім беру платформасы
+
+</p>
+
+</div>
+
+</div>
+
+</body>
+</html>
